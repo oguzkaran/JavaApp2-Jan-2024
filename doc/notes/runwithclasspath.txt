@@ -1,0 +1,1 @@
+java -cp ".:org-csystem-util-1.0.0.jar:SampleApp-1.0.0.jar" org.csystem.app.App

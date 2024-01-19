@@ -1,0 +1,12 @@
+git clone https://github.com/oguzkaran/javaapp1-jul-2020-maven-repo
+
+git config --global user.email "oguzkaran@csystem.org"
+
+mvn install:install-file -DgroupId=org.csystem -DartifactId=org-csystem-util-datetime -Dversion=1.0.0 -Dfile=../jars/org-csystem-util-datetime-1.0.0.jar -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=. -DcreateChecksum=true
+
+git add -A . && git commit -m "released version 1.0.0"
+
+git push
+
+
+'http://raw.github.com/oguzkaran/javaapp1-jul-2020-maven-repo/master'
