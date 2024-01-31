@@ -1,10 +1,3 @@
-/*
-    Sınıf Çalışması: Aşağıdaki stack sınıfını public bölümünü değiştirmeden yazınız.
-    Açıklamalar:
-        - Sınıf içsel olarak bir dizi kullanacaktır
-        - Hiç bir metot herhangi bir exception fırlatmayacaktır
-*/
-
 package org.csystem.challenge.collection;
 
 /**

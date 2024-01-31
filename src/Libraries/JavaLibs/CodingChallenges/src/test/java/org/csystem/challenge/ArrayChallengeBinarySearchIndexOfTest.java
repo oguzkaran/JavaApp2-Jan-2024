@@ -1,4 +1,4 @@
-package org.csystem.util.challenge;
+package org.csystem.challenge;
 
 import org.csystem.challenge.array.ArrayChallenge;
 import org.junit.jupiter.api.Assertions;
@@ -14,8 +14,7 @@ public class ArrayChallengeBinarySearchIndexOfTest {
     public static int[] getArray(String path) throws IOException
     {
 
-        try (var br = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8))
-        {
+        try (var br = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8)) {
             return Arrays.stream(br.readLine().split(","))
                     .mapToInt(Integer::parseInt)
                     .toArray();
