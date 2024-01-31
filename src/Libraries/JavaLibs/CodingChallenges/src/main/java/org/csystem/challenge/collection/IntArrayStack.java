@@ -13,13 +13,16 @@ package org.csystem.challenge.collection;
  * @author JavaApp2-Jan-2024 group
  */
 public class IntArrayStack {
+    private final int [] m_values;
+    private int m_index;
+
     /**
      * Creates a fixed stack
      * @param count capacity of the stack
      */
     public IntArrayStack(int count)
     {
-        throw new UnsupportedOperationException("TODO");
+        m_values = new int[count];
     }
 
     /**
@@ -29,7 +32,12 @@ public class IntArrayStack {
      */
     public boolean push(int value)
     {
-        throw new UnsupportedOperationException("TODO");
+        var result = m_index != m_values.length;
+
+        if (result)
+            m_values[m_index++] = value;
+
+        return result;
     }
 
     /**
@@ -38,16 +46,21 @@ public class IntArrayStack {
      */
     public int peek()
     {
-        throw new UnsupportedOperationException("TODO");
+        return m_index != 0 ? m_values[m_index - 1] : 0;
     }
 
     /**
-     * Pops a last in value from stack if stack is not empty
+     * Pops a last value from stack if stack is not empty
      * @return true if stack is available, false if stack is empty
      */
     public boolean pop()
     {
-        throw new UnsupportedOperationException("TODO");
+        var result = m_index != 0;
+
+        if (m_index != 0)
+            --m_index;
+
+        return result;
     }
 
     /**
@@ -56,7 +69,7 @@ public class IntArrayStack {
      */
     public boolean isEmpty()
     {
-        throw new UnsupportedOperationException("TODO");
+        return m_index == 0;
     }
 
     /**
@@ -66,7 +79,7 @@ public class IntArrayStack {
      */
     public int size()
     {
-        throw new UnsupportedOperationException("TODO");
+        return m_index;
     }
 
     /**
@@ -76,6 +89,6 @@ public class IntArrayStack {
      */
     public int capacity()
     {
-        throw new UnsupportedOperationException("TODO");
+        return m_values.length;
     }
 }
