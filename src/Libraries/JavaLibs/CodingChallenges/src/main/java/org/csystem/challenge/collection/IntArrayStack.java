@@ -10,11 +10,12 @@ package org.csystem.challenge.collection;
 /**
  *
  * Fixed stack that stores int values. Stack capacity does not grow. It is fixed
+ * @author JavaApp2-Jan-2024 group
  */
 public class IntArrayStack {
     /**
      * Creates a fixed stack
-     * @param capacity of the stack
+     * @param count capacity of the stack
      */
     public IntArrayStack(int count)
     {
