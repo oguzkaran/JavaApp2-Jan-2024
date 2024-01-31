@@ -1,6 +1,8 @@
 package org.csystem.challenge.io.file;
 
 import java.io.File;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class FileUtil {
     /**
@@ -20,7 +22,8 @@ public class FileUtil {
      */
     public static String [] files(String dir)
     {
-        return new File(dir).list();
+        return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
+                .map(File::getAbsolutePath).toList().toArray(new String[0]);
     }
 
     /**
