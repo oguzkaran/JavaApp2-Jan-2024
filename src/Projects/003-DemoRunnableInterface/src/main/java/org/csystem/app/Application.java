@@ -12,7 +12,7 @@ class Application {
         var name = Thread.currentThread().getName();
 
         for (var i = 0; i < count; ++i) {
-            var text = StringUtil.getRandomTextEN(random, randomGenerator.nextInt(min, bound));
+            var text = StringUtil.getRandomTextEN(randomGenerator, randomGenerator.nextInt(min, bound));
 
             System.out.printf("%s -> %s%n", name, text);
         }
