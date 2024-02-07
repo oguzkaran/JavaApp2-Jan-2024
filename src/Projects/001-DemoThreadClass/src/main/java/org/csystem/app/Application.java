@@ -1,6 +1,6 @@
 package org.csystem.app;
 
-
+import com.karandev.util.console.Console;
 import org.csystem.app.thread.RandomTextGeneratorThread;
 
 class Application {
@@ -8,10 +8,13 @@ class Application {
     {
         var self = Thread.currentThread();
 
+        var nThreads = Console.readInt("Input number of threads:");
+        var count = Console.readInt("Input count:");
+
         System.out.printf("Name:%s%n", self.getName());
 
-        for (var i = 0; i < 10; ++i) {
-            var thread = new RandomTextGeneratorThread("Generator-" + (i + 1), 100000, 5, 15);
+        for (var i = 0; i < nThreads; ++i) {
+            var thread = new RandomTextGeneratorThread("Generator-" + (i + 1), count, 5, 15);
 
             thread.start();
         }

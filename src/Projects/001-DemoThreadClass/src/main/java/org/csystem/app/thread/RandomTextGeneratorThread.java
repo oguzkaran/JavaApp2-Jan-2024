@@ -1,9 +1,8 @@
 package org.csystem.app.thread;
 
-import java.util.Random;
-
-import org.csystem.util.concurrent.ThreadUtil;
 import org.csystem.util.string.StringUtil;
+
+import java.util.Random;
 
 public class RandomTextGeneratorThread extends Thread {
     private final Random m_random = new Random();
@@ -26,7 +25,7 @@ public class RandomTextGeneratorThread extends Thread {
             var text = StringUtil.getRandomTextEN(m_random, m_random.nextInt(m_min, m_bound));
 
             System.out.printf("%s -> %s%n", getName(), text);
-            ThreadUtil.sleep(m_random.nextLong(300, 501));
+            //ThreadUtil.sleep(m_random.nextLong(300, 501));
         }
     }
 }
