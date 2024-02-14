@@ -15,10 +15,11 @@ public class StringGenerator {
     {
         var self = Thread.currentThread();
 
-        for (var i = 0; i < m_count; ++i) {
-            m_list.add(String.format("%s:%s", self.getName(), StringUtil.getRandomTextEN(m_randomGenerator, m_randomGenerator.nextInt(5, 15))));
-            m_list.add(String.format("%s:%s", self.getName(), StringUtil.getRandomTextEN(m_randomGenerator, m_randomGenerator.nextInt(1, 15))));
-        }
+        for (var i = 0; i < m_count; ++i)
+            synchronized (this) {
+                m_list.add(String.format("%s:%s", self.getName(), StringUtil.getRandomTextEN(m_randomGenerator, m_randomGenerator.nextInt(5, 15))));
+                m_list.add(String.format("%s:%s", self.getName(), StringUtil.getRandomTextEN(m_randomGenerator, m_randomGenerator.nextInt(1, 15))));
+            }
     }
 
     public StringGenerator(List<String> list, int count, RandomGenerator randomGenerator)
