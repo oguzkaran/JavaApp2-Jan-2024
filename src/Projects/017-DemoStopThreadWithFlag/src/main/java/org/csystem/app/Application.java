@@ -1,14 +1,3 @@
-
-/*
-    x = a + b + 10;
-    y = a + b + 20;
-    z = a + b + 30;
-
-    reg = a + b;
-    x = reg + 10;
-    y = reg + 20;
-    z = reg + 30;
-*/
 package org.csystem.app;
 
 import com.karandev.util.console.Console;
