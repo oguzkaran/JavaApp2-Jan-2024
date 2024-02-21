@@ -33,8 +33,8 @@ class Application {
                 futures[i] = threadPool.submit(() -> generateAndFindTotalThreadCallback(threadParams[idx]));
             }
 
-            for (var t : futures)
-                join(t);
+            for (var future : futures)
+                join(future);
 
             for (var tp : threadParams)
                 Console.writeLine("Result:%d", tp.getResult());
@@ -44,17 +44,21 @@ class Application {
 
     private static void generateAndFindTotalThreadCallback(ThreadParam param)
     {
-        var self = Thread.currentThread();
-        var random = new Random();
-        var count = param.getCount();
-        var min = param.getMin();
-        var bound = param.getBound();
+        try {
+            var random = new Random();
+            var count = param.getCount();
+            var min = param.getMin();
+            var bound = param.getBound();
 
-        for (var i = 0; i < count; ++i) {
-            var val = random.nextInt(min, bound);
+            for (var i = 0; i < count; ++i) {
+                var val = random.nextInt(min, bound);
 
-            //Console.writeLine("%s:%d", self.getName(), val);
-            param.add(val);
+                //Console.writeLine("%s:%d", self.getName(), val);
+                param.add(val);
+            }
+        }
+        catch (Throwable ex) {
+
         }
     }
 
