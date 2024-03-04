@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 21.04.2023
+	LAST UPDATE : 04.03.2024
 
 	Utility class for TCP socket operations
 
@@ -355,12 +355,14 @@ public final class TcpUtil {
 			int result;
 
 			for (;;) {
-				var data = new byte[receiveInt(socket)];
-				result = receive(socket, data);
+				var size = receiveInt(socket);
 
-				if (result <= 0)
+				if (size <= 0)
 					break;
 
+				var data = new byte[size];
+
+				result = receive(socket, data);
 				fos.write(data, 0, result);
 			}
 		}
@@ -529,10 +531,9 @@ public final class TcpUtil {
 
 			for (;;) {
 				result = fis.read(data);
+				sendInt(socket, result);
 				if (result <= 0)
 					break;
-
-				sendInt(socket, result);
 				send(socket, data, 0, result);
 			}
 		}

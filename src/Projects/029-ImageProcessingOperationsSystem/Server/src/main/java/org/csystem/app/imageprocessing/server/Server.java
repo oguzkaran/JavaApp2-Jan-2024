@@ -1,12 +1,12 @@
 package org.csystem.app.imageprocessing.server;
 
 import com.karandev.io.util.console.Console;
+import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.exception.NetworkException;
 import org.csystem.io.image.CImage;
 import org.csystem.io.image.CImageFormat;
 
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,36 +24,31 @@ public class Server {
     private final int m_port;
     private final int m_backlog;
 
-    private void saveFile(String path, Socket socket) throws IOException
+    private void saveFile(Socket socket, String path) throws IOException
     {
-        byte result = 0;
-        var file = new File(IMAGE_PATH, path);
+        try {
+            var file = new File(IMAGE_PATH, new File(path).getName());
 
-        try (var fos = new FileOutputStream(file)) {
-            var is = socket.getInputStream();
-            var dos = new DataInputStream(is);
-            var length = dos.readLong();
-
-            for (var i = 0; i < length; ++i)
-                fos.write(is.read());
-
-            result = 1;
-            doGrayScale(file);
+            TcpUtil.receiveFile(socket, file);
+            file = doGrayScale(file);
+            TcpUtil.sendInt(socket, 1);
+            TcpUtil.sendFile(socket, file, 1024);
         }
-        catch (Throwable ignore) {
-            file.delete();
+        catch (NetworkException ex) {
+            Console.Error.writeLine("Network problem:%s", ex.getMessage());
         }
 
-        socket.getOutputStream().write(result);
-
+        TcpUtil.sendInt(socket, 0);
     }
 
-    private void doGrayScale(File file) throws IOException
+    private File doGrayScale(File file) throws IOException
     {
         var image = new CImage(file);
 
         image.grayScale();
-        image.save(new File(file.getAbsolutePath() + "-gs"), CImageFormat.PNG);
+        image.save((file = new File(file + "-gs")), CImageFormat.PNG);
+
+        return file;
     }
 
     private void handleClient(Socket socket)
@@ -65,7 +60,7 @@ public class Server {
             Console.writeLine("Client connected via %s:%d", hostAddress, port);
             var path = String.format("%s_%d_%s", hostAddress, port, FORMATTER.format(LocalDateTime.now()));
 
-            saveFile(path, socket);
+            saveFile(socket, path);
         }
         catch (IOException ex) {
             Console.Error.writeLine("IO Exception Occurred:%s", ex.getMessage());

@@ -2,8 +2,11 @@ package org.csystem.app.imageprocessing.client;
 
 import com.karandev.io.util.console.Console;
 import com.karandev.io.util.console.commandprompt.annotation.Command;
+import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.exception.NetworkException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.Socket;
 
 public class CommandsInfo {
@@ -11,7 +14,7 @@ public class CommandsInfo {
     private final int m_port;
 
     @Command("gs")
-    private void makeGrayScale(String path)
+    private void makeGrayScale(String path, String blockSizeStr)
     {
         var file = new File(path);
         if (!file.exists()) {
@@ -19,29 +22,24 @@ public class CommandsInfo {
             return;
         }
 
-        try (var socket = new Socket(m_host, m_port);  var fis = new FileInputStream(file)) {
-            var os = socket.getOutputStream();
-            var is = socket.getInputStream();
-            var dos = new DataOutputStream(os);
+        try (var socket = new Socket(m_host, m_port)) {
+            var blockSize = Integer.parseInt(blockSizeStr);
+            TcpUtil.sendFile(socket, file, blockSize);
 
-            dos.writeLong(file.length());
-
-            int b;
-
-            while ((b = fis.read()) != -1)
-                os.write(b);
-
-            var result = is.read();
-
-            if (result == 1) {
-                Console.writeLine("Sent!...");
+            if (TcpUtil.receiveInt(socket) == 1) {
+                TcpUtil.receiveFile(socket, "gs.png");
             }
-            else {
+            else
                 Console.writeLine("Not sent!...");
-            }
+        }
+        catch (NumberFormatException ignore) {
+            Console.Error.writeLine("Invalid block size value!...");
         }
         catch (IOException ex) {
-            Console.Error.writeLine("IO exception occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Socket problem occurred:%s", ex.getMessage());
+        }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("Network error occurred:%s", ex.getMessage());
         }
     }
 
