@@ -1,0 +1,4 @@
+org\csystem\app\imageprocessing\server\GrayscaleImageServer.class
+org\csystem\app\imageprocessing\App.class
+org\csystem\app\imageprocessing\server\BinaryImageServer.class
+org\csystem\app\imageprocessing\Application.class

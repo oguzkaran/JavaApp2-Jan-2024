@@ -1,14 +1,14 @@
 /*----------------------------------------------------------
 	FILE			: CImage.java
 	AUTHOR			: Java-Nov-2022 Group
-	LAST UPDATE		: 02.12.2023
+	LAST UPDATE		: 6th March 2024
 
-	CImage class for generaL image operations
+	CImage class for general image operations
 
 	Copyleft (c) 1993 C and System Programmers Association
 	All Rights Free
 ------------------------------------------------------------*/
-package org.csystem.io.image;
+package org.csystem.image;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -41,12 +41,24 @@
             <artifactId>com-karandev-util-console</artifactId>
             <version>14.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.karandev</groupId>
             <artifactId>com-karandev-util-net</artifactId>
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.csystem</groupId>
+            <artifactId>org-csystem-imageprocessing</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.csystem</groupId>
+            <artifactId>org-csystem-net-tcp-server</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
