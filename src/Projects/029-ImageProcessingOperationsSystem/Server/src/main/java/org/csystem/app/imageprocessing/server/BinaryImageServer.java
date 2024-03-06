@@ -5,7 +5,7 @@ import com.karandev.util.net.TcpUtil;
 import com.karandev.util.net.exception.NetworkException;
 import org.csystem.image.CImage;
 import org.csystem.image.CImageFormat;
-import org.csystem.net.tcp.server.Server;
+import org.csystem.net.tcp.server.ConcurrentServer;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +18,12 @@ public class BinaryImageServer {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyy_HH-mm-ss-n");
     private static final File IMAGE_PATH = new File("binary_images");
 
-    private final Server m_server;
+    private final ConcurrentServer m_server;
 
     private void saveFile(Socket socket, String path) throws IOException
     {
         try {
-            var file = new File(IMAGE_PATH, new File(path).getName());
+            var file = new File(IMAGE_PATH, String.format("%s.png", new File(path).getName()));
 
             TcpUtil.receiveFile(socket, file);
             var threshold = TcpUtil.receiveInt(socket);
@@ -44,7 +44,7 @@ public class BinaryImageServer {
         var image = new CImage(file);
 
         var path = file.getAbsolutePath();
-        file = new File(path.substring(0, path.lastIndexOf('.') + 1), "-bin.png");
+        file = new File(path.substring(0, path.lastIndexOf('.') + 1) +  "-bin.png");
 
         image.binary(threshold);
         image.save(file, CImageFormat.PNG);
@@ -73,7 +73,7 @@ public class BinaryImageServer {
 
     public BinaryImageServer(int port, int backlog) throws IOException
     {
-        m_server = Server.builder()
+        m_server = ConcurrentServer.builder()
                 .setPort(port)
                 .setBacklog(backlog)
                 .setInitRunnable(IMAGE_PATH::mkdirs)
@@ -85,8 +85,12 @@ public class BinaryImageServer {
 
     public void run()
     {
-        m_server.run();
+        m_server.start();
     }
 
+    public void close()
+    {
+        m_server.stop();
+    }
 
 }

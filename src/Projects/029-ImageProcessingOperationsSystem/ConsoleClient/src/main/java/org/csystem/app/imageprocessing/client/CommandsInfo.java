@@ -26,9 +26,40 @@ public class CommandsInfo {
             var blockSize = Integer.parseInt(blockSizeStr);
             TcpUtil.sendFile(socket, file, blockSize);
 
-            if (TcpUtil.receiveInt(socket) == 1) {
+            if (TcpUtil.receiveInt(socket) == 1)
                 TcpUtil.receiveFile(socket, "gs.png");
-            }
+            else
+                Console.writeLine("Not sent!...");
+        }
+        catch (NumberFormatException ignore) {
+            Console.Error.writeLine("Invalid block size value!...");
+        }
+        catch (IOException ex) {
+            Console.Error.writeLine("Socket problem occurred:%s", ex.getMessage());
+        }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("Network error occurred:%s", ex.getMessage());
+        }
+    }
+
+    @Command("bin")
+    private void makeBinary(String path, String blockSizeStr, String thresholdStr)
+    {
+        var file = new File(path);
+        if (!file.exists()) {
+            Console.Error.writeLine("Image not found");
+            return;
+        }
+
+        try (var socket = new Socket(m_host, m_port + 1)) {
+            var blockSize = Integer.parseInt(blockSizeStr);
+            var threshold = Integer.parseInt(thresholdStr);
+
+            TcpUtil.sendFile(socket, file, blockSize);
+            TcpUtil.sendInt(socket, threshold);
+
+            if (TcpUtil.receiveInt(socket) == 1)
+                TcpUtil.receiveFile(socket, "bin.png");
             else
                 Console.writeLine("Not sent!...");
         }

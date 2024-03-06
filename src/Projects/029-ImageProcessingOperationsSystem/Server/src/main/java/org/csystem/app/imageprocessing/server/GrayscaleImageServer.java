@@ -5,20 +5,21 @@ import com.karandev.util.net.TcpUtil;
 import com.karandev.util.net.exception.NetworkException;
 import org.csystem.image.CImage;
 import org.csystem.image.CImageFormat;
-import org.csystem.net.tcp.server.Server;
+import org.csystem.net.tcp.server.ConcurrentServer;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class GrayscaleImageServer {
+public class GrayscaleImageServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 10000;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyy_HH-mm-ss-n");
     private static final File IMAGE_PATH = new File("grayscale_images");
 
-    private final Server m_server;
+    private final ConcurrentServer m_server;
 
     private void saveFile(Socket socket, String path) throws IOException
     {
@@ -42,7 +43,7 @@ public class GrayscaleImageServer {
         var image = new CImage(file);
 
         var path = file.getAbsolutePath();
-        file = new File(path.substring(0, path.lastIndexOf('.') + 1), "-gs.png");
+        file = new File(path.substring(0, path.lastIndexOf('.') + 1) +  "-gs.png");
 
         image.grayScale();
         image.save(file, CImageFormat.PNG);
@@ -72,7 +73,7 @@ public class GrayscaleImageServer {
 
     public GrayscaleImageServer(int port, int backlog) throws IOException
     {
-        m_server = Server.builder()
+        m_server = ConcurrentServer.builder()
                 .setPort(port)
                 .setBacklog(backlog)
                 .setInitRunnable(IMAGE_PATH::mkdirs)
@@ -80,14 +81,15 @@ public class GrayscaleImageServer {
                 .setClientSocketConsumer(this::handleClient)
                 .setServerExceptionConsumer(ex -> Console.Error.writeLine("Exception Occurred:%s", ex.getMessage()))
                 .build();
-
-
     }
 
     public void run()
     {
-        m_server.run();
+        m_server.start();
     }
 
-
+    public void close()
+    {
+        m_server.stop();
+    }
 }

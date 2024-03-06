@@ -1,3 +1,13 @@
+/*----------------------------------------------------------
+	FILE			: ConcurrentServer.java
+	AUTHOR			: JavaApp2-Jab-2024 Group
+	LAST UPDATE		: 6th March 2024
+
+	Class that represents a general server
+
+	Copyleft (c) 1993 C and System Programmers Association
+	All Rights Free
+------------------------------------------------------------*/
 package org.csystem.net.tcp.server;
 
 import org.csystem.net.function.IConsumer;
@@ -71,8 +81,6 @@ public class ConcurrentServer {
 
         public ConcurrentServer build() throws IOException
         {
-            m_concurrentServer.m_serverSocket = new ServerSocket(m_concurrentServer.m_port, m_concurrentServer.m_backlog);
-
             return m_concurrentServer;
         }
     }
@@ -111,7 +119,7 @@ public class ConcurrentServer {
             }
         }
         finally {
-            m_threadPool.shutdown();
+            //m_threadPool.shutdown();
         }
     }
 
@@ -125,8 +133,24 @@ public class ConcurrentServer {
         return new Builder();
     }
 
-    public void run()
+    public void start()
     {
-        m_threadPool.execute(this::serverThreadCallback);
+        try {
+            m_serverSocket = new ServerSocket(m_port, m_backlog);
+            m_threadPool.execute(this::serverThreadCallback);
+        }
+        catch (IOException ignore) {
+            //...
+        }
+    }
+
+    public void stop()
+    {
+        try {
+            m_serverSocket.close();
+        }
+        catch (IOException ignore) {
+            //...
+        }
     }
 }
