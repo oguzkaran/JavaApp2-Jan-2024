@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="com-karandev-util-net" />
+        <module name="org-csystem-imageprocessing" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

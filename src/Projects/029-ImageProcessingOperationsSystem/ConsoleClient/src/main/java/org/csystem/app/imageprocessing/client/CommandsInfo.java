@@ -14,7 +14,7 @@ public class CommandsInfo {
     private final int m_port;
 
     @Command("gs")
-    private void makeGrayScale(String path, String blockSizeStr)
+    private void makeGrayScale(String name, String path, String blockSizeStr)
     {
         var file = new File(path);
         if (!file.exists()) {
@@ -24,6 +24,16 @@ public class CommandsInfo {
 
         try (var socket = new Socket(m_host, m_port)) {
             var blockSize = Integer.parseInt(blockSizeStr);
+
+            TcpUtil.sendStringViaLength(socket, name);
+
+            var statusStr = TcpUtil.receiveString(socket, 5);
+
+            if (statusStr.equals("ERR_N")) {
+                Console.writeLine("invalid name");
+                return;
+            }
+
             TcpUtil.sendFile(socket, file, blockSize);
 
             if (TcpUtil.receiveInt(socket) == 1)
@@ -43,7 +53,7 @@ public class CommandsInfo {
     }
 
     @Command("bin")
-    private void makeBinary(String path, String blockSizeStr, String thresholdStr)
+    private void makeBinary(String name, String path, String blockSizeStr, String thresholdStr)
     {
         var file = new File(path);
         if (!file.exists()) {
@@ -54,6 +64,15 @@ public class CommandsInfo {
         try (var socket = new Socket(m_host, m_port + 1)) {
             var blockSize = Integer.parseInt(blockSizeStr);
             var threshold = Integer.parseInt(thresholdStr);
+
+            TcpUtil.sendStringViaLength(socket, name);
+
+            var statusStr = TcpUtil.receiveString(socket, 5);
+
+            if (statusStr.equals("ERR_N")) {
+                Console.writeLine("invalid name");
+                return;
+            }
 
             TcpUtil.sendFile(socket, file, blockSize);
             TcpUtil.sendInt(socket, threshold);

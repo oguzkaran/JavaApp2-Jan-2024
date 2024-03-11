@@ -7,7 +7,6 @@ import org.csystem.app.imageprocessing.server.GrayscaleImageServer;
 import org.csystem.app.imageprocessing.server.manage.ManageServerCommands;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static com.karandev.io.util.console.commandline.CommandLineUtil.checkLengthEquals;

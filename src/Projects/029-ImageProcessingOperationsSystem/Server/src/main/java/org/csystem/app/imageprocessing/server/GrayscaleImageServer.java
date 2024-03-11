@@ -58,7 +58,16 @@ public class GrayscaleImageServer implements Closeable {
             var hostAddress = socket.getInetAddress().getHostAddress();
             var port = socket.getPort();
             Console.writeLine("Client connected to grayscale image server via %s:%d", hostAddress, port);
-            var path = String.format("%s_%d_%s", hostAddress, port, FORMATTER.format(LocalDateTime.now()));
+            var name = TcpUtil.receiveStringViaLength(socket);
+
+            if (name.length() < 3) {
+                TcpUtil.sendString(socket, "ERR_N");
+                return;
+            }
+
+            TcpUtil.sendString(socket, "SUC_N");
+
+            var path = String.format("%s_%s_%d_%s", name.substring(0, 3), hostAddress, port, FORMATTER.format(LocalDateTime.now()));
 
             saveFile(socket, path);
         }

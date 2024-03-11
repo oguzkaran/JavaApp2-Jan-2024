@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="GenericApp" />
         <module name="ConosleClient" />
+        <module name="ImageProcessingConsoleClientApp" />
       </profile>
     </annotationProcessing>
   </component>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ConosleClient" options="-parameters" />
       <module name="GenericApp" options="-parameters" />
+      <module name="ImageProcessingConsoleClientApp" options="-parameters" />
     </option>
   </component>
 </project>

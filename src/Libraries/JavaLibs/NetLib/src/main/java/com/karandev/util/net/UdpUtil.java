@@ -10,6 +10,7 @@
 -----------------------------------------------------------------------*/
 package com.karandev.util.net;
 
+import com.karandev.util.net.BitConverter;
 import com.karandev.util.net.exception.NetworkException;
 
 import java.net.*;

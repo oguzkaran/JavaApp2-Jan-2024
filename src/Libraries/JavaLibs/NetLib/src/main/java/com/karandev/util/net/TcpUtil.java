@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 04.03.2024
+	LAST UPDATE : 11th March 2024
 
 	Utility class for TCP socket operations
 
@@ -10,6 +10,7 @@
 -----------------------------------------------------------------------*/
 package com.karandev.util.net;
 
+import com.karandev.util.net.BitConverter;
 import com.karandev.util.net.exception.NetworkException;
 
 import java.io.*;
@@ -171,7 +172,7 @@ public final class TcpUtil {
 	public static byte receiveByte(Socket socket)
 	{
 		try {
-			byte [] data = new byte[1];
+			byte [] data = new byte[Byte.BYTES];
 
 			receive(socket, data);
 
@@ -188,7 +189,7 @@ public final class TcpUtil {
 	public static short receiveShort(Socket socket)
 	{
 		try {
-			byte[] data = new byte[2];
+			byte[] data = new byte[Short.BYTES];
 
 			receive(socket, data);
 
@@ -205,7 +206,7 @@ public final class TcpUtil {
 	public static int receiveInt(Socket socket)
 	{
 		try {
-			byte[] data = new byte[4];
+			byte[] data = new byte[Integer.BYTES];
 
 			receive(socket, data);
 
@@ -222,7 +223,7 @@ public final class TcpUtil {
 	public static long receiveLong(Socket socket)
 	{
 		try {
-			byte[] data = new byte[8];
+			byte[] data = new byte[Long.BYTES];
 
 			receive(socket, data);
 
@@ -239,7 +240,7 @@ public final class TcpUtil {
 	public static float receiveFloat(Socket socket)
 	{
 		try {
-			byte[] data = new byte[4];
+			byte[] data = new byte[Float.BYTES];
 
 			receive(socket, data);
 
@@ -256,7 +257,7 @@ public final class TcpUtil {
 	public static double receiveDouble(Socket socket)
 	{
 		try {
-			byte[] data = new byte[8];
+			byte[] data = new byte[Double.BYTES];
 
 			receive(socket, data);
 
@@ -273,7 +274,7 @@ public final class TcpUtil {
 	public static char receiveChar(Socket socket)
 	{
 		try {
-			byte[] data = new byte[2];
+			byte[] data = new byte[Character.BYTES];
 
 			receive(socket, data);
 
@@ -287,16 +288,6 @@ public final class TcpUtil {
 		}
 	}
 
-	public static boolean receiveBoolean(Socket socket)
-	{
-		try {
-			return new DataInputStream(socket.getInputStream()).readByte() != 0;
-		}
-		catch (Throwable ex) {
-			throw new NetworkException("TcpUtil.receiveBoolean", ex);
-		}
-	}
-
 	public static String receiveStringViaLength(Socket socket)
 	{
 		return receiveStringViaLength(socket, StandardCharsets.UTF_8);
@@ -305,10 +296,7 @@ public final class TcpUtil {
 	public static String receiveStringViaLength(Socket socket, Charset charset)
 	{
 		try {
-			byte[] dataLen = new byte[4];
-			receive(socket, dataLen);
-
-			byte[] data = new byte[BitConverter.toInt(dataLen)];
+			byte[] data = new byte[receiveInt(socket)];
 
 			receive(socket, data);
 
@@ -343,6 +331,8 @@ public final class TcpUtil {
 			throw new NetworkException("TcpUtil.receiveString", ex);
 		}
 	}
+
+	//...
 
 	public static void receiveFile(Socket socket, File file)
 	{
@@ -462,19 +452,6 @@ public final class TcpUtil {
 		}
 	}
 
-	public static void sendBoolean(Socket socket, boolean val)
-	{
-		try {
-			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-
-			dos.writeByte(val ? 1 : 0);
-			dos.flush();
-		}
-		catch (Throwable ex) {
-			throw new NetworkException("TcpUtil.sendBoolean", ex);
-		}
-	}
-
 	public static void sendStringViaLength(Socket socket, String str)
 	{
 		sendStringViaLength(socket, str, StandardCharsets.UTF_8);
@@ -516,6 +493,8 @@ public final class TcpUtil {
 			throw new NetworkException("TcpUtil.sendString", ex);
 		}
 	}
+
+	//...
 
 	public static void sendFile(Socket socket, File file, int blockSize)
 	{

@@ -13,21 +13,24 @@ public class ManageServerCommands {
     private final ExecutorService m_executorService;
 
     @Command("startgs")
-    private void startGrayscaleServer()
+    private void startGrayscaleServer() throws InterruptedException
     {
         m_executorService.execute(m_grayscaleImageServer::run);
+        Thread.sleep(250);
     }
 
     @Command("startbs")
-    private void startBinaryServer()
+    private void startBinaryServer() throws InterruptedException
     {
         m_executorService.execute(m_binaryImageServer::run);
+        Thread.sleep(250);
     }
 
     @Command("stopgs")
-    private void stopGrayscaleServer()
+    private void stopGrayscaleServer() throws InterruptedException
     {
         m_executorService.execute(m_grayscaleImageServer::close);
+        Thread.sleep(1000);
     }
 
     @Command("stopbs")
@@ -37,14 +40,15 @@ public class ManageServerCommands {
     }
 
     @Command("startall")
-    private void startAll()
+    private void startAll() throws InterruptedException
     {
         startGrayscaleServer();
         startBinaryServer();
+        Thread.sleep(1000);
     }
 
     @Command("stopall")
-    private void stopAll()
+    private void stopAll() throws InterruptedException
     {
         stopGrayscaleServer();
         stopBinaryServer();
