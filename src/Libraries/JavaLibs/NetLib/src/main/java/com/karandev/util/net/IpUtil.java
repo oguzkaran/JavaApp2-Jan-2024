@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
     FILE        : IpUtil.java
     AUTHOR      : Oğuz Karan
-    LAST UPDATE : 21.04.2023
+    LAST UPDATE : 13th Mar 2024
 
     Utility class for IP family
 
@@ -33,7 +33,7 @@ public final class IpUtil {
 
     public static OptionalInt getFirstAvailablePort(int minPort, int maxPort)
     {
-        for (int port = minPort; port <= maxPort; ++port)
+        for (var port = minPort; port <= maxPort; ++port)
             if (isPortAvailable(port))
                 return OptionalInt.of(port);
 

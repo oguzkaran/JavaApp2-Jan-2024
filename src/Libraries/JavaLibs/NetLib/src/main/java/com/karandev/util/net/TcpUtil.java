@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 11th March 2024
+	LAST UPDATE : 13th March 2024
 
 	Utility class for TCP socket operations
 
@@ -10,7 +10,6 @@
 -----------------------------------------------------------------------*/
 package com.karandev.util.net;
 
-import com.karandev.util.net.BitConverter;
 import com.karandev.util.net.exception.NetworkException;
 
 import java.io.*;
@@ -24,10 +23,10 @@ public final class TcpUtil {
 	private static int receive(DataInputStream dis, byte [] data, int offset, int length) throws IOException
 	{
 	    int result;
-	    int left = length, index = 0;
+	    int left = length, index = offset;
 
 	    while (left > 0) {
-	        if ((result = dis.read(data, offset, left)) == -1)
+	        if ((result = dis.read(data, index, left)) == -1)
 	            return -1;
 	        
 	        if (result == 0)
@@ -47,13 +46,13 @@ public final class TcpUtil {
 
 	private static int send(DataOutputStream dos, byte [] data, int offset, int length) throws IOException
 	{						
-		int curOffset = offset;		
+		int curOffset = offset;
 		int left = length;
 		int total = 0;
 		int written;
 		int initWritten = dos.size();
 		
-		while (curOffset < length) {
+		while (total < length) {
 			dos.write(data, curOffset, left);
 			dos.flush();
 			written = dos.size() - initWritten;
@@ -332,7 +331,25 @@ public final class TcpUtil {
 		}
 	}
 
-	//...
+	public static String receiveLine(Socket socket)
+	{
+		return receiveLine(socket, StandardCharsets.UTF_8);
+	}
+
+	public static String receiveLine(Socket socket, Charset charset)
+	{
+		try {
+			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
+
+			return br.readLine();
+		}
+		catch (NetworkException ex) {
+			throw new NetworkException("TcpUtil.receiveString", ex.getCause());
+		}
+		catch (Throwable ex) {
+			throw new NetworkException("TcpUtil.receiveString", ex);
+		}
+	}
 
 	public static void receiveFile(Socket socket, File file)
 	{
@@ -491,6 +508,27 @@ public final class TcpUtil {
 		}
 		catch (Throwable ex) {
 			throw new NetworkException("TcpUtil.sendString", ex);
+		}
+	}
+
+	public static void sendLine(Socket socket, String str)
+	{
+		sendLine(socket, str, StandardCharsets.UTF_8);
+	}
+
+	public static void sendLine(Socket socket, String str, Charset charset)
+	{
+		try {
+			var bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charset));
+
+			bw.write(String.format("%s\r\n", str));
+			bw.flush();
+		}
+		catch (NetworkException ex) {
+			throw new NetworkException("TcpUtil.sendLine", ex.getCause());
+		}
+		catch (Throwable ex) {
+			throw new NetworkException("TcpUtil.sendLine", ex);
 		}
 	}
 
