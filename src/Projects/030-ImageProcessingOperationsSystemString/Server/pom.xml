@@ -43,9 +43,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.karandev</groupId>
-            <artifactId>com-karandev-util-net</artifactId>
-            <version>2.0.0</version>
+             <groupId>com.karandev</groupId>
+	    <artifactId>com-karandev-util-net</artifactId>
+	    <version>1.0.0</version>
         </dependency>
 
         <dependency>

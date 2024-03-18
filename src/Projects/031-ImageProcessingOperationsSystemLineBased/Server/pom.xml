@@ -42,11 +42,12 @@
             <version>14.4.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.karandev</groupId>
-            <artifactId>com-karandev-util-net</artifactId>
-            <version>2.1.0</version>
+         <dependency>
+             <groupId>com.karandev</groupId>
+	    <artifactId>com-karandev-util-net</artifactId>
+	    <version>1.0.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.csystem</groupId>
