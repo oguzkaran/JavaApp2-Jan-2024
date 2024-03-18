@@ -532,6 +532,8 @@ public final class TcpUtil {
 		}
 	}
 
+	//...
+
 	public static void sendFile(Socket socket, File file, int blockSize)
 	{
 		sendFile(socket, file.getAbsolutePath(), blockSize);
