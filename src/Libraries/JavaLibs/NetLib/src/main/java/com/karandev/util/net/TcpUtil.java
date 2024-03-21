@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 13th March 2024
+	LAST UPDATE : 20th March 2024
 
 	Utility class for TCP socket operations
 
@@ -341,13 +341,18 @@ public final class TcpUtil {
 		try {
 			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
 
-			return br.readLine();
+			var line = br.readLine();
+
+			if (line == null)
+				throw new NetworkException("End of Stream!...");
+
+			return line;
 		}
 		catch (NetworkException ex) {
-			throw new NetworkException("TcpUtil.receiveString", ex.getCause());
+			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
 		}
 		catch (Throwable ex) {
-			throw new NetworkException("TcpUtil.receiveString", ex);
+			throw new NetworkException("TcpUtil.receiveLine", ex);
 		}
 	}
 
@@ -519,9 +524,9 @@ public final class TcpUtil {
 	public static void sendLine(Socket socket, String str, Charset charset)
 	{
 		try {
-			var bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charset));
+			var bw = new PrintStream(socket.getOutputStream(), true, charset);
 
-			bw.write(String.format("%s\r\n", str));
+			bw.printf("%s\r\n", str);
 			bw.flush();
 		}
 		catch (NetworkException ex) {

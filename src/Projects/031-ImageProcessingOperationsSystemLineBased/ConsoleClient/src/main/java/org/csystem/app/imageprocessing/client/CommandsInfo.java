@@ -28,6 +28,8 @@ public class CommandsInfo {
             return;
         }
 
+        //gs ba ./images/bart.png 512
+
         try (var socket = new Socket(m_host, m_port)) {
             var blockSize = Integer.parseInt(blockSizeStr);
 

@@ -63,6 +63,7 @@ public class GrayscaleImageServer implements Closeable {
             if (name.length() < 3) {
                 TcpUtil.sendLine(socket, "ERR_N");
                 TcpUtil.sendLine(socket, "Length of name must be greater or equal than 3(three)");
+                //Thread.sleep(1000);
                 return;
             }
 
