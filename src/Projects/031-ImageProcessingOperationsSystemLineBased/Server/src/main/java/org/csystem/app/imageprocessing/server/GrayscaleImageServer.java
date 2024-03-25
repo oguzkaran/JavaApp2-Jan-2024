@@ -51,21 +51,11 @@ public class GrayscaleImageServer implements Closeable {
         return file;
     }
 
-    private void handleClient(Socket socket)
+    private void nameValidCallback(Socket socket, String name)
     {
-        try (socket) {
-            socket.setSoTimeout(SOCKET_TIMEOUT);
+        try {
             var hostAddress = socket.getInetAddress().getHostAddress();
             var port = socket.getPort();
-            Console.writeLine("Client connected to grayscale image server via %s:%d", hostAddress, port);
-            var name = TcpUtil.receiveLine(socket);
-
-            if (name.length() < 3) {
-                TcpUtil.sendLine(socket, "ERR_N");
-                TcpUtil.sendLine(socket, "Length of name must be greater or equal than 3(three)");
-                //Thread.sleep(1000);
-                return;
-            }
 
             TcpUtil.sendLine(socket, "SUC_N");
 
@@ -76,11 +66,39 @@ public class GrayscaleImageServer implements Closeable {
         catch (IOException ex) {
             Console.Error.writeLine("GrayScaleImageServer:IO Exception Occurred:%s", ex.getMessage());
         }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("GrayScaleImageServer:Network Exception Occurred:%s", ex.getMessage());
+        }
+    }
+
+    private void nameNotValidCallback(Socket socket)
+    {
+        try {
+            TcpUtil.sendLine(socket, "ERR_N");
+            TcpUtil.sendLine(socket, "Length of name must be greater than 2(three) AND less then 5(five)");
+        }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("GrayScaleImageServer:nameNotValidCallback:%s", ex.getMessage());
+        }
+    }
+
+    private void handleClient(Socket socket)
+    {
+        try (socket) {
+            socket.setSoTimeout(SOCKET_TIMEOUT);
+            var hostAddress = socket.getInetAddress().getHostAddress();
+            var port = socket.getPort();
+            Console.writeLine("Client connected to grayscale image server via %s:%d", hostAddress, port);
+
+            TcpUtil.receiveLineOptional(socket)
+                    .filter(n -> 3 <= n.length())
+                    .filter(n -> n.length() <= 10)
+                    .ifPresentOrElse(n -> nameValidCallback(socket, n), () -> nameNotValidCallback(socket));
+        }
         catch (Throwable ex) {
             Console.Error.writeLine("GrayScaleImageServer:Exception Occurred:%s", ex.getMessage());
         }
     }
-
 
     public GrayscaleImageServer(int port, int backlog) throws IOException
     {
@@ -90,7 +108,6 @@ public class GrayscaleImageServer implements Closeable {
                 .setInitRunnable(IMAGE_PATH::mkdirs)
                 .setBeforeAcceptRunnable(() -> Console.writeLine("Grayscale image server is waiting for a client on port:%d", port))
                 .setClientSocketConsumer(this::handleClient)
-                //.setServerExceptionConsumer(ex -> Console.Error.writeLine("Exception Occurred:%s", ex.getMessage()))
                 .build();
     }
 

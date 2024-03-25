@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 20th March 2024
+	LAST UPDATE : 25th March 2024
 
 	Utility class for TCP socket operations
 
@@ -341,12 +341,27 @@ public final class TcpUtil {
 		try {
 			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
 
-			var line = br.readLine();
+			return br.readLine();
+		}
+		catch (NetworkException ex) {
+			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
+		}
+		catch (Throwable ex) {
+			throw new NetworkException("TcpUtil.receiveLine", ex);
+		}
+	}
 
-			if (line == null)
-				throw new NetworkException("End of Stream!...");
+	public static Optional<String> receiveLineOptional(Socket socket)
+	{
+		return receiveLineOptional(socket, StandardCharsets.UTF_8);
+	}
 
-			return line;
+	public static Optional<String> receiveLineOptional(Socket socket, Charset charset)
+	{
+		try {
+			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
+
+			return Optional.ofNullable(br.readLine());
 		}
 		catch (NetworkException ex) {
 			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
@@ -524,10 +539,10 @@ public final class TcpUtil {
 	public static void sendLine(Socket socket, String str, Charset charset)
 	{
 		try {
-			var bw = new PrintStream(socket.getOutputStream(), true, charset);
+			var pw = new PrintWriter(socket.getOutputStream(), true, charset);
 
-			bw.printf("%s\r\n", str);
-			bw.flush();
+			pw.print(str + "\r\n");
+			pw.flush();
 		}
 		catch (NetworkException ex) {
 			throw new NetworkException("TcpUtil.sendLine", ex.getCause());

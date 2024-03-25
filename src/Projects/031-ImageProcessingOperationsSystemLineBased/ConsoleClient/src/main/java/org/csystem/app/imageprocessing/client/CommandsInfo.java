@@ -29,25 +29,25 @@ public class CommandsInfo {
         }
 
         //gs ba ./images/bart.png 512
-
+        //gs bartu ./images/bob-marley.jpg 512
         try (var socket = new Socket(m_host, m_port)) {
             var blockSize = Integer.parseInt(blockSizeStr);
 
             TcpUtil.sendLine(socket, name);
 
-            var statusStr = TcpUtil.receiveLine(socket);
+            var statusStr = TcpUtil.receiveLineOptional(socket).get();
 
             if (statusStr.equals(ERR_N)) {
-                Console.writeLine("Message:%s", TcpUtil.receiveLine(socket));
+                Console.writeLine("Message:%s", TcpUtil.receiveLineOptional(socket).get());
                 return;
             }
 
             TcpUtil.sendFile(socket, file, blockSize);
 
-            if (TcpUtil.receiveLine(socket).equals(SUC_GS))
+            if (TcpUtil.receiveLineOptional(socket).get().equals(SUC_GS))
                 TcpUtil.receiveFile(socket, "gs.png");
             else
-                Console.writeLine("Message:%s", TcpUtil.receiveLine(socket));
+                Console.writeLine("Message:%s", TcpUtil.receiveLineOptional(socket).get());
         }
         catch (NumberFormatException ignore) {
             Console.Error.writeLine("Invalid block size value!...");
@@ -57,6 +57,9 @@ public class CommandsInfo {
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("Network error occurred:%s", ex.getMessage());
+        }
+        catch (Throwable ex) {
+            Console.Error.writeLine("Error occurred:%s", ex.getMessage());
         }
     }
 
