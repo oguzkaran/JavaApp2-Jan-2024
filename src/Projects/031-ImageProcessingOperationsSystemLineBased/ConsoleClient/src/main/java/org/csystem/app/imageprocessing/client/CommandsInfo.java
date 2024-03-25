@@ -32,6 +32,11 @@ public class CommandsInfo {
         //gs bartu ./images/bob-marley.jpg 512
         try (var socket = new Socket(m_host, m_port)) {
             var blockSize = Integer.parseInt(blockSizeStr);
+            TcpUtil.sendLine(socket, "gs");
+            var cmd = TcpUtil.receiveLineOptional(socket).get();
+
+            if (cmd.equals("ERR_CMD"))
+                return;
 
             TcpUtil.sendLine(socket, name);
 
@@ -67,14 +72,22 @@ public class CommandsInfo {
     private void makeBinary(String name, String path, String blockSizeStr, String thresholdStr)
     {
         var file = new File(path);
+
         if (!file.exists()) {
             Console.Error.writeLine("Image not found");
             return;
         }
 
-        try (var socket = new Socket(m_host, m_port + 1)) {
+        try (var socket = new Socket(m_host, m_port)) {
             var blockSize = Integer.parseInt(blockSizeStr);
             var threshold = Integer.parseInt(thresholdStr);
+
+            TcpUtil.sendLine(socket, "bin");
+
+            var cmd = TcpUtil.receiveLineOptional(socket).get();
+
+            if (cmd.equals("ERR_CMD"))
+                return;
 
             TcpUtil.sendLine(socket, name);
 

@@ -2,56 +2,26 @@ package org.csystem.app.imageprocessing.server.manage;
 
 import com.karandev.io.util.console.Console;
 import com.karandev.io.util.console.commandprompt.annotation.Command;
-import org.csystem.app.imageprocessing.server.BinaryImageServer;
-import org.csystem.app.imageprocessing.server.GrayscaleImageServer;
+import org.csystem.app.imageprocessing.server.ImageProcessingServer;
 
 import java.util.concurrent.ExecutorService;
 
 public class ManageServerCommands {
-    private final GrayscaleImageServer m_grayscaleImageServer;
-    private final BinaryImageServer m_binaryImageServer;
+    private final ImageProcessingServer m_imageProcessingServer;
     private final ExecutorService m_executorService;
 
-    @Command("startgs")
+    @Command("start")
     private void startGrayscaleServer() throws InterruptedException
     {
-        m_executorService.execute(m_grayscaleImageServer::run);
+        m_executorService.execute(m_imageProcessingServer::run);
         Thread.sleep(250);
     }
 
-    @Command("startbs")
-    private void startBinaryServer() throws InterruptedException
-    {
-        m_executorService.execute(m_binaryImageServer::run);
-        Thread.sleep(250);
-    }
-
-    @Command("stopgs")
+    @Command("stop")
     private void stopGrayscaleServer() throws InterruptedException
     {
-        m_executorService.execute(m_grayscaleImageServer::close);
+        m_executorService.execute(m_imageProcessingServer::close);
         Thread.sleep(1000);
-    }
-
-    @Command("stopbs")
-    private void stopBinaryServer()
-    {
-        m_executorService.execute(m_binaryImageServer::close);
-    }
-
-    @Command("startall")
-    private void startAll() throws InterruptedException
-    {
-        startGrayscaleServer();
-        startBinaryServer();
-        Thread.sleep(1000);
-    }
-
-    @Command("stopall")
-    private void stopAll() throws InterruptedException
-    {
-        stopGrayscaleServer();
-        stopBinaryServer();
     }
 
     @Command("quit")
@@ -62,10 +32,9 @@ public class ManageServerCommands {
         System.exit(0);
     }
 
-    public ManageServerCommands(GrayscaleImageServer grayscaleImageServer, BinaryImageServer binaryImageServer, ExecutorService executorService)
+    public ManageServerCommands(ImageProcessingServer imageProcessingServer, ExecutorService executorService)
     {
-        m_grayscaleImageServer = grayscaleImageServer;
-        m_binaryImageServer = binaryImageServer;
+        m_imageProcessingServer = imageProcessingServer;
         m_executorService = executorService;
     }
 }
