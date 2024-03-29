@@ -135,7 +135,7 @@ public class ImageProcessingServer implements Closeable {
         return file;
     }
 
-    private void nameValidCallback(Socket socket, String name, String cmdText)
+    private void nameValidCallback(Socket socket, String name, CommandInfo commandInfo)
     {
         try {
             var hostAddress = socket.getInetAddress().getHostAddress();
@@ -145,11 +145,7 @@ public class ImageProcessingServer implements Closeable {
 
             var path = String.format("%s_%s_%d_%s", name.substring(0, 3), hostAddress, port, FORMATTER.format(LocalDateTime.now()));
 
-            switch (cmdText) {
-                case "gs" -> doGrayScaleFile(socket, path);
-                case "bin" -> doBinaryImageFile(socket, path);
-            }
-
+            commandInfo.consumer.accept(socket, path);
         }
         catch (IOException ex) {
             Console.Error.writeLine("ImageProcessingServer:IO Exception Occurred:%s", ex.getMessage());
@@ -157,13 +153,16 @@ public class ImageProcessingServer implements Closeable {
         catch (NetworkException ex) {
             Console.Error.writeLine("ImageProcessingServer:Network Exception Occurred:%s", ex.getMessage());
         }
+        catch (Throwable ex) {
+            Console.Error.writeLine("ImageProcessingServer:Exception Occurred:%s", ex.getMessage());
+        }
     }
 
     private void nameInValidCallback(Socket socket)
     {
         try {
             TcpUtil.sendLine(socket, "ERR_N");
-            TcpUtil.sendLine(socket, "Length of name must be greater than 2(three) AND less then 5(five)");
+            TcpUtil.sendLine(socket, "Length of name must be greater than 2(three) AND less then 10(ten)");
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("ImageProcessingServer:nameNotValidCallback:%s", ex.getMessage());
@@ -178,9 +177,7 @@ public class ImageProcessingServer implements Closeable {
             TcpUtil.receiveLineOptional(socket)
                     .filter(n -> 3 <= n.length())
                     .filter(n -> n.length() <= 10)
-                    .ifPresentOrElse(n -> nameValidCallback(socket, n, ci.cmdText), () -> nameInValidCallback(socket));
-
-            ci.consumer.accept(socket, ci.path);
+                    .ifPresentOrElse(n -> nameValidCallback(socket, n, ci), () -> nameInValidCallback(socket));
         }
         catch (Throwable ex) {
             Console.Error.writeLine("ImageProcessingServer:Exception Occurred:%s", ex.getMessage());
@@ -190,6 +187,7 @@ public class ImageProcessingServer implements Closeable {
     private void commandInvalidCallback(Socket socket)
     {
         TcpUtil.sendLine(socket, "ERR_CMD");
+        TcpUtil.sendLine(socket, "gs, bin");
     }
 
     private void handleClient(Socket socket)
@@ -208,12 +206,23 @@ public class ImageProcessingServer implements Closeable {
         }
     }
 
+    private void initRunnableCallback()
+    {
+        var gsDirStatus = GS_IMAGE_PATH.mkdirs();
+        var binDirStatus = BIN_IMAGE_PATH.mkdirs();
+
+        if ((!GS_IMAGE_PATH.exists() && !gsDirStatus) || (!BIN_IMAGE_PATH.exists() && !binDirStatus)) {
+            Console.Error.writeLine("Directories can not be created!...");
+            System.exit(1);
+        }
+    }
+
     public ImageProcessingServer(int port, int backlog) throws IOException
     {
         m_server = ConcurrentServer.builder()
                 .setPort(port)
                 .setBacklog(backlog)
-                .setInitRunnable(() -> {GS_IMAGE_PATH.mkdirs(); BIN_IMAGE_PATH.mkdirs();})
+                .setInitRunnable(this::initRunnableCallback)
                 .setBeforeAcceptRunnable(() -> Console.writeLine("ImageProcessingServer server is waiting for a client on port:%d", port))
                 .setClientSocketConsumer(this::handleClient)
                 .build();

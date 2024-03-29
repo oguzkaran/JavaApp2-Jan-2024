@@ -29,6 +29,7 @@ public class ManageServerCommands {
     private void exit()
     {
         Console.writeLine("Thanks");
+        Console.writeLine("C and System Programmers Association");
         System.exit(0);
     }
 
