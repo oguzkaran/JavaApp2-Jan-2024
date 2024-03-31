@@ -1,7 +1,7 @@
 package org.csystem.app.imageprocessing;
 
+import com.karandev.io.util.console.CommandPrompt;
 import com.karandev.io.util.console.Console;
-import com.karandev.io.util.console.commandprompt.CommandPrompt;
 import org.csystem.app.imageprocessing.server.BinaryImageServer;
 import org.csystem.app.imageprocessing.server.GrayscaleImageServer;
 import org.csystem.app.imageprocessing.server.manage.ManageServerCommands;
@@ -9,7 +9,7 @@ import org.csystem.app.imageprocessing.server.manage.ManageServerCommands;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
-import static com.karandev.io.util.console.commandline.CommandLineUtil.checkLengthEquals;
+import static com.karandev.io.util.console.CommandLineArgs.checkLengthEquals;
 
 class Application {
     public static void run(String[] args)
@@ -22,10 +22,10 @@ class Application {
             var grayscaleServer = new GrayscaleImageServer(port, backlog);
             var binaryServer = new BinaryImageServer(port + 1, backlog);
 
-            new CommandPrompt.Builder()
+            CommandPrompt.createBuilder()
                     .setPrompt("server")
-                    .register(new ManageServerCommands(grayscaleServer, binaryServer, Executors.newCachedThreadPool()))
-                    .build().run();
+                    .registerObject(new ManageServerCommands(grayscaleServer, binaryServer, Executors.newCachedThreadPool()))
+                    .create().run();
 
         }
         catch (NumberFormatException ignore) {

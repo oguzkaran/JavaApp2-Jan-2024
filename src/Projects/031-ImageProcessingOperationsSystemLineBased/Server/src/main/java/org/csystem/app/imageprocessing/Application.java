@@ -1,7 +1,7 @@
 package org.csystem.app.imageprocessing;
 
+import com.karandev.io.util.console.CommandPrompt;
 import com.karandev.io.util.console.Console;
-import com.karandev.io.util.console.commandprompt.CommandPrompt;
 import com.karandev.util.net.IpUtil;
 import org.csystem.app.imageprocessing.server.ImageProcessingServer;
 import org.csystem.app.imageprocessing.server.manage.ManageServerCommands;
@@ -9,7 +9,7 @@ import org.csystem.app.imageprocessing.server.manage.ManageServerCommands;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
-import static com.karandev.io.util.console.commandline.CommandLineUtil.*;
+import static com.karandev.io.util.console.CommandLineArgs.checkLengthLessOrEqual;
 
 class Application {
     private static int findAvailablePorts() throws IOException
@@ -31,9 +31,9 @@ class Application {
     public static void run(String[] args)
     {
         try {
-            checkLengthLessOrEquals(args.length, 2, "wrong number of arguments!...");
-            int port = 0;
-            int backlog = 512;
+            checkLengthLessOrEqual(args.length, 2, "wrong number of arguments!...");
+            int port;
+            var backlog = 512;
 
             if (args.length == 1) {
                 backlog = Integer.parseInt(args[0]);
@@ -48,10 +48,10 @@ class Application {
 
             var grayscaleServer = new ImageProcessingServer(port, backlog);
 
-            new CommandPrompt.Builder()
+            CommandPrompt.createBuilder()
                     .setPrompt("image-processing-server")
-                    .register(new ManageServerCommands(grayscaleServer, Executors.newCachedThreadPool()))
-                    .build().run();
+                    .registerObject(new ManageServerCommands(grayscaleServer, Executors.newCachedThreadPool()))
+                    .create().run();
         }
         catch (NumberFormatException ignore) {
             Console.Error.writeLine("Invalid arguments");

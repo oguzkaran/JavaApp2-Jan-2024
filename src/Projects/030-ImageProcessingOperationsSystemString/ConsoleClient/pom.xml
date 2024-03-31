@@ -16,15 +16,15 @@
     <version>1.0.0</version>
     <name>ImageProcessingConsoleClientApp</name>
 
-       <repositories>
+    <repositories>
         <repository>
-            <id>javaapp1-jan-2024-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main</url>
+            <id>javaapp2-jan-2024-karandev-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main</url>
         </repository>
 
         <repository>
-            <id>javaapp1-jan-2024-karandev-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main</url>
+            <id>javaapp2-jan-2024-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main</url>
         </repository>
     </repositories>
 
@@ -38,13 +38,13 @@
         <dependency>
             <groupId>com.karandev</groupId>
             <artifactId>com-karandev-util-console</artifactId>
-            <version>14.4.0</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
              <groupId>com.karandev</groupId>
-	    <artifactId>com-karandev-util-net</artifactId>
-	    <version>1.0.0</version>
+	        <artifactId>com-karandev-util-net</artifactId>
+	        <version>1.0.0</version>
         </dependency>
 
         <dependency>

@@ -1,7 +1,7 @@
 package org.csystem.app.imageprocessing.client;
 
 import com.karandev.io.util.console.Console;
-import com.karandev.io.util.console.commandprompt.annotation.Command;
+import com.karandev.io.util.console.annotation.Command;
 import com.karandev.util.net.TcpUtil;
 import com.karandev.util.net.exception.NetworkException;
 

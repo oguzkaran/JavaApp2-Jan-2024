@@ -1,7 +1,7 @@
 package org.csystem.app.imageprocessing.server.manage;
 
 import com.karandev.io.util.console.Console;
-import com.karandev.io.util.console.commandprompt.annotation.Command;
+import com.karandev.io.util.console.annotation.Command;
 import org.csystem.app.imageprocessing.server.BinaryImageServer;
 import org.csystem.app.imageprocessing.server.GrayscaleImageServer;
 

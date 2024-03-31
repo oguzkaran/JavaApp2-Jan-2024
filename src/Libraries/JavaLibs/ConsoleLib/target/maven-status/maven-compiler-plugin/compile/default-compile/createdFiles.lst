@@ -1,9 +1,0 @@
-com\karandev\io\util\console\CommandPrompt$Builder.class
-com\karandev\io\util\console\Console.class
-com\karandev\io\util\console\CommandLineArgs.class
-com\karandev\io\util\console\annotation\ErrorCommand.class
-com\karandev\io\util\console\annotation\Command.class
-com\karandev\io\util\console\Console$Error.class
-com\karandev\io\util\console\CommandPrompt$CommandInfo.class
-com\karandev\io\util\console\CommandPrompt.class
-com\karandev\io\util\console\annotation\Commands.class
