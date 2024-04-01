@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>MeetingCommunicationServer</artifactId>
+    <artifactId>MeetingManagerServer</artifactId>
     <version>1.0.0</version>
-    <name>MeetingCommunicationServer</name>
+    <name>MeetingManagerServer</name>
 
     <repositories>
         <repository>
