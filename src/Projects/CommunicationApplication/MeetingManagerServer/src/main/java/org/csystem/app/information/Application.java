@@ -33,7 +33,7 @@ class Application {
     {
         try {
             checkLengthLessOrEqual(args.length, 2, "wrong number of arguments!...");
-            int basePort = 0;
+            int basePort;
             int backlog = 512;
 
             if (args.length == 1) {

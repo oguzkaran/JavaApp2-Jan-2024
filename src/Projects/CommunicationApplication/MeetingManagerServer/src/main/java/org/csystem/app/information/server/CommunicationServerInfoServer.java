@@ -1,19 +1,65 @@
 package org.csystem.app.information.server;
 
 import com.karandev.io.util.console.Console;
+import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.exception.NetworkException;
+import org.csystem.app.information.server.communication.client.CommunicationServerInfo;
+import org.csystem.app.information.server.communication.global.CommunicationServerUtil;
 import org.csystem.net.tcp.server.ConcurrentServer;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 
+import static org.csystem.communication.library.common.CommunicationMessage.*;
+
 public class CommunicationServerInfoServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 1000;
+
     private final ConcurrentServer m_server;
+
+    private int getRemotePort(Socket socket)
+    {
+        var port = 0;
+
+        try {
+            port = Integer.parseInt(TcpUtil.receiveLine(socket));
+        }
+        catch (NumberFormatException ignore) {
+
+        }
+
+        return port;
+    }
 
     private void handleClient(Socket socket)
     {
-        //...
+        try (socket) {
+            socket.setSoTimeout(SOCKET_TIMEOUT);
+            var host = socket.getInetAddress().getHostAddress();
+            var port = getRemotePort(socket);
+
+            if (port == 0) {
+                TcpUtil.sendLine(socket, ERROR_INVALID_PORT);
+                return;
+            }
+            TcpUtil.sendLine(socket, SUCCESS_PORT);
+
+            synchronized (CommunicationServerUtil.SYNC_SERVERS_OBJECT) {
+                CommunicationServerUtil.SERVERS.add(new CommunicationServerInfo(host, port));
+            }
+
+            Console.writeLine("Communication Server:%s%d", host, port);
+        }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("CommunicationInfoServer Server:Network Exception Occurred:%s", ex.getMessage());
+        }
+        catch (IOException ex) {
+            Console.Error.writeLine("CommunicationInfoServer ServerServer:IO Exception Occurred:%s", ex.getMessage());
+        }
+        catch (Throwable ex) {
+            Console.Error.writeLine("CommunicationInfoServer Server Server:Exception Occurred:%s", ex.getMessage());
+        }
     }
 
     public CommunicationServerInfoServer(int port, int backlog) throws IOException

@@ -2,6 +2,7 @@ package org.csystem.app.information.server;
 
 import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.exception.NetworkException;
 import org.csystem.app.information.server.communication.client.CommunicationServerInfo;
 import org.csystem.app.information.server.communication.global.CommunicationServerUtil;
 import org.csystem.net.tcp.server.ConcurrentServer;
@@ -10,7 +11,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 
-import static org.csystem.app.information.server.communication.global.Message.*;
+import static org.csystem.communication.library.common.CommunicationMessage.*;
 
 public class JoinMeetingInformationServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 1000;
@@ -31,17 +32,19 @@ public class JoinMeetingInformationServer implements Closeable {
     {
         var port = 0;
 
-        for (var ci : CommunicationServerUtil.SERVERS) {
-            try (var socket = new Socket(ci.getHost(), ci.getPort())) {
-                port = connectToCommunicationServerCallback(socket, id);
+        synchronized (CommunicationServerUtil.SYNC_SERVERS_OBJECT) {
+            for (var ci : CommunicationServerUtil.SERVERS) {
+                try (var socket = new Socket(ci.getHost(), ci.getPort())) {
+                    port = connectToCommunicationServerCallback(socket, id);
 
-                if (port > 0) {
-                    communicationServerInfo.setHost(ci.getHost());
-                    break;
+                    if (port > 0) {
+                        communicationServerInfo.setHost(ci.getHost());
+                        break;
+                    }
                 }
-            }
-            catch (IOException ignore) {
-                port = -1;
+                catch (IOException ignore) {
+                    port = -1;
+                }
             }
         }
 
@@ -67,11 +70,14 @@ public class JoinMeetingInformationServer implements Closeable {
             else
                 TcpUtil.sendLine(socket, ERROR_INTERNAL);
         }
+        catch (NetworkException ex) {
+            Console.Error.writeLine("Join Meeting Information Server:Network Exception Occurred:%s", ex.getMessage());
+        }
         catch (IOException ex) {
-            Console.Error.writeLine("Information Server:IO Exception Occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Join Meeting Information Server:IO Exception Occurred:%s", ex.getMessage());
         }
         catch (Throwable ex) {
-            Console.Error.writeLine("Information Server:Exception Occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Join Meeting Information Server:Exception Occurred:%s", ex.getMessage());
         }
     }
 
@@ -80,7 +86,7 @@ public class JoinMeetingInformationServer implements Closeable {
         m_server = ConcurrentServer.builder()
                 .setPort(port)
                 .setBacklog(backlog)
-                .setBeforeAcceptRunnable(() -> Console.writeLine("Join Meeting Information server is waiting for a client on port:%d", port))
+                .setBeforeAcceptRunnable(() -> Console.writeLine("Join meeting information server is waiting for a client on port:%d", port))
                 .setClientSocketConsumer(this::handleClient)
                 .build();
     }

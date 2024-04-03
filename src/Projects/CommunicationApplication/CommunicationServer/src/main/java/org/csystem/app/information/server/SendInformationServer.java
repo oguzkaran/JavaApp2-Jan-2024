@@ -4,15 +4,14 @@ import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TcpUtil;
 import org.csystem.net.tcp.server.ConcurrentServer;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Random;
 
-import static org.csystem.app.information.server.communication.global.Message.ERROR;
-import static org.csystem.app.information.server.communication.global.Message.SUCCESS;
+import static org.csystem.communication.library.common.CommunicationMessage.ERROR;
+import static org.csystem.communication.library.common.CommunicationMessage.SUCCESS;
 
-public class SendInformationServer implements Closeable {
+public class SendInformationServer {
     private static final int SOCKET_TIMEOUT = 1000;
     private final ConcurrentServer m_server;
     private final int m_port;
@@ -67,10 +66,5 @@ public class SendInformationServer implements Closeable {
     public void run()
     {
         m_server.start();
-    }
-
-    public void close()
-    {
-        m_server.stop();
     }
 }

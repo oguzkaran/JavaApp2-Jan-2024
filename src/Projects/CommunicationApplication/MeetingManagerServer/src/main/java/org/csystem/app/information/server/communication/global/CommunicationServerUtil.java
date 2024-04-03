@@ -10,6 +10,9 @@ public final class CommunicationServerUtil {
     {
     }
 
+    public static final Object SYNC_SERVERS_OBJECT = new Object();
+
     public static final Set<CommunicationServerInfo> SERVERS = new HashSet<>();
+
     //...
 }

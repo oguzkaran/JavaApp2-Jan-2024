@@ -1,7 +1,7 @@
-package org.csystem.app.information.server.communication.global;
+package org.csystem.communication.library.common.message;
 
-public final class Message {
-    private Message()
+public final class CommunicationMessage {
+    private CommunicationMessage()
     {
     }
 
@@ -11,4 +11,8 @@ public final class Message {
     public static final String ERROR_INFO = "ERR_INFO";
     public static final String ERROR_INVALID_ID = "ERR_INVALID_ID";
     public static final String ERROR_INTERNAL = "ERR_INTERNAL";
+
+    public static final String SUCCESS_PORT = "SUC_PORT";
+
+    public static final String ERROR_INVALID_PORT = "ERR_INVALID_PORT";
 }
