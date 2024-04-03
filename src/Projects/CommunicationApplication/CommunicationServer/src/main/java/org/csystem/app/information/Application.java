@@ -23,7 +23,7 @@ class Application {
             var sendInformationServer = new SendInformationServer(basePort, backlog, name);
             var informationClient = new InformationClient(basePort + 1);
 
-            informationClient.run(args[3], Integer.parseInt(args[4]));
+            informationClient.run(name, args[3], Integer.parseInt(args[4]));
             threadPool.execute(sendInformationServer::run);
         }
         catch (NumberFormatException ignore) {

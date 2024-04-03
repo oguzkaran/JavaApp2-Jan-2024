@@ -11,7 +11,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 
-import static org.csystem.communication.library.common.CommunicationMessage.*;
+import static org.csystem.communication.library.common.CommunicationMessage.ERROR_INVALID_PORT;
+import static org.csystem.communication.library.common.CommunicationMessage.SUCCESS_PORT;
 
 public class CommunicationServerInfoServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 1000;
@@ -36,6 +37,7 @@ public class CommunicationServerInfoServer implements Closeable {
     {
         try (socket) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
+            var name = TcpUtil.receiveLine(socket);
             var host = socket.getInetAddress().getHostAddress();
             var port = getRemotePort(socket);
 
@@ -46,10 +48,10 @@ public class CommunicationServerInfoServer implements Closeable {
             TcpUtil.sendLine(socket, SUCCESS_PORT);
 
             synchronized (CommunicationServerUtil.SYNC_SERVERS_OBJECT) {
-                CommunicationServerUtil.SERVERS.add(new CommunicationServerInfo(host, port));
+                CommunicationServerUtil.SERVERS.add(new CommunicationServerInfo(name, host, port));
             }
 
-            Console.writeLine("Communication Server:%s%d", host, port);
+            Console.writeLine("Communication Server:%s, %s:%d", name, host, port);
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("CommunicationInfoServer Server:Network Exception Occurred:%s", ex.getMessage());
