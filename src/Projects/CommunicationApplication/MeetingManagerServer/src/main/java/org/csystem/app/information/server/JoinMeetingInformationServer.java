@@ -28,7 +28,7 @@ public class JoinMeetingInformationServer implements Closeable {
         return 0;
     }
 
-    private int connectToCommunicationServers(String id, String name, CommunicationServerInfo communicationServerInfo)
+    private int connectToCommunicationServers(String id, CommunicationServerInfo communicationServerInfo)
     {
         var port = 0;
 
@@ -39,6 +39,7 @@ public class JoinMeetingInformationServer implements Closeable {
 
                     if (port > 0) {
                         communicationServerInfo.setHost(ci.getHost());
+                        communicationServerInfo.setPort(port);
                         break;
                     }
                 }
@@ -59,7 +60,9 @@ public class JoinMeetingInformationServer implements Closeable {
             var name = TcpUtil.receiveLine(socket);
             var info = new CommunicationServerInfo();
 
-            var port = connectToCommunicationServers(id, name, info);
+            info.setName(name);
+
+            var port = connectToCommunicationServers(id, info);
 
             if (port > 0) {
                 TcpUtil.sendLine(socket, SUCCESS_INFO);

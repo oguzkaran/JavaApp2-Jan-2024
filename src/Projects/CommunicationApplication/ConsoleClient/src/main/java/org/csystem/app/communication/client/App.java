@@ -1,4 +1,4 @@
-package org.csystem.app.imageprocessing;
+package org.csystem.app.communication.client;
 
 class App {
     public static void main(String[] args)
