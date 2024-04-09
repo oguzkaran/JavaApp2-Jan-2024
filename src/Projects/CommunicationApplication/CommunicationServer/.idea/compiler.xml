@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="GenericApp" />
+        <module name="MeetingCommunicationServer" />
         <module name="ManagerServer" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="GenericApp" options="-parameters" />
       <module name="ManagerServer" options="-parameters" />
+      <module name="MeetingCommunicationServer" options="-parameters" />
     </option>
   </component>
 </project>

@@ -14,7 +14,7 @@ import java.net.Socket;
 import static org.csystem.communication.library.common.CommunicationMessage.*;
 
 public class JoinMeetingInformationServer implements Closeable {
-    private static final int SOCKET_TIMEOUT = 1000;
+    private static final int SOCKET_TIMEOUT = 4000;
     private final ConcurrentServer m_server;
 
     private int connectToCommunicationServerCallback(Socket socket, String id)

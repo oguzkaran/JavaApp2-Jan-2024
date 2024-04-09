@@ -9,8 +9,7 @@ import static org.csystem.communication.library.common.CommunicationMessage.ERRO
 
 public class InformationClient {
     private final int m_port;
-
-
+    
     public InformationClient(int port)
     {
         m_port = port;

@@ -1,7 +1,0 @@
-org\csystem\app\information\server\CommunicationServerInfoServer.class
-org\csystem\app\information\Application.class
-org\csystem\app\information\server\communication\global\CommunicationServerUtil.class
-org\csystem\app\information\App.class
-org\csystem\app\information\server\JoinMeetingInformationServer.class
-org\csystem\app\information\server\manage\MeetingManagerServerCommands.class
-org\csystem\app\information\server\communication\client\CommunicationServerInfo.class
