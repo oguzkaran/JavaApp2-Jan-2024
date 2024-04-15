@@ -1,5 +1,7 @@
 package org.csystem.app.information.server.communication.client;
 
+import java.util.Objects;
+
 public class CommunicationServerInfo {
     private String m_name;
     private String m_host;
@@ -49,18 +51,18 @@ public class CommunicationServerInfo {
     @Override
     public int hashCode()
     {
-        return m_host.hashCode();
+        return m_name.hashCode();
     }
 
     @Override
     public boolean equals(Object other)
     {
-        return other instanceof CommunicationServerInfo ci && m_host.equals(ci.m_host);
+        return other instanceof CommunicationServerInfo ci && ci.m_name.equals(m_name);
     }
 
     @Override
     public String toString()
     {
-        return String.format("%s, %s:%d", m_name, m_host, m_port);
+        return "%s, %s:%d".formatted(m_name, m_host, m_port);
     }
 }

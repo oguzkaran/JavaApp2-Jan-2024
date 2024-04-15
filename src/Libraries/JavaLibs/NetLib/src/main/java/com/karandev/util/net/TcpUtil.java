@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 25th March 2024
+	LAST UPDATE : 15th April 2024
 
 	Utility class for TCP socket operations
 
@@ -17,9 +17,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Optional;
 
 public final class TcpUtil {
+	private static final int DEFAULT_LINE_BLOCK_SIZE = 2048;
+
 	private static int receive(DataInputStream dis, byte [] data, int offset, int length) throws IOException
 	{
 	    int result;
@@ -60,7 +63,8 @@ public final class TcpUtil {
 			left -= written;
 			curOffset += written;
 		}	
-		
+
+		dos.flush();
 		return total;
 	}
 	
@@ -77,7 +81,7 @@ public final class TcpUtil {
 
 		for (int port = minPort; port <= maxPort; ++port)
 			try {
-				result = Optional.of(new ServerSocket(backlog, port));
+				result = Optional.of(new ServerSocket(port, backlog));
 			}
 			catch (IOException ignore) {
 			}
@@ -105,7 +109,7 @@ public final class TcpUtil {
 
 		for (var port : ports)
 			try {
-				result = Optional.of(new ServerSocket(backlog, port));
+				result = Optional.of(new ServerSocket(port, backlog));
 			}
 			catch (IOException ignore) {
 			}
@@ -319,7 +323,8 @@ public final class TcpUtil {
 		try {
 			byte[] data = new byte[length];
 
-			receive(socket, data);
+			if (receive(socket, data) == -1)
+				return null;
 
 			return BitConverter.toString(data, charset);
 		}
@@ -338,10 +343,35 @@ public final class TcpUtil {
 
 	public static String receiveLine(Socket socket, Charset charset)
 	{
-		try {
-			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
+		return receiveLine(socket, charset, DEFAULT_LINE_BLOCK_SIZE);
+	}
 
-			return br.readLine();
+	public static String receiveLine(Socket socket, int blockSize)
+	{
+		return receiveLine(socket, StandardCharsets.UTF_8, blockSize);
+	}
+
+	public static String receiveLine(Socket socket, Charset charset, int blockSize)
+	{
+		var sb = new StringBuilder();
+
+		try {
+			var buf = new byte[blockSize];
+			Arrays.fill(buf, (byte)-1);
+
+			while (true) {
+				var result = receive(socket, buf);
+				var str = BitConverter.toString(buf, charset);
+				var index = str.indexOf('\n');
+
+				if (index != -1)
+					sb.append(str, 0, index);
+				else
+					sb.append(str);
+
+				if (result == -1)
+					break;
+			}
 		}
 		catch (NetworkException ex) {
 			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
@@ -349,6 +379,8 @@ public final class TcpUtil {
 		catch (Throwable ex) {
 			throw new NetworkException("TcpUtil.receiveLine", ex);
 		}
+
+		return sb.toString();
 	}
 
 	public static Optional<String> receiveLineOptional(Socket socket)
@@ -539,10 +571,7 @@ public final class TcpUtil {
 	public static void sendLine(Socket socket, String str, Charset charset)
 	{
 		try {
-			var pw = new PrintWriter(socket.getOutputStream(), true, charset);
-
-			pw.print(str + "\r\n");
-			pw.flush();
+			sendString(socket, String.format("%s\r\n", str), charset);
 		}
 		catch (NetworkException ex) {
 			throw new NetworkException("TcpUtil.sendLine", ex.getCause());
