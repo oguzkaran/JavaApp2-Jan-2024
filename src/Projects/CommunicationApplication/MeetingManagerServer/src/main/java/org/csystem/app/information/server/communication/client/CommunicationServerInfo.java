@@ -1,7 +1,5 @@
 package org.csystem.app.information.server.communication.client;
 
-import java.util.Objects;
-
 public class CommunicationServerInfo {
     private String m_name;
     private String m_host;

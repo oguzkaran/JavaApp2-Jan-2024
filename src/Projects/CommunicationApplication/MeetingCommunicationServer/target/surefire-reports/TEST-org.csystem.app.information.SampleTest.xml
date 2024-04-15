@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.information.SampleTest" time="0.223" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.information.SampleTest" time="0.307" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="TR"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire/surefirebooter-20240415204055588_3.jar /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire 2024-04-15T20-40-54_885-jvmRun1 surefire-20240415204055588_1tmp surefire_0-20240415204055588_2tmp"/>
+    <property name="sun.java.command" value="/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire/surefirebooter-20240415221042559_3.jar /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire 2024-04-15T22-10-42_119-jvmRun1 surefire-20240415221042559_1tmp surefire_0-20240415221042559_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/test-classes:/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/classes:/Users/oguzkaran/.m2/repository/com/karandev/com-karandev-util-console/1.0.0/com-karandev-util-console-1.0.0.jar:/Users/oguzkaran/.m2/repository/com/karandev/com-karandev-util-net/1.0.0/com-karandev-util-net-1.0.0.jar:/Users/oguzkaran/.m2/repository/org/csystem/org-csystem-net-tcp-server/1.0.0/org-csystem-net-tcp-server-1.0.0.jar:/Users/oguzkaran/.m2/repository/org/csystem/CommunicationAppCommonLib/1.0.0/CommunicationAppCommonLib-1.0.0.jar:/Users/oguzkaran/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/Users/oguzkaran/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/oguzkaran/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/oguzkaran/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire/surefirebooter-20240415204055588_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Projects/CommunicationApplication/MeetingCommunicationServer/target/surefire/surefirebooter-20240415221042559_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="18.0.1.1+0"/>
@@ -56,5 +56,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="test" classname="org.csystem.app.information.SampleTest" time="0.113"/>
+  <testcase name="test" classname="org.csystem.app.information.SampleTest" time="0.145"/>
 </testsuite>

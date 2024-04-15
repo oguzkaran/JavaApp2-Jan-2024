@@ -19,11 +19,11 @@ public class JoinMeetingInformationServer implements Closeable {
 
     private int connectToCommunicationServerCallback(Socket socket, String id)
     {
-        TcpUtil.sendLine(socket, String.format("%s", id));
-        var status = TcpUtil.receiveLine(socket);
+        TcpUtil.sendStringViaLength(socket, id);
+        var status = TcpUtil.receiveStringViaLength(socket);
 
         if (status.equals(SUCCESS))
-            return Integer.parseInt(TcpUtil.receiveLine(socket));
+            return TcpUtil.receiveInt(socket);
 
         return 0;
     }
@@ -39,11 +39,12 @@ public class JoinMeetingInformationServer implements Closeable {
 
                     if (port > 0) {
                         communicationServerInfo.setHost(ci.getHost());
-                        communicationServerInfo.setPort(port);
+                        communicationServerInfo.setPort(port); //Bu port numarası meeting started durumdayken de gönderilebilir? Düşünelim!...
                         break;
                     }
                 }
-                catch (IOException ignore) {
+                catch (IOException ex) {
+                    Console.Error.writeLine("Message::%s", ex.getMessage());
                     port = -1;
                 }
             }
@@ -56,22 +57,19 @@ public class JoinMeetingInformationServer implements Closeable {
     {
         try (socket) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
-            var id = TcpUtil.receiveLine(socket);
-            var name = TcpUtil.receiveLine(socket);
+            var id = TcpUtil.receiveStringViaLength(socket);
             var info = new CommunicationServerInfo();
-
-            info.setName(name);
 
             var port = connectToCommunicationServers(id, info);
 
             if (port > 0) {
-                TcpUtil.sendLine(socket, SUCCESS_INFO);
-                TcpUtil.sendLine(socket, String.format("%s:%d", info.getHost(), port));
+                TcpUtil.sendStringViaLength(socket, SUCCESS_INFO);
+                TcpUtil.sendStringViaLength(socket, "%s:%d".formatted(info.getHost(), port));
             }
             else if (port == 0)
-                TcpUtil.sendLine(socket, ERROR_INVALID_ID);
+                TcpUtil.sendStringViaLength(socket, ERROR_INVALID_ID);
             else
-                TcpUtil.sendLine(socket, ERROR_INTERNAL);
+                TcpUtil.sendStringViaLength(socket, ERROR_INTERNAL);
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("Join Meeting Information Server:Network Exception Occurred:%s", ex.getMessage());

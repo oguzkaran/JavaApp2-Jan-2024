@@ -18,18 +18,18 @@ public class CommandsInfo {
     private void joinMeeting(String meetingId, String name)
     {
         try (var socket = new Socket(m_host, m_port)) {
-            TcpUtil.sendLine(socket, meetingId);
-            TcpUtil.sendLine(socket, name);
+            TcpUtil.sendStringViaLength(socket, meetingId);
+            TcpUtil.sendStringViaLength(socket, name);
 
-            var statusStr = TcpUtil.receiveLine(socket);
+            var statusStr = TcpUtil.receiveStringViaLength(socket);
+            Console.writeLine("Status Str:%s", statusStr);
 
             if (statusStr.equals(CommunicationMessage.SUCCESS_INFO))
-                Console.writeLine("Communication Server:%s", TcpUtil.receiveLine(socket));
+                Console.writeLine("Communication Server:%s", TcpUtil.receiveStringViaLength(socket));
             else if (statusStr.equals(CommunicationMessage.ERROR_INVALID_ID))
                 Console.writeLine("Invalid meeting id");
             else
                 Console.writeLine("Internal server error");
-
         }
         catch (IOException ex) {
             Console.Error.writeLine("Socket problem occurred:%s", ex.getMessage());
@@ -38,11 +38,6 @@ public class CommandsInfo {
             Console.Error.writeLine("Network error occurred:%s", ex.getMessage());
         }
         catch (Throwable ex) {
-
-
-
-
-
             Console.Error.writeLine("Error occurred:%s", ex.getMessage());
         }
     }

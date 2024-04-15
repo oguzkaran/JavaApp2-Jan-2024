@@ -21,7 +21,7 @@ class Application {
             var basePort = Integer.parseInt(args[2]);
 
             var informationClient = new InformationClient(basePort + 1);
-            var sendInformationServer = new SendInformationServer(basePort, backlog, name);
+            var sendInformationServer = new SendInformationServer(basePort + 1, backlog, name);
 
             informationClient.run(name, args[3], Integer.parseInt(args[4]));
             threadPool.execute(sendInformationServer::run);

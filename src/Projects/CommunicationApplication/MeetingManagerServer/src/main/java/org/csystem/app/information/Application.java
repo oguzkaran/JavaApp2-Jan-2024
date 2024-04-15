@@ -47,8 +47,8 @@ class Application {
             else
                 basePort = findAvailablePorts();
 
-            var joinMeetingInformationServer = new JoinMeetingInformationServer(basePort, backlog);
             var communicationServerInfoServer = new CommunicationServerInfoServer(basePort + 1, backlog);
+            var joinMeetingInformationServer = new JoinMeetingInformationServer(basePort, backlog);
 
             CommandPrompt.createBuilder()
                     .setPrompt("meeting-manager")

@@ -29,20 +29,15 @@ public class SendInformationServer {
     {
         try (socket) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
-            var idOpt = TcpUtil.receiveLineOptional(socket);
-
-            if (idOpt.isEmpty())
-                return;
-
-            var id = idOpt.get();
+            var id = TcpUtil.receiveStringViaLength(socket);
 
             if (meetingExists(id)) {
                 Console.writeLine("Name:%s", m_name);
-                TcpUtil.sendLine(socket, SUCCESS);
-                TcpUtil.sendLine(socket, String.valueOf(m_port + 1));
+                TcpUtil.sendStringViaLength(socket, SUCCESS);
+                TcpUtil.sendInt(socket, m_port + 1); // Bu port numarası için de düşünelim!...
             }
             else
-                TcpUtil.sendLine(socket, ERROR);
+                TcpUtil.sendStringViaLength(socket, ERROR);
         }
         catch (IOException ex) {
             Console.Error.writeLine("Send Information Server:IO Exception Occurred:%s", ex.getMessage());
