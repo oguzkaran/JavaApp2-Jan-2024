@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 15th April 2024
+	LAST UPDATE : 17th April 2024
 
 	Utility class for TCP socket operations
 
@@ -17,7 +17,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Optional;
 
 public final class TcpUtil {
@@ -62,7 +61,7 @@ public final class TcpUtil {
 			total += written;			
 			left -= written;
 			curOffset += written;
-		}	
+		}
 
 		dos.flush();
 		return total;
@@ -354,23 +353,20 @@ public final class TcpUtil {
 	public static String receiveLine(Socket socket, Charset charset, int blockSize)
 	{
 		var sb = new StringBuilder();
+		var buf = new byte[blockSize];
 
 		try {
-			var buf = new byte[blockSize];
-			Arrays.fill(buf, (byte)-1);
-
 			while (true) {
-				var result = receive(socket, buf);
+				receive(socket, buf);
 				var str = BitConverter.toString(buf, charset);
 				var index = str.indexOf('\n');
 
-				if (index != -1)
+				if (index != -1) {
 					sb.append(str, 0, index);
-				else
-					sb.append(str);
-
-				if (result == -1)
 					break;
+				}
+
+				sb.append(str);
 			}
 		}
 		catch (NetworkException ex) {
@@ -381,26 +377,6 @@ public final class TcpUtil {
 		}
 
 		return sb.toString();
-	}
-
-	public static Optional<String> receiveLineOptional(Socket socket)
-	{
-		return receiveLineOptional(socket, StandardCharsets.UTF_8);
-	}
-
-	public static Optional<String> receiveLineOptional(Socket socket, Charset charset)
-	{
-		try {
-			var br = new BufferedReader(new InputStreamReader(socket.getInputStream(), charset));
-
-			return Optional.ofNullable(br.readLine());
-		}
-		catch (NetworkException ex) {
-			throw new NetworkException("TcpUtil.receiveLine", ex.getCause());
-		}
-		catch (Throwable ex) {
-			throw new NetworkException("TcpUtil.receiveLine", ex);
-		}
 	}
 
 	public static void receiveFile(Socket socket, File file)

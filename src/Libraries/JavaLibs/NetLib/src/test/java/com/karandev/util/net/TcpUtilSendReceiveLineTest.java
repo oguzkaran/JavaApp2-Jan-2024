@@ -24,18 +24,20 @@ public class TcpUtilSendReceiveLineTest {
             var clientSocket = m_serverSocket.accept();
             clientSocket.setSoTimeout(SOCKET_TIMEOUT);
             var text = TcpUtil.receiveLine(clientSocket);
-            Assertions.assertEquals(SEND_TEXT, text.strip());
 
+            Assertions.assertEquals(SEND_TEXT, text.strip());
             text = TcpUtil.receiveLine(clientSocket);
             Assertions.assertEquals(SEND_TEXT.toUpperCase(), text.strip());
+            text = TcpUtil.receiveLine(clientSocket);
+            Assertions.assertEquals(SEND_TEXT, text.strip());
         }
-        catch (Throwable ex) {
+        catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     @BeforeEach
-    public void setUp() throws IOException
+    public void setUp()
     {
         m_threadPool = Executors.newSingleThreadExecutor();
         m_threadPool.execute(this::serverCallback);
@@ -47,6 +49,7 @@ public class TcpUtilSendReceiveLineTest {
         try (var socket = new Socket(HOST, PORT)) {
             TcpUtil.sendLine(socket, SEND_TEXT);
             TcpUtil.sendLine(socket, SEND_TEXT.toUpperCase());
+            TcpUtil.sendLine(socket, SEND_TEXT);
         }
     }
 

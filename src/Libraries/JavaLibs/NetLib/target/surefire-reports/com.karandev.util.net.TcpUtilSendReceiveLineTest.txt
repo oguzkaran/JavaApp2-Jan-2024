@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.karandev.util.net.TcpUtilSendReceiveLineTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.004 s -- in com.karandev.util.net.TcpUtilSendReceiveLineTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 s -- in com.karandev.util.net.TcpUtilSendReceiveLineTest

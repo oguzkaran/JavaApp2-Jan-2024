@@ -37,7 +37,7 @@ public class TcpUtilSendReceiveStringViaLengthTest {
     }
 
     @BeforeEach
-    public void setUp() throws IOException
+    public void setUp()
     {
         m_threadPool = Executors.newSingleThreadExecutor();
         m_threadPool.execute(this::serverCallback);
