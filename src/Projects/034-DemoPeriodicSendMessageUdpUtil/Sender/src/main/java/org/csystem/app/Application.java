@@ -1,6 +1,8 @@
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
+import com.karandev.util.net.UdpUtil;
+import com.karandev.util.net.exception.NetworkException;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -22,16 +24,14 @@ class Application {
     {
         try (var datagramSocket = new DatagramSocket()) {
             text = "%s-%s".formatted(text, DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now()));
-            var data = text.getBytes(StandardCharsets.UTF_8);
-            var datagramPacket = new DatagramPacket(data, data.length, InetAddress.getByName(host), port);
 
-            datagramSocket.send(datagramPacket);
+            UdpUtil.sendString(datagramSocket, host, port, text);
         }
-        catch (UnknownHostException ex) {
-            Console.Error.writeLine("Unknown host:%s", ex.getMessage());
+        catch (NetworkException ex) {
+            Console.Error.writeLine("Network problem occurred:%s", ex.getMessage());
         }
         catch (IOException ex) {
-            Console.Error.writeLine("Problem occurred:%s", ex.getMessage());
+            Console.Error.writeLine("IO Problem occurred:%s", ex.getMessage());
         }
     }
 
