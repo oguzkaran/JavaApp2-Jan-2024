@@ -1,0 +1,7 @@
+Aynı yerel ağ üzerinde konuşlanan demo uygulamaları aşağıdaki açıklamalara göre yazınız
+- Birinci uygulama periyodik olarak rasgele text'ler üretecek ve ağa bağlı server olarak çalışan uygulamalara TCP üzerinden bu yazıları gönderecektir
+
+- Yazıları alacak server uygulamalar ayağa kaltıklarında 50500 numaralı porta broadcast yapıp hangi porttan
+yazıları bekleyeceklerini göndereceklerdir. 
+
+- Uygulamada UdpUtil sınıfının ilgili metotlarını kullanabilirsiniz
