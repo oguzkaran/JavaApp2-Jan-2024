@@ -17,7 +17,7 @@ public class ServerReceiver {
         var host = datagramPacket.getAddress().getHostAddress();
         var port = ByteBuffer.wrap(datagramPacket.getData(), 0, 4).getInt();
 
-        synchronized (this) {
+        synchronized (Servers.SYNC_LOCK) {
             Servers.SERVERS.add(new ServerInfo(host, port));
         }
     }

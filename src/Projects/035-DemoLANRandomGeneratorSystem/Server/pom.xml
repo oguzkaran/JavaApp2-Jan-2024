@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>RandomTextGenerator</artifactId>
+    <artifactId>Server</artifactId>
     <version>14.0.0</version>
-    <name>RandomTextGenerator</name>
+    <name>Server</name>
 
     <repositories>
         <repository>

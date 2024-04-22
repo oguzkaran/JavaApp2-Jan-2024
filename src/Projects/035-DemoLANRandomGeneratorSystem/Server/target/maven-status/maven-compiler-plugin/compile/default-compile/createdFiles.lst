@@ -1,0 +1,4 @@
+org\csystem\app\generator\server\Application.class
+org\csystem\app\generator\server\InfoClient.class
+org\csystem\app\generator\server\Server.class
+org\csystem\app\generator\server\App.class

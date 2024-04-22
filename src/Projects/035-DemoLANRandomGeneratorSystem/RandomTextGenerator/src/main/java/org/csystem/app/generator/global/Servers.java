@@ -7,4 +7,5 @@ import java.util.List;
 
 public class Servers {
     public static final List<ServerInfo> SERVERS = new ArrayList<>();
+    public static final Object SYNC_LOCK = new Object();
 }
