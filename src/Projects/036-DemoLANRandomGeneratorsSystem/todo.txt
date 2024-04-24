@@ -1,0 +1,11 @@
+Aynı yerel ağ üzerinde konuşlanan demo uygulamaları aşağıdaki açıklamalara göre yazınız
+- Server uygulama periyodik olarak UDP broadcast ile dinlemede olduğu port'u (ve dolayısıyla IP'yi) gönderecektir. Periyodu ve port'u komut satırı argümanından 
+alınız. 
+
+- RandomTextGenerator client'lar 50500 numaralı port'ta ilgili server'lardan ip ve port bilgisi bekleyecektir ve periyodik olarak server'lara ürettiği text'leri
+gönderecektir. Bu kısım aslında bir önceki uygulamada hazırlanmıştır. Senaryoya ilişkin detaylar aynı şekilde olacaktır
+
+- Server'lar yine aynı bilgisayarlarda olabildiği gibi yerel ağ içerisinde farklı bilgisayarlarda da olabilecektir
+
+- Yine server uygulama bir önceki uygulamadaki senaryoda olduğu gibi ilgili text'leri client'lar TCP üzerinden bekleyecektir
+
