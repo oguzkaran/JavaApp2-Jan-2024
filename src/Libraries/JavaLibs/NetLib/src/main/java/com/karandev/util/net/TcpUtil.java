@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TcpUtil.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 17th April 2024
+	LAST UPDATE : 29th April 2024
 
 	Utility class for TCP socket operations
 
@@ -64,6 +64,7 @@ public final class TcpUtil {
 		}
 
 		dos.flush();
+
 		return total;
 	}
 	
@@ -350,16 +351,25 @@ public final class TcpUtil {
 		return receiveLine(socket, StandardCharsets.UTF_8, blockSize);
 	}
 
+	/**
+	 * This method receives until the last line feed character of the text from network.
+	 * This method will work properly if sender close socket after the send process
+	 * @param socket valid socket
+	 * @param charset Charset of the text
+	 * @param blockSize block size of the internal buffer
+	 * @return received string
+	 * @throws NetworkException if any problem occurs
+	 */
 	public static String receiveLine(Socket socket, Charset charset, int blockSize)
 	{
 		var sb = new StringBuilder();
 		var buf = new byte[blockSize];
 
-		try {
+		try (socket) {
 			while (true) {
 				receive(socket, buf);
 				var str = BitConverter.toString(buf, charset);
-				var index = str.indexOf('\n');
+				var index = str.lastIndexOf('\n');
 
 				if (index != -1) {
 					sb.append(str, 0, index);
@@ -377,6 +387,45 @@ public final class TcpUtil {
 		}
 
 		return sb.toString();
+	}
+
+	public static String [] receiveLines(Socket socket)
+	{
+		return receiveLines(socket, StandardCharsets.UTF_8);
+	}
+
+	public static String [] receiveLines(Socket socket, Charset charset)
+	{
+		return receiveLines(socket, charset, DEFAULT_LINE_BLOCK_SIZE);
+	}
+
+	public static String [] receiveLines(Socket socket, int blockSize)
+	{
+		return receiveLines(socket, StandardCharsets.UTF_8, blockSize);
+	}
+
+	/**
+	 * This method read a String and split the lines
+	 * This method will work properly if sender close socket after the send process
+	 * @param socket valid socket
+	 * @param charset Charset of the text
+	 * @param blockSize block size of the internal buffer
+	 * @return received all lines
+	 * @throws NetworkException if any problem occurs
+	 */
+	public static String [] receiveLines(Socket socket, Charset charset, int blockSize)
+	{
+		try {
+			var lines = receiveLine(socket, charset, blockSize);
+
+			return lines.split("[\r\n]+");
+		}
+		catch (NetworkException ex) {
+			throw new NetworkException("TcpUtil.receiveLines", ex.getCause());
+		}
+		catch (Throwable ex) {
+			throw new NetworkException("TcpUtil.receiveLines", ex);
+		}
 	}
 
 	public static void receiveFile(Socket socket, File file)

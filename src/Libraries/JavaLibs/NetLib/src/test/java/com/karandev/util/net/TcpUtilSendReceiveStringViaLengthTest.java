@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Disabled("Tested before")
+@Disabled("Run the debug test")
 public class TcpUtilSendReceiveStringViaLengthTest {
     private static final String HOST = "localhost";
     private static final int PORT = 50500;
@@ -22,8 +22,6 @@ public class TcpUtilSendReceiveStringViaLengthTest {
         try {
             m_serverSocket = new ServerSocket(PORT);
             var clientSocket = m_serverSocket.accept();
-
-            clientSocket.setSoTimeout(SOCKET_TIMEOUT);
             var text = TcpUtil.receiveStringViaLength(clientSocket);
 
             Assertions.assertEquals(SEND_TEXT, text);

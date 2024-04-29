@@ -1,5 +1,6 @@
 D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\ISender.java
 D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\ip\protocol\standard\text\Client.java
+D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\TCP.java
 D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\IReceiver.java
 D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\exception\NetworkException.java
 D:\Repositories\JavaApp2-Jan-2024\src\Libraries\JavaLibs\NetLib\src\main\java\com\karandev\util\net\http\HttpConnection.java

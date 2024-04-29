@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Disabled("Tested before")
+@Disabled("Run the debug test")
 public class TcpUtilSendReceiveStringTest {
     private static final String HOST = "localhost";
     private static final int PORT = 50500;
@@ -22,12 +22,13 @@ public class TcpUtilSendReceiveStringTest {
         try {
             m_serverSocket = new ServerSocket(PORT);
             var clientSocket = m_serverSocket.accept();
-            clientSocket.setSoTimeout(SOCKET_TIMEOUT);
             var text = TcpUtil.receiveString(clientSocket, SEND_TEXT.length());
             Assertions.assertEquals(SEND_TEXT, text);
 
             text = TcpUtil.receiveString(clientSocket, SEND_TEXT.length());
             Assertions.assertEquals(SEND_TEXT.toUpperCase(), text);
+            text = TcpUtil.receiveString(clientSocket, SEND_TEXT.length());
+            Assertions.assertEquals(SEND_TEXT, text);
         }
         catch (Throwable ex) {
             ex.printStackTrace();
@@ -47,6 +48,7 @@ public class TcpUtilSendReceiveStringTest {
         try (var socket = new Socket(HOST, PORT)) {
             TcpUtil.sendString(socket, SEND_TEXT);
             TcpUtil.sendString(socket, SEND_TEXT.toUpperCase());
+            TcpUtil.sendString(socket, SEND_TEXT);
         }
     }
 

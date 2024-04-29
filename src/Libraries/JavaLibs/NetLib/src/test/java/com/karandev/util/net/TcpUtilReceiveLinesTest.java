@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Disabled("Run the debug test")
-public class TcpUtilSendReceiveLineTest {
+public class TcpUtilReceiveLinesTest {
     private static final String HOST = "localhost";
     private static final int PORT = 50500;
     private static final int SOCKET_TIMEOUT = 1000;
@@ -23,11 +23,13 @@ public class TcpUtilSendReceiveLineTest {
             m_serverSocket = new ServerSocket(PORT);
             var clientSocket = m_serverSocket.accept();
             clientSocket.setSoTimeout(SOCKET_TIMEOUT);
-            var text = TcpUtil.receiveLine(clientSocket);
+            var lines = TcpUtil.receiveLines(clientSocket);
 
-            Assertions.assertEquals(SEND_TEXT, text.strip());
+            Assertions.assertEquals(SEND_TEXT, lines[0]);
+            Assertions.assertEquals(SEND_TEXT.toUpperCase(), lines[1]);
+            Assertions.assertEquals(SEND_TEXT, lines[2]);
         }
-        catch (IOException ex) {
+        catch (Throwable ex) {
             ex.printStackTrace();
         }
     }
@@ -40,9 +42,13 @@ public class TcpUtilSendReceiveLineTest {
     }
 
     @Test
-    public void test() throws IOException, InterruptedException
+    public void test() throws IOException
     {
-        TcpUtil.sendLine(new Socket(HOST, PORT), SEND_TEXT);
+        try (var socket = new Socket(HOST, PORT)) {
+            TcpUtil.sendLine(socket, SEND_TEXT);
+            TcpUtil.sendLine(socket, SEND_TEXT.toUpperCase());
+            TcpUtil.sendLine(socket, SEND_TEXT);
+        }
     }
 
     @AfterEach

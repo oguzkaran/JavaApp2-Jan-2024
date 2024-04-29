@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------
 	FILE        : TCP.java
 	AUTHOR      : JavaApp2-Jan-2024 Group
-	LAST UPDATE : 24th April 2024
+	LAST UPDATE : 29th April 2024
 
-	Utility class for TCP socket operations
+	Immutable TCP class for TCP socket operations
 
 	Copyleft (c) 1993 by C and System Programmers Association (CSD)
 	All Rights Free
@@ -15,198 +15,200 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 
 public class TCP {
+    private final Socket m_socket;
+
     public TCP(Socket socket)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        m_socket = socket;
+    }
+
+    public boolean isOpen()
+    {
+        return !m_socket.isClosed();
     }
 
     public Socket getSocket()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
-    }
-
-    public void setSocket(Socket socket)
-    {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return m_socket;
     }
 
     public int receive(byte [] data, int offset, int length)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receive(m_socket, data, offset, length);
     }
 
     public int receive(byte [] data)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receive(m_socket, data);
     }
 
     public int send(byte [] data, int offset, int length)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.send(m_socket, data, offset, length);
     }
 
-    public int send( byte [] data)
+    public int send(byte [] data)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.send(m_socket, data);
     }
 
     public byte receiveByte()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveByte(m_socket);
     }
 
     public short receiveShort()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveShort(m_socket);
     }
 
     public int receiveInt()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveInt(m_socket);
     }
 
     public long receiveLong()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveLong(m_socket);
     }
 
     public float receiveFloat()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveFloat(m_socket);
     }
 
     public double receiveDouble()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveDouble(m_socket);
     }
 
     public char receiveChar()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveChar(m_socket);
     }
 
     public String receiveStringViaLength()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveStringViaLength(m_socket);
     }
 
     public String receiveStringViaLength(Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveStringViaLength(m_socket, charset);
     }
 
     public String receiveString(int length)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveString(m_socket, length);
     }
 
     public String receiveString(int length, Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveString(m_socket, length, charset);
     }
 
     public String receiveLine()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveLine(m_socket);
     }
 
     public String receiveLine(Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveLine(m_socket, charset);
     }
 
     public String receiveLine(int blockSize)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveLine(m_socket, blockSize);
     }
 
     public String receiveLine(Charset charset, int blockSize)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        return TcpUtil.receiveLine(m_socket, charset, blockSize);
     }
 
     public void receiveFile(File file)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.receiveFile(m_socket, file);
     }
 
     public void receiveFile(String path)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.receiveFile(m_socket, path);
     }
 
     public void sendByte(byte val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendByte(m_socket, val);
     }
 
     public void sendShort(short val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendShort(m_socket, val);
     }
 
     public void sendInt(int val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendInt(m_socket, val);
     }
 
     public void sendLong(long val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendLong(m_socket, val);
     }
 
     public void sendFloat(float val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendFloat(m_socket, val);
     }
 
     public void sendDouble(double val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendDouble(m_socket, val);
     }
 
     public void sendChar(char val)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendChar(m_socket, val);
     }
 
     public void sendStringViaLength(String str)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendStringViaLength(m_socket, str);
     }
 
     public void sendStringViaLength(String str, Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendStringViaLength(m_socket, str, charset);
     }
 
     public void sendString(String str)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendString(m_socket, str);
     }
 
     public void sendString(String str, Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendString(m_socket, str, charset);
     }
 
-    public void sendLine( String str)
+    public void sendLine(String str)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendLine(m_socket, str);
     }
 
     public void sendLine(String str, Charset charset)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendLine(m_socket, str, charset);
     }
 
     public void sendFile(File file, int blockSize)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendFile(m_socket, file, blockSize);
     }
 
     public void sendFile(String path, int blockSize)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        TcpUtil.sendFile(m_socket, path, blockSize);
     }
 }

@@ -12,8 +12,8 @@
     </parent>
 
     <groupId>com.karandev</groupId>
-    <artifactId>com-karandev-util-net</artifactId>
-    <version>2.1.0</version>
+    <artifactId>com-karandev-net</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
