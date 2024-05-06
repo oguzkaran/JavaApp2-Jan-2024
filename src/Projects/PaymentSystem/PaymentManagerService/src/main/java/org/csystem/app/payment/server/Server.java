@@ -49,12 +49,12 @@ public class Server implements Closeable {
 
     private void creditCardCallback()
     {
-        //Send the informartion of the credit card server information to client
+        //Send the information of the credit card server information to client
     }
 
     private void ticketCardCallback()
     {
-        //Send the informartion of the ticket card service information to client
+        //Send the information of the ticket card service information to client
     }
 
     private void handleClient(Socket socket)
