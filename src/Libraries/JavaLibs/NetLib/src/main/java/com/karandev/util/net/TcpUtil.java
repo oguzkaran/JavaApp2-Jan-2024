@@ -352,13 +352,15 @@ public final class TcpUtil {
 	}
 
 	/**
-	 * This method receives until the last line feed character of the text from network.
+	 * This method receives text data until the last line feed character of the text from network.
 	 * This method will work properly if sender close socket after the send process
-	 * @param socket valid socket
+	 * @param socket Valid/Open socket
 	 * @param charset Charset of the text
-	 * @param blockSize block size of the internal buffer
-	 * @return received string
+	 * @param blockSize block size of the internal buffer. If zero no data read.
+	 * @return Received text
 	 * @throws NetworkException if any problem occurs
+	 * @throws NullPointerException if socket is null or charset is null
+	 * @throws NegativeArraySizeException blockSize is less than zero
 	 */
 	public static String receiveLine(Socket socket, Charset charset, int blockSize)
 	{

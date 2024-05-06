@@ -1,7 +1,7 @@
 package org.csystem.app.generator.server;
 
 import com.karandev.io.util.console.Console;
-import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.TCP;
 import com.karandev.util.net.exception.NetworkException;
 
 import java.net.ServerSocket;
@@ -12,10 +12,13 @@ import java.util.concurrent.Executors;
 public class Server {
     private final int m_port;
     private final ExecutorService m_threadPool;
+
     private void handleClient(Socket socket)
     {
         try (socket) {
-            Console.writeLine("Text:%s", TcpUtil.receiveLine(socket).strip());
+            var tcp = new TCP(socket);
+
+            Console.writeLine("Text:%s", tcp.receiveLine().strip());
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("Network problem occurred:" + ex.getMessage());

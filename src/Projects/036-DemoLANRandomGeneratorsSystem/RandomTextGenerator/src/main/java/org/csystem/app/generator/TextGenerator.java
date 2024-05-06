@@ -1,12 +1,10 @@
 package org.csystem.app.generator;
 
 import com.karandev.io.util.console.Console;
-import com.karandev.util.net.TcpUtil;
+import com.karandev.util.net.TCPClient;
 import com.karandev.util.net.exception.NetworkException;
 import org.csystem.util.string.StringUtil;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
@@ -14,7 +12,6 @@ import static org.csystem.app.generator.global.ServerUtil.*;
 
 public class TextGenerator {
     private final RandomGenerator m_randomGenerator = new Random();
-
 
     private static void setInActive(ServerInfo serverInfo)
     {
@@ -25,15 +22,11 @@ public class TextGenerator {
 
     private void sendTextAsyncCallback(ServerInfo serverInfo, String text)
     {
-        try (var socket = new Socket(serverInfo.getHost(), serverInfo.getPort())) {
-            TcpUtil.sendLine(socket, text);
+        try (var tcpClient = new TCPClient(serverInfo.getHost(), serverInfo.getPort())) {
+            tcpClient.sendLine(text);
         }
         catch (NetworkException ex) {
             Console.Error.writeLine("Network Error occurred:%s", ex.getMessage());
-            setInActive(serverInfo);
-        }
-        catch (IOException ex) {
-            Console.Error.writeLine("IO Error occurred:%s", ex.getMessage());
             setInActive(serverInfo);
         }
         catch (Throwable ex) {

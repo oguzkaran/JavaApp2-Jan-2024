@@ -5,6 +5,7 @@
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/ISender.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/UdpUtil.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/EndianConverter.java
+/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/TCPClient.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/TcpUtil.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/exception/NetworkException.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/main/java/com/karandev/util/net/ip/protocol/standard/text/ITextTransmission.java
