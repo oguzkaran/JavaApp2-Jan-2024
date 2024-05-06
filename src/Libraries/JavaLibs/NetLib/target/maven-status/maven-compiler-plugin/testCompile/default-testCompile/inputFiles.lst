@@ -3,3 +3,4 @@
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/test/java/com/karandev/util/net/TcpUtilReceiveLinesTest.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/test/java/com/karandev/util/net/TcpUtilSendReceiveStringViaLengthTest.java
 /Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/test/java/com/karandev/util/net/TcpUtilSendReceiveStringTest.java
+/Users/oguzkaran/Dropbox/CSD/Kurslar/JavaApp2-Jan-2024/src/Libraries/JavaLibs/NetLib/src/test/java/com/karandev/util/net/TcpAndTcpClientSendReceiveLineTest.java

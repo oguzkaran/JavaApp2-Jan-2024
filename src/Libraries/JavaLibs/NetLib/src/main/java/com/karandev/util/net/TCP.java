@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : TCP.java
 	AUTHOR      : JavaApp2-Jan-2024 Group
-	LAST UPDATE : 29th April 2024
+	LAST UPDATE : 6th May 2024
 
 	Immutable TCP class for TCP socket operations
 
@@ -9,6 +9,8 @@
 	All Rights Free
 -----------------------------------------------------------------------*/
 package com.karandev.util.net;
+
+import com.karandev.util.net.exception.NetworkException;
 
 import java.io.File;
 import java.net.Socket;
@@ -20,6 +22,17 @@ public class TCP {
     public TCP(Socket socket)
     {
         m_socket = socket;
+    }
+
+    public TCP(Socket socket, int timeout)
+    {
+        try {
+            m_socket = socket;
+            socket.setSoTimeout(timeout);
+        }
+        catch (Throwable ex) {
+            throw new NetworkException("TCP(socket, timeout)", ex);
+        }
     }
 
     public boolean isOpen()
