@@ -60,7 +60,6 @@ public class Server implements Closeable {
     private void handleClient(Socket socket)
     {
         try (socket) {
-            socket.setSoTimeout(SOCKET_TIMEOUT);
             var tcp = new TCP(socket, SOCKET_TIMEOUT);
             var cardType = tcp.receiveByte();
             var index = SERVER_INFO.indexOf(new CardOperationInfo(cardType));

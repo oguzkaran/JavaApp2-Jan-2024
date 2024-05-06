@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="GenericApp" />
+        <module name="PaymentManagerServer" />
         <module name="ManagerServer" />
-        <module name="MeetingManagerServer" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,7 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="GenericApp" options="-parameters" />
       <module name="ManagerServer" options="-parameters" />
-      <module name="MeetingManagerServer" options="-parameters" />
+      <module name="PaymentManagerServer" options="-parameters" />
     </option>
   </component>
 </project>
