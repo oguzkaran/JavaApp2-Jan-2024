@@ -1,4 +1,4 @@
-package org.csystem.app.payment.server.communication.client;
+package org.csystem.app.payment.server.manager.client;
 
 import java.util.Objects;
 
@@ -6,20 +6,16 @@ public class TicketCardPaymentServiceInfo extends PaymentServerInfo {
 
     private String m_endPoint;
 
-    public TicketCardPaymentServiceInfo(String name, String endPoint)
+    public TicketCardPaymentServiceInfo(int id, String endPoint)
     {
-        super(name);
+        super(id);
         m_endPoint = endPoint;
     }
 
-    public String getName()
+    @Override
+    public String serverInfo()
     {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
+        return m_endPoint;
     }
 
     public String getEndPoint()
@@ -35,19 +31,19 @@ public class TicketCardPaymentServiceInfo extends PaymentServerInfo {
     @Override
     public int hashCode()
     {
-        return Objects.hash(name, m_endPoint);
+        return Objects.hash(id, m_endPoint);
     }
 
     @Override
     public boolean equals(Object other)
     {
         return other instanceof TicketCardPaymentServiceInfo ti
-                && ti.name.equals(name) && ti.m_endPoint.equals(m_endPoint);
+                && super.equals(other) && ti.m_endPoint.equals(m_endPoint);
     }
 
     @Override
     public String toString()
     {
-        return "%s, %s".formatted(name, m_endPoint);
+        return "%d, %s".formatted(id, m_endPoint);
     }
 }

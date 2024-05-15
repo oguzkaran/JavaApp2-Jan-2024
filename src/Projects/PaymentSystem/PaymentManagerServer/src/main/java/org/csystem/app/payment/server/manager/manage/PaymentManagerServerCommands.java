@@ -1,4 +1,4 @@
-package org.csystem.app.payment.server.manage;
+package org.csystem.app.payment.server.manager.manage;
 
 import com.karandev.io.util.console.Console;
 import com.karandev.io.util.console.annotation.Command;

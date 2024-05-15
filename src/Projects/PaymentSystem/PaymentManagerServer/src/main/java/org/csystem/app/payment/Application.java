@@ -4,7 +4,7 @@ import com.karandev.io.util.console.CommandPrompt;
 import com.karandev.io.util.console.Console;
 import com.karandev.util.net.IpUtil;
 import org.csystem.app.payment.server.Server;
-import org.csystem.app.payment.server.manage.PaymentManagerServerCommands;
+import org.csystem.app.payment.server.manager.manage.PaymentManagerServerCommands;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;

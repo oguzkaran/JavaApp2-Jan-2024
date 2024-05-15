@@ -1,4 +1,4 @@
-package org.csystem.app.payment.server.communication.client;
+package org.csystem.app.payment.server.manager.client;
 
 import java.util.Objects;
 
@@ -6,21 +6,11 @@ public class CreditCardPaymentServerInfo extends PaymentServerInfo {
     private String m_host;
     private int m_port;
 
-    public CreditCardPaymentServerInfo(String name, String host, int port)
+    public CreditCardPaymentServerInfo(int id, String host, int port)
     {
-        super(name);
+        super(id);
         m_host = host;
         m_port = port;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     public String getHost()
@@ -44,9 +34,15 @@ public class CreditCardPaymentServerInfo extends PaymentServerInfo {
     }
 
     @Override
+    public String serverInfo()
+    {
+        return "%s:%d".formatted(m_host, m_port);
+    }
+
+    @Override
     public int hashCode()
     {
-        return Objects.hash(name, m_host, m_port);
+        return Objects.hash(id, m_host, m_port);
     }
 
     @Override
@@ -60,6 +56,6 @@ public class CreditCardPaymentServerInfo extends PaymentServerInfo {
     @Override
     public String toString()
     {
-        return "%s, %s:%d".formatted(name, m_host, m_port);
+        return "%d, %s:%d".formatted(id, m_host, m_port);
     }
 }

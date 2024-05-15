@@ -3,7 +3,8 @@ package org.csystem.app.payment.server;
 import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TCP;
 import com.karandev.util.net.exception.NetworkException;
-import org.csystem.app.payment.server.communication.client.PaymentServerInfo;
+import org.csystem.app.payment.server.manager.client.PaymentServerInfo;
+import static org.csystem.app.payment.server.manager.global.ServerUtil.*;
 import org.csystem.net.tcp.server.ConcurrentServer;
 
 import java.io.Closeable;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class Server implements Closeable {
@@ -20,23 +23,40 @@ public class Server implements Closeable {
 
     {
         SERVER_INFO = new ArrayList<>();
-        SERVER_INFO.add(new CardOperationInfo(1, this::creditCardCallback));
-        SERVER_INFO.add(new CardOperationInfo(2, this::ticketCardCallback));
+        SERVER_INFO.add(new CardOperationInfo(1, this::sendInformationCallback));
+        SERVER_INFO.add(new CardOperationInfo(2, this::sendInformationCallback));
+    }
+
+    private static class ClientInfo {
+        TCP tcp;
+        PaymentServerInfo paymentServerInfo;
+
+        public ClientInfo(TCP tcp, PaymentServerInfo paymentServerInfo)
+        {
+            this.tcp = tcp;
+            this.paymentServerInfo = paymentServerInfo;
+        }
     }
 
     private static class CardOperationInfo {
         int type;
-        Runnable runnable;
+        Consumer<ClientInfo> clientInfoConsumer;
 
         CardOperationInfo(int type)
         {
-            this.type = type;
+            this(type, null);
         }
 
-        CardOperationInfo(int type, Runnable runnable)
+        CardOperationInfo(int type, Consumer<ClientInfo> clientInfoConsumer)
         {
             this.type = type;
-            this.runnable = runnable;
+            this.clientInfoConsumer = clientInfoConsumer;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return Objects.hashCode(type);
         }
 
         @Override
@@ -44,17 +64,24 @@ public class Server implements Closeable {
         {
             return other instanceof CardOperationInfo ci && ci.type == type;
         }
-        //..
+
+        @Override
+        public String toString()
+        {
+            return "%s".formatted(type);
+        }
     }
 
-    private void creditCardCallback()
+    private void sendInformationCallback(ClientInfo clientInfo)
     {
-        //Send the information of the credit card server information to client
+        var tcp = clientInfo.tcp;
+
+        tcp.sendLine(clientInfo.paymentServerInfo.serverInfo());
     }
 
-    private void ticketCardCallback()
+    private Optional<PaymentServerInfo> findPaymentInfo(int type)
     {
-        //Send the information of the ticket card service information to client
+        return SERVERS.containsKey(type) ? Optional.of(SERVERS.get(type)) : Optional.empty();
     }
 
     private void handleClient(Socket socket)
@@ -66,19 +93,26 @@ public class Server implements Closeable {
 
             if (index != -1) {
                 tcp.sendByte((byte)1);
-                SERVER_INFO.get(index).runnable.run();
+                var coi = SERVER_INFO.get(index);
+                Optional<PaymentServerInfo> opt;
+
+                synchronized (SYNC_OBJECT) {
+                    opt = findPaymentInfo(coi.type);
+                }
+                opt.ifPresentOrElse(p -> coi.clientInfoConsumer.accept(new ClientInfo(tcp, p)),
+                        () -> tcp.sendByte((byte)-1));
             }
             else
                 tcp.sendByte((byte)0);
         }
         catch (NetworkException ex) {
-            Console.Error.writeLine("CommunicationInfoServer Server:Network Exception Occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Payment Manager Server:Network Exception Occurred:%s", ex.getMessage());
         }
         catch (IOException ex) {
-            Console.Error.writeLine("CommunicationInfoServer ServerServer:IO Exception Occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Payment Manager Server:IO Exception Occurred:%s", ex.getMessage());
         }
         catch (Throwable ex) {
-            Console.Error.writeLine("CommunicationInfoServer Server Server:Exception Occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Payment Manager Server:Exception Occurred:%s", ex.getMessage());
         }
     }
 
@@ -87,7 +121,7 @@ public class Server implements Closeable {
         m_server = ConcurrentServer.builder()
                 .setPort(port)
                 .setBacklog(backlog)
-                .setBeforeAcceptRunnable(() -> Console.writeLine("Communication server info server is waiting for a client on port:%d", port))
+                .setBeforeAcceptRunnable(() -> Console.writeLine("Payment Manager Server info server is waiting for a client on port:%d", port))
                 .setClientSocketConsumer(this::handleClient)
                 .build();
     }
