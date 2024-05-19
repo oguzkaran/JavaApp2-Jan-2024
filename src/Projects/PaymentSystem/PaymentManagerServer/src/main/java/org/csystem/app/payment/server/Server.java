@@ -92,14 +92,13 @@ public class Server implements Closeable {
             var index = SERVER_INFO.indexOf(new CardOperationInfo(cardType));
 
             if (index != -1) {
-                tcp.sendByte((byte)1);
                 var coi = SERVER_INFO.get(index);
                 Optional<PaymentServerInfo> opt;
 
                 synchronized (SYNC_OBJECT) {
                     opt = findPaymentInfo(coi.type);
                 }
-                opt.ifPresentOrElse(p -> coi.clientInfoConsumer.accept(new ClientInfo(tcp, p)),
+                opt.ifPresentOrElse(p -> {tcp.sendByte((byte)1); coi.clientInfoConsumer.accept(new ClientInfo(tcp, p));},
                         () -> tcp.sendByte((byte)-1));
             }
             else
