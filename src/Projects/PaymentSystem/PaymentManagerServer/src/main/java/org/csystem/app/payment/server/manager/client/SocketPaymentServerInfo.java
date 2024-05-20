@@ -2,11 +2,11 @@ package org.csystem.app.payment.server.manager.client;
 
 import java.util.Objects;
 
-public class CreditCardPaymentServerInfo extends PaymentServerInfo {
+public class SocketPaymentServerInfo extends PaymentServerInfo {
     private String m_host;
     private int m_port;
 
-    public CreditCardPaymentServerInfo(int id, String host, int port)
+    public SocketPaymentServerInfo(int id, String host, int port)
     {
         super(id);
         m_host = host;
@@ -48,7 +48,7 @@ public class CreditCardPaymentServerInfo extends PaymentServerInfo {
     @Override
     public boolean equals(Object other)
     {
-        return other instanceof CreditCardPaymentServerInfo ci
+        return other instanceof SocketPaymentServerInfo ci
                 && super.equals(other) && ci.m_host.equals(m_host)
                 && ci.m_port == m_port;
     }

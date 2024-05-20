@@ -8,13 +8,14 @@ import java.util.concurrent.ExecutorService;
 
 public class PaymentManagerServerCommands {
     private final Server m_server;
-
+    private final PaymentServerInfoServer m_paymentServerInfoServer;
     private final ExecutorService m_executorService;
 
     @Command
     private void start() throws InterruptedException
     {
         m_executorService.execute(m_server::run);
+        m_executorService.execute(m_paymentServerInfoServer::run);
         Thread.sleep(250);
     }
 
@@ -22,6 +23,7 @@ public class PaymentManagerServerCommands {
     private void stop() throws InterruptedException
     {
         m_executorService.execute(m_server::close);
+        m_executorService.execute(m_paymentServerInfoServer::close);
         Thread.sleep(1000);
     }
 
@@ -34,9 +36,10 @@ public class PaymentManagerServerCommands {
         System.exit(0);
     }
 
-    public PaymentManagerServerCommands(Server server, ExecutorService executorService)
+    public PaymentManagerServerCommands(Server server, PaymentServerInfoServer paymentServerInfoServer, ExecutorService executorService)
     {
         m_server = server;
+        m_paymentServerInfoServer = paymentServerInfoServer;
         m_executorService = executorService;
     }
 }

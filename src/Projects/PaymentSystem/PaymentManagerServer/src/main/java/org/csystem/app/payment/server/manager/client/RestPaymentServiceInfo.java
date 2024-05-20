@@ -2,11 +2,11 @@ package org.csystem.app.payment.server.manager.client;
 
 import java.util.Objects;
 
-public class TicketCardPaymentServiceInfo extends PaymentServerInfo {
+public class RestPaymentServiceInfo extends PaymentServerInfo {
 
     private String m_endPoint;
 
-    public TicketCardPaymentServiceInfo(int id, String endPoint)
+    public RestPaymentServiceInfo(int id, String endPoint)
     {
         super(id);
         m_endPoint = endPoint;
@@ -37,7 +37,7 @@ public class TicketCardPaymentServiceInfo extends PaymentServerInfo {
     @Override
     public boolean equals(Object other)
     {
-        return other instanceof TicketCardPaymentServiceInfo ti
+        return other instanceof RestPaymentServiceInfo ti
                 && super.equals(other) && ti.m_endPoint.equals(m_endPoint);
     }
 

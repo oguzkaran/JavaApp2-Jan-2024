@@ -1,7 +1,5 @@
 package org.csystem.app.payment.server.manager.client;
 
-import com.karandev.util.net.TCP;
-
 import java.util.Objects;
 
 public abstract class PaymentServerInfo {

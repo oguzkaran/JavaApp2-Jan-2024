@@ -1,2 +1,12 @@
+org/csystem/app/payment/server/manager/client/PaymentServerInfo.class
+org/csystem/app/payment/server/Server.class
+org/csystem/app/payment/server/manager/manage/PaymentServerInfoServer.class
+org/csystem/app/payment/server/manager/manage/PaymentManagerServerCommands.class
+org/csystem/app/payment/Application.class
+org/csystem/app/payment/server/manager/client/SocketPaymentServerInfo.class
+org/csystem/app/payment/server/manager/global/ServerUtil.class
 org/csystem/app/payment/server/Server$CardOperationInfo.class
-org/csystem/app/payment/server/communication/client/PaymentServerInfo.class
+org/csystem/app/payment/server/manager/client/RestPaymentServiceInfo.class
+org/csystem/app/payment/server/manager/client/factory/PaymentServerFactory.class
+org/csystem/app/payment/server/Server$ClientInfo.class
+org/csystem/app/payment/App.class

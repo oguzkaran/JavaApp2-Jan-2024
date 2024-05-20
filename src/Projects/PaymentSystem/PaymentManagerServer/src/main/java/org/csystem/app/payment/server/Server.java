@@ -4,7 +4,6 @@ import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TCP;
 import com.karandev.util.net.exception.NetworkException;
 import org.csystem.app.payment.server.manager.client.PaymentServerInfo;
-import static org.csystem.app.payment.server.manager.global.ServerUtil.*;
 import org.csystem.net.tcp.server.ConcurrentServer;
 
 import java.io.Closeable;
@@ -15,6 +14,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static org.csystem.app.payment.server.manager.global.ServerUtil.SERVERS;
+import static org.csystem.app.payment.server.manager.global.ServerUtil.SYNC_OBJECT;
 
 public class Server implements Closeable {
     private static final int SOCKET_TIMEOUT = 4000;
@@ -83,6 +85,12 @@ public class Server implements Closeable {
     {
         return SERVERS.containsKey(type) ? Optional.of(SERVERS.get(type)) : Optional.empty();
     }
+    
+    private void sendInformationOptionalCallback(PaymentServerInfo pi, CardOperationInfo coi, TCP tcp)
+    {
+        tcp.sendByte((byte)1);
+        coi.clientInfoConsumer.accept(new ClientInfo(tcp, pi));
+    }
 
     private void handleClient(Socket socket)
     {
@@ -98,8 +106,7 @@ public class Server implements Closeable {
                 synchronized (SYNC_OBJECT) {
                     opt = findPaymentInfo(coi.type);
                 }
-                opt.ifPresentOrElse(p -> {tcp.sendByte((byte)1); coi.clientInfoConsumer.accept(new ClientInfo(tcp, p));},
-                        () -> tcp.sendByte((byte)-1));
+                opt.ifPresentOrElse(p -> sendInformationOptionalCallback(p, coi, tcp), () -> tcp.sendByte((byte)-1));
             }
             else
                 tcp.sendByte((byte)0);

@@ -5,6 +5,7 @@ import com.karandev.io.util.console.Console;
 import com.karandev.util.net.IpUtil;
 import org.csystem.app.payment.server.Server;
 import org.csystem.app.payment.server.manager.manage.PaymentManagerServerCommands;
+import org.csystem.app.payment.server.manager.manage.PaymentServerInfoServer;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -47,10 +48,11 @@ class Application {
                 basePort = findAvailablePorts();
 
             var server = new Server(basePort + 1, backlog);
+            var paymentServerInfoServer = new PaymentServerInfoServer(basePort + 2, backlog);
 
             CommandPrompt.createBuilder()
                     .setPrompt("payment-manager")
-                    .registerObject(new PaymentManagerServerCommands(server, Executors.newCachedThreadPool()))
+                    .registerObject(new PaymentManagerServerCommands(server, paymentServerInfoServer, Executors.newCachedThreadPool()))
                     .create()
                     .run();
         }

@@ -5,28 +5,40 @@ import com.karandev.util.net.TcpUtil;
 
 import java.io.IOException;
 import java.net.Socket;
-
-import static org.csystem.communication.library.common.CommunicationMessage.ERROR_INVALID_PORT;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class InformationClient {
     private final int m_port;
-    
+    private final ExecutorService m_threadPool = Executors.newCachedThreadPool();
+
+    private void startServerCallback()
+    {
+        //...
+    }
+
     public InformationClient(int port)
     {
         m_port = port;
     }
 
-    public void run(int id, String managerHost, int managerPort) throws IOException
+    public void run(int id, String managerHost, int managerPort)
     {
         try (var socket = new Socket(managerHost, managerPort)) {
+            socket.setSoTimeout(3000);
             TcpUtil.sendInt(socket, id);
-            TcpUtil.sendInt(socket, m_port);
-            var replyMessage = TcpUtil.receiveStringViaLength(socket);
+            TcpUtil.sendStringViaLength(socket, "S;%d".formatted(m_port));
+            var status = TcpUtil.receiveByte(socket);
 
-            Console.writeLine("Reply:%s", replyMessage);
+            Console.writeLine("Status:%d", status);
 
-            if (replyMessage.equals(ERROR_INVALID_PORT))
-                throw new IOException("Invalid port");
+            if (status == 1)
+                m_threadPool.execute(this::startServerCallback);
+            else
+                Console.Error.writeLine("Cannot connect to manager server");
+        }
+        catch (IOException ex) {
+            Console.Error.writeLine("Send information problem:%s", ex.getMessage());
         }
     }
 }
