@@ -22,6 +22,11 @@
             <id>javaapp2-jan-2024-karandev-maven-repo</id>
             <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main</url>
         </repository>
+
+        <repository>
+            <id>javaapp2-jan-2024-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -34,6 +39,12 @@
         <dependency>
             <groupId>com.karandev</groupId>
             <artifactId>com-karandev-util-console</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.csystem</groupId>
+            <artifactId>org-csystem-util-process</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
