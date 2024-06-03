@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : ProcessUtil.java
 	AUTHOR      : JavaApp2-Jan-2024 Team
-	LAST UPDATE : 29th May 2024
+	LAST UPDATE : 3rd June 2024
 
 	Utility class for process operations
 
@@ -40,17 +40,16 @@ public final class ProcessUtil {
     }
 
     /**
-     *
+     * Starts a process
      * @param timeout Maximum wait timeout value
      * @param timeUnit Unit of timeout
-     * @param builderAction
-     * @param exitAction
-     * @param elapsedBeforeExitAction
-     * @param interruptAction
-     * @param exceptionAction
-     * @param commands
+     * @param builderAction Customization action of the process before the start
+     * @param exitAction An action for process exiting in the allowed timeout
+     * @param elapsedBeforeExitAction An action after elapsed process due to timeout
+     * @param interruptAction An action that the interrupt status of the parent process set while waiting for the child process
+     * @param exceptionAction An action after the exception occurrence in startProcess.
+     * @param commands a string array containing the program and its arguments
      */
-
     public static void startProcess(long timeout, TimeUnit timeUnit,
                                     Consumer<ProcessBuilder> builderAction,
                                     Consumer<Process> exitAction,

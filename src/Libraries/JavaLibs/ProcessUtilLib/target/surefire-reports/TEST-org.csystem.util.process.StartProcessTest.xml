@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.util.process.StartProcessTest" time="0.016" tests="5" errors="0" skipped="5" failures="0">
+  <properties/>
+  <testcase name="testStartProcessExceptionAction" classname="org.csystem.util.process.StartProcessTest" time="0.0">
+    <skipped message="Written by Bartu Çankaya"/>
+  </testcase>
+  <testcase name="testStartProcessElapsedAction" classname="org.csystem.util.process.StartProcessTest" time="0.0">
+    <skipped message="Written by Bartu Çankaya"/>
+  </testcase>
+  <testcase name="testStartProcessExitAction" classname="org.csystem.util.process.StartProcessTest" time="0.0">
+    <skipped message="Written by Bartu Çankaya"/>
+  </testcase>
+  <testcase name="testStartProcessInterruptActionBeforeWaitFor" classname="org.csystem.util.process.StartProcessTest" time="0.0">
+    <skipped message="Written by Bartu Çankaya"/>
+  </testcase>
+  <testcase name="testStartProcessInterruptActionAfterWaitFor" classname="org.csystem.util.process.StartProcessTest" time="0.0">
+    <skipped message="Written by Bartu Çankaya"/>
+  </testcase>
+</testsuite>
