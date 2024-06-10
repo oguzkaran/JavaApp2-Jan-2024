@@ -3,25 +3,37 @@ package org.csystem.app.payment.server.manager.manage;
 import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TcpUtil;
 import com.karandev.util.net.exception.NetworkException;
+import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.payment.server.manager.client.PaymentServerInfo;
 import org.csystem.app.payment.server.manager.client.factory.PaymentServerFactory;
-import org.csystem.net.tcp.server.ConcurrentServer;
+import org.csystem.spring.net.tcp.server.ConcurrentServer;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Map;
 
-import static org.csystem.app.payment.server.manager.global.ServerUtil.SERVERS;
-import static org.csystem.app.payment.server.manager.global.ServerUtil.SYNC_OBJECT;
-
+@Component
+@Slf4j
 public class PaymentServerInfoServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 4000;
     private final ConcurrentServer m_server;
+    private final Map<Integer, PaymentServerInfo> m_servers;
+    private final Object m_syncObject;
+
+    @Value("${app.server.info.port}")
+    private int m_port;
+
+    @Value("${app.server.info.backlog}")
+    private int m_backlog;
 
     private void addServerCallback(PaymentServerInfo paymentServerInfo, int id, Socket socket)
     {
-        SERVERS.put(id, paymentServerInfo);
-        Console.writeLine("Number of server:%d", SERVERS.size());
+        m_servers.put(id, paymentServerInfo);
+        Console.writeLine("Number of server:%d", m_servers.size());
         TcpUtil.sendByte(socket, (byte)1);
     }
 
@@ -39,11 +51,12 @@ public class PaymentServerInfoServer implements Closeable {
             var id = TcpUtil.receiveInt(socket);
             var infoStr = TcpUtil.receiveStringViaLength(socket);
 
-            Console.writeLine("Payment Server Info -> id:%d, host:%s, info:%s", id, host, infoStr);
+            log.info("Payment Server Info -> id:{}, host:{}, info:{}", id, host, infoStr);
 
-            synchronized (SYNC_OBJECT) {
-                if (!SERVERS.containsKey(id)) {
+            synchronized (m_syncObject) {
+                if (!m_servers.containsKey(id)) {
                     var paymentFactory = new PaymentServerFactory();
+
                     paymentFactory.create(id, host, infoStr)
                             .ifPresentOrElse(p -> addServerCallback(p, id, socket), () -> addServerFailCallback(socket));
                 }
@@ -52,26 +65,28 @@ public class PaymentServerInfoServer implements Closeable {
             }
         }
         catch (NetworkException ex) {
-            Console.Error.writeLine("Payment Server Info Server:Network Exception Occurred:%s", ex.getMessage());
+            log.error("Payment Server Info Server:Network Exception Occurred:{}", ex.getMessage());
         }
         catch (IOException ex) {
-            Console.Error.writeLine("Payment Server Info Server:IO Exception Occurred:%s", ex.getMessage());
+            log.error("Payment Server Info Server:IO Exception Occurred:{}", ex.getMessage());
         }
         catch (Throwable ex) {
-            Console.Error.writeLine("Payment Server Info Server:Exception Occurred: Exception: %s, Message:%s",
+            log.error("Payment Server Info Server:Exception Occurred: Exception: {}, Message:{}",
                     ex.getClass().getSimpleName(), ex.getMessage());
             TcpUtil.sendByte(socket, (byte)0);
         }
     }
 
-    public PaymentServerInfoServer(int port, int backlog) throws IOException
+    public PaymentServerInfoServer(ConcurrentServer server, Map<Integer, PaymentServerInfo> servers,
+                                   @Qualifier("sync") Object syncObject)
     {
-        m_server = ConcurrentServer.builder()
-                .setPort(port)
-                .setBacklog(backlog)
-                .setBeforeAcceptRunnable(() -> Console.writeLine("CreditCard Payment server info server is waiting for a client on port:%d", port))
-                .setClientSocketConsumer(this::handleClient)
-                .build();
+        m_server = server;
+        m_servers = servers;
+        m_syncObject = syncObject;
+        m_server.setPort(m_port)
+                .setBacklog(m_backlog)
+                .setBeforeAcceptRunnable(() -> log.info("Payment server info server is waiting for a client on port:{}", m_port))
+                .setClientSocketConsumer(this::handleClient);
     }
 
     public void run()

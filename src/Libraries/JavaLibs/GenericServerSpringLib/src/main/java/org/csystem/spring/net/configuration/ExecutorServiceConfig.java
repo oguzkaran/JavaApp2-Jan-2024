@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Configuration
+@Configuration("org.csystem.spring.net.executorService.config")
 public class ExecutorServiceConfig {
     @Bean("org.csystem.spring.net.executorService")
     @Scope("prototype")

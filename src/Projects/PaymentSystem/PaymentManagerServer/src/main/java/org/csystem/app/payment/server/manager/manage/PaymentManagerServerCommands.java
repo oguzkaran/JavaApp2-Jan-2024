@@ -2,10 +2,14 @@ package org.csystem.app.payment.server.manager.manage;
 
 import com.karandev.io.util.console.Console;
 import com.karandev.io.util.console.annotation.Command;
+import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.payment.server.Server;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutorService;
 
+@Component
+@Slf4j
 public class PaymentManagerServerCommands {
     private final Server m_server;
     private final PaymentServerInfoServer m_paymentServerInfoServer;
@@ -31,12 +35,14 @@ public class PaymentManagerServerCommands {
     @Command
     private void exit()
     {
-        Console.writeLine("C and System Programmers Association");
-        Console.writeLine("Thanks");
+        log.error("C and System Programmers Association");
+        log.error("Thanks");
         System.exit(0);
     }
 
-    public PaymentManagerServerCommands(Server server, PaymentServerInfoServer paymentServerInfoServer, ExecutorService executorService)
+    public PaymentManagerServerCommands(Server server,
+                                        PaymentServerInfoServer paymentServerInfoServer,
+                                        ExecutorService executorService)
     {
         m_server = server;
         m_paymentServerInfoServer = paymentServerInfoServer;

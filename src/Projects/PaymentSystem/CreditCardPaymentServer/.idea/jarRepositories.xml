@@ -7,9 +7,14 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="javaapp1-mar-2023-maven-repo" />
-      <option name="name" value="javaapp1-mar-2023-maven-repo" />
-      <option name="url" value="https://raw.github.com/oguzkaran/javaapp1-mar-2023-maven-repo/main" />
+      <option name="id" value="javaapp1-nov-2023-maven-repo" />
+      <option name="name" value="javaapp1-nov-2023-maven-repo" />
+      <option name="url" value="https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="javaapp1-nov-2023-karandev-maven-repo" />
+      <option name="name" value="javaapp1-nov-2023-karandev-maven-repo" />
+      <option name="url" value="https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
@@ -20,26 +25,6 @@
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="JavaApp1-Mar-2023" />
-      <option name="name" value="JavaApp1-Mar-2023" />
-      <option name="url" value="https://raw.github.com/oguzkaran/javaapp1-mar-2023-maven-repo/main" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="javaapp2-jan-2024-karandev-maven-repo" />
-      <option name="name" value="javaapp2-jan-2024-karandev-maven-repo" />
-      <option name="url" value="https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="javaapp2-jan-2024-maven-repo" />
-      <option name="name" value="javaapp2-jan-2024-maven-repo" />
-      <option name="url" value="https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="javaapp1-mar-2023-karandev-maven-repo" />
-      <option name="name" value="javaapp1-mar-2023-karandev-maven-repo" />
-      <option name="url" value="https://raw.github.com/oguzkaran/javaapp1-mar-2023-karandev-maven-repo/main" />
     </remote-repository>
   </component>
 </project>

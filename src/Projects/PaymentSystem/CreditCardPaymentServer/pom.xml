@@ -1,73 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+	<groupId>org.csystem</groupId>
+	<artifactId>Application</artifactId>
+	<version>1.0.0</version>
+	<name>Application</name>
+	<description>Generic project for Spring Boot</description>
 
-    <groupId>org.csystem</groupId>
-    <artifactId>CreditCardPaymentServer</artifactId>
-    <version>1.0.0</version>
-    <name>CreditCardPaymentServer</name>
+	<repositories>
+		<repository>
+			<id>javaapp2-jan-2024-karandev-maven-repo</id>
+			<url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main</url>
+		</repository>
 
-    <repositories>
-        <repository>
-            <id>javaapp2-jan-2024-karandev-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main</url>
-        </repository>
+		<repository>
+			<id>javaapp2-jan-2024-maven-repo</id>
+			<url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main</url>
+		</repository>
+	</repositories>
 
-        <repository>
-            <id>javaapp2-jan-2024-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main</url>
-        </repository>
-    </repositories>
+	<properties>
+		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.karandev</groupId>
-            <artifactId>com-karandev-util-console</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.32</version>
+			<scope>provided</scope>
+		</dependency>
 
-         <dependency>
-             <groupId>com.karandev</groupId>
-             <artifactId>com-karandev-util-net</artifactId>
-             <version>1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>com.karandev</groupId>
+			<artifactId>com-karandev-util-console</artifactId>
+			<version>11.2.0</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.csystem</groupId>
-            <artifactId>org-csystem-net-tcp-server</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

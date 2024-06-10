@@ -1,8 +1,12 @@
 package org.csystem.app.payment;
 
-class App {
-    public static void main(String[] args)
-    {
-        Application.run(args);
-    }
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class App {
+	public static void main(String[] args)
+	{
+		SpringApplication.run(App.class, args);		
+	}
 }

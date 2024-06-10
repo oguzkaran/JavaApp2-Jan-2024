@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Scope;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-@Configuration
+@Configuration("org.csystem.spring.net.concurrentServer.serverSocket.config")
 public class ServerSocketConfig {
     @Bean("org.csystem.spring.net.concurrentServer.serverSocket")
     @Scope("prototype")

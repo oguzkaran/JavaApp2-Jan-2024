@@ -12,6 +12,10 @@ package com.karandev.io.util.console;
 
 import com.karandev.io.util.console.annotation.Command;
 import com.karandev.io.util.console.annotation.ErrorCommand;
+import lombok.Builder;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldNameConstants;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,14 +23,35 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Builder
 public final class CommandPrompt {
-    private Object m_regObject;
+    @Accessors(prefix = "m_")
+    private Object m_registerObject;
+
     private final ArrayList<CommandInfo> m_commandInfo = new ArrayList<>();
+
+    @FieldNameConstants.Exclude
     private Method m_errorCommandMethod;
+
+    @Setter
+    @Accessors(prefix = "m_")
+    @Builder.Default
     private String m_prompt = "krn";
+
+    @Accessors(prefix = "m_")
+    @Builder.Default
     private String m_suffix = "$";
+
+    @Accessors(prefix = "m_")
+    @Builder.Default
     private String m_paramStringErrorMessage = "Message parameters must be String!...";
+
+    @Accessors(prefix = "m_")
+    @Builder.Default
     private String m_wrongNumberOfArgumentsMessage = "Wrong number of arguments!...";
+
+    @Accessors(prefix = "m_")
+    @Builder.Default
     private String m_invalidCommand = "Invalid command!...";
 
     private static class CommandInfo {
@@ -39,56 +64,6 @@ public final class CommandPrompt {
             this.commandText = commandText;
             this.method = method;
             this.argCount = argCount;
-        }
-    }
-
-    public static class Builder {
-        private final CommandPrompt m_commandPrompt = new CommandPrompt();
-
-        private Builder()
-        {
-        }
-
-        public Builder registerObject(Object regObject)
-        {
-            m_commandPrompt.registerObject(regObject);
-
-            return this;
-        }
-
-        public Builder setPrompt(String prompt)
-        {
-            m_commandPrompt.m_prompt = prompt;
-            return this;
-        }
-
-        public Builder setSuffix(String suffix)
-        {
-            m_commandPrompt.m_suffix = suffix;
-            return this;
-        }
-
-        public Builder setParamStringErrorMessage(String message)
-        {
-            m_commandPrompt.m_paramStringErrorMessage = message;
-            return this;
-        }
-
-        public Builder setWrongNumberOfArgumentsErrorMessage(String message)
-        {
-            m_commandPrompt.m_wrongNumberOfArgumentsMessage = message;
-            return this;
-        }
-
-        public Builder setInvalidCommandErrorMessage(String message)
-        {
-            m_commandPrompt.m_invalidCommand = message;
-            return this;
-        }
-
-        public CommandPrompt create()
-        {
-            return m_commandPrompt;
         }
     }
 
@@ -118,7 +93,7 @@ public final class CommandPrompt {
                 }
 
                 commandInfo.method.setAccessible(true);
-                commandInfo.method.invoke(m_regObject, (Object[]) params);
+                commandInfo.method.invoke(m_registerObject, (Object[]) params);
                 commandInfo.method.setAccessible(false);
                 break;
             }
@@ -126,7 +101,7 @@ public final class CommandPrompt {
         if (!flag) {
             if (m_errorCommandMethod != null) {
                 m_errorCommandMethod.setAccessible(true);
-                m_errorCommandMethod.invoke(m_regObject);
+                m_errorCommandMethod.invoke(m_registerObject);
                 m_errorCommandMethod.setAccessible(false);
             }
             else
@@ -150,10 +125,10 @@ public final class CommandPrompt {
         }
     }
 
-    private void registerObject(Object regObject)
+    public CommandPrompt registerObject(Object regObject)
     {
-        m_regObject = regObject;
-        var clsRegObject = m_regObject.getClass();
+        m_registerObject = regObject;
+        var clsRegObject = m_registerObject.getClass();
 
         var methods = clsRegObject.getDeclaredMethods();
 
@@ -168,21 +143,10 @@ public final class CommandPrompt {
             }
             registerCommands(commands, method);
         }
+
+        return this;
     }
 
-    private CommandPrompt()
-    {
-    }
-
-    public static Builder createBuilder()
-    {
-        return new Builder();
-    }
-
-    public void setPrompt(String prompt)
-    {
-        m_prompt = prompt;
-    }
 
     public void run()
     {
