@@ -33,7 +33,7 @@ public class PaymentServerInfoServer implements Closeable {
     private void addServerCallback(PaymentServerInfo paymentServerInfo, int id, Socket socket)
     {
         m_servers.put(id, paymentServerInfo);
-        Console.writeLine("Number of server:%d", m_servers.size());
+        log.info("Number of servers:{}", m_servers.size());
         TcpUtil.sendByte(socket, (byte)1);
     }
 
@@ -83,14 +83,14 @@ public class PaymentServerInfoServer implements Closeable {
         m_server = server;
         m_servers = servers;
         m_syncObject = syncObject;
-        m_server.setPort(m_port)
-                .setBacklog(m_backlog)
-                .setBeforeAcceptRunnable(() -> log.info("Payment server info server is waiting for a client on port:{}", m_port))
-                .setClientSocketConsumer(this::handleClient);
     }
 
     public void run()
     {
+        m_server.setPort(m_port)
+                .setBacklog(m_backlog)
+                .setBeforeAcceptRunnable(() -> log.info("Payment server info server is waiting for a client on port:{}", m_port))
+                .setClientSocketConsumer(this::handleClient);
         m_server.start();
     }
 

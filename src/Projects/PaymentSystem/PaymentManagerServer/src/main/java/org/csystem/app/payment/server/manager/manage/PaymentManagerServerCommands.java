@@ -1,6 +1,5 @@
 package org.csystem.app.payment.server.manager.manage;
 
-import com.karandev.io.util.console.Console;
 import com.karandev.io.util.console.annotation.Command;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.payment.server.Server;
@@ -35,8 +34,8 @@ public class PaymentManagerServerCommands {
     @Command
     private void exit()
     {
-        log.error("C and System Programmers Association");
-        log.error("Thanks");
+        log.info("C and System Programmers Association");
+        log.info("Thanks");
         System.exit(0);
     }
 

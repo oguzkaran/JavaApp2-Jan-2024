@@ -12,7 +12,8 @@ public class PaymentServerFactory {
     {
         try {
             return Optional.of(new SocketPaymentServerInfo(id, host, Integer.parseInt(info[1])));
-        } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+        }
+        catch (NumberFormatException | IndexOutOfBoundsException ex) {
             return Optional.empty();
         }
     }
@@ -21,7 +22,8 @@ public class PaymentServerFactory {
     {
         try {
             return Optional.of(new RestPaymentServiceInfo(id, info[1]));
-        } catch (IndexOutOfBoundsException ex) {
+        }
+        catch (IndexOutOfBoundsException ex) {
             return Optional.empty();
         }
     }

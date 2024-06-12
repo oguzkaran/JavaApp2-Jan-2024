@@ -10,6 +10,7 @@
 ------------------------------------------------------------*/
 package org.csystem.spring.net.tcp.server;
 
+import lombok.extern.slf4j.Slf4j;
 import org.csystem.spring.net.constant.Constant;
 import org.csystem.spring.net.function.IConsumer;
 import org.csystem.spring.net.function.IRunnable;
@@ -26,14 +27,17 @@ import java.util.concurrent.ExecutorService;
 
 @Component(Constant.CONCURRENT_SERVER_BEAN_NAME)
 @Scope("prototype")
+@Slf4j
 public class ConcurrentServer {
     private final ExecutorService m_threadPool;
     private final ServerSocket m_serverSocket;
 
     @Value("6767")
     private int m_port;
+
     @Value("512")
     private int m_backlog;
+
     private IRunnable m_initRunnable;
     private IRunnable m_beforeAcceptRunnable;
     private IConsumer<Socket> m_clientSocketConsumer = s -> {};
@@ -42,6 +46,7 @@ public class ConcurrentServer {
     private void handleClient(Socket socket)
     {
         try {
+            log.info("Client connected via {}:{}", socket.getInetAddress().getHostAddress(), socket.getPort());
             m_clientSocketConsumer.accept(socket);
         }
         catch (Throwable ignore) {
@@ -61,9 +66,12 @@ public class ConcurrentServer {
                 if (m_beforeAcceptRunnable != null)
                     m_beforeAcceptRunnable.run();
 
+                log.info("Server started on port:{}", m_port);
+
                 var socket = m_serverSocket.accept();
 
                 m_threadPool.execute(() -> handleClient(socket));
+
             }
         }
         catch (Throwable ex) {

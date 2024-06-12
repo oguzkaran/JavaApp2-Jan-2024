@@ -26,5 +26,15 @@
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="javaapp2-jan-2024-karandev-maven-repo" />
+      <option name="name" value="javaapp2-jan-2024-karandev-maven-repo" />
+      <option name="url" value="https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="javaapp2-jan-2024-maven-repo" />
+      <option name="name" value="javaapp2-jan-2024-maven-repo" />
+      <option name="url" value="https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main" />
+    </remote-repository>
   </component>
 </project>

@@ -88,15 +88,14 @@ public class Server implements Closeable {
         m_serverInfo = serverInfo;
         m_servers = servers;
         m_syncObject = syncObject;
-
-        m_server.setPort(m_port)
-            .setBacklog(m_backlog)
-            .setBeforeAcceptRunnable(() -> log.info("Payment Manager Server info server is waiting for a client on port:{}", m_port))
-            .setClientSocketConsumer(this::handleClient);
     }
 
     public void run()
     {
+        m_server.setPort(m_port)
+                .setBacklog(m_backlog)
+                .setBeforeAcceptRunnable(() -> log.info("Payment Manager Server info server is waiting for a client on port:{}", m_port))
+                .setClientSocketConsumer(this::handleClient);
         m_server.start();
     }
 
