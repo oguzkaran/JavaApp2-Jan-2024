@@ -8,7 +8,7 @@ group = "org.csystem"
 version = "1.0.0"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
 }
 
 configurations {
@@ -31,7 +31,6 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("com.karandev:com-karandev-util-console:2.0.0")
 	implementation("com.karandev:com-karandev-net:1.0.0")
 	implementation("org.csystem:org-csystem-spring-net-tcp-server:1.0.0")
 

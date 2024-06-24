@@ -1,6 +1,5 @@
 package org.csystem.app.payment.server;
 
-import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TCP;
 import com.karandev.util.net.exception.NetworkException;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +7,6 @@ import org.csystem.app.payment.server.manager.client.CardOperationInfo;
 import org.csystem.app.payment.server.manager.client.ClientInfo;
 import org.csystem.app.payment.server.manager.client.PaymentServerInfo;
 import org.csystem.spring.net.tcp.server.ConcurrentServer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;

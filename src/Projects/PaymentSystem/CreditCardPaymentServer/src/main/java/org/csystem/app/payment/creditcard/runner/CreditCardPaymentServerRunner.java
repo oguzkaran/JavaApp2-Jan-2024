@@ -6,22 +6,21 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ExecutorService;
-
 @Component
 public class CreditCardPaymentServerRunner implements ApplicationRunner {
     private final InformationClient m_informationClient;
-    private final ExecutorService m_threadPool;
 
-    public CreditCardPaymentServerRunner(InformationClient informationClient, ExecutorService threadPool)
+    public CreditCardPaymentServerRunner(InformationClient informationClient)
     {
         m_informationClient = informationClient;
-        m_threadPool = threadPool;
     }
 
     @Override
     public void run(ApplicationArguments args)
     {
-        m_threadPool.execute(m_informationClient::run);
+        var thread = new Thread(m_informationClient::run);
+
+        thread.setDaemon(false);
+        thread.start();
     }
 }

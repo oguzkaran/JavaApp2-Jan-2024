@@ -1,27 +1,30 @@
 package org.csystem.app.payment.server.runner;
 
-import com.karandev.io.util.console.CommandPrompt;
-import org.csystem.app.payment.server.manager.manage.PaymentManagerServerCommands;
+import org.csystem.app.payment.server.Server;
+import org.csystem.app.payment.server.manager.manage.PaymentServerInfoServer;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ExecutorService;
+
 @Component
 public class PaymentManagerApplicationRunner implements ApplicationRunner {
-    private final PaymentManagerServerCommands m_paymentManagerServerCommands;
+    private final Server m_server;
+    private final PaymentServerInfoServer m_paymentServerInfoServer;
+    private final ExecutorService m_executorService;
 
-    public PaymentManagerApplicationRunner(PaymentManagerServerCommands paymentManagerServerCommands)
+    public PaymentManagerApplicationRunner(Server server, PaymentServerInfoServer paymentServerInfoServer, ExecutorService executorService)
     {
-        m_paymentManagerServerCommands = paymentManagerServerCommands;
+        m_server = server;
+        m_paymentServerInfoServer = paymentServerInfoServer;
+        m_executorService = executorService;
     }
 
     @Override
     public void run(ApplicationArguments args)
     {
-        CommandPrompt.builder()
-                .prompt("payment-manager")
-                .build()
-                .registerObject(m_paymentManagerServerCommands)
-                .run();
+        m_executorService.execute(m_server::run);
+        m_executorService.execute(m_paymentServerInfoServer::run);
     }
 }

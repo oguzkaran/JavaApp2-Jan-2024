@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Configuration
+//@Configuration
 public class ExecutorServiceConfig {
     @Bean
     @Primary

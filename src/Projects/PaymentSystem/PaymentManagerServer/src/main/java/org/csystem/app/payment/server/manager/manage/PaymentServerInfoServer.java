@@ -1,6 +1,5 @@
 package org.csystem.app.payment.server.manager.manage;
 
-import com.karandev.io.util.console.Console;
 import com.karandev.util.net.TcpUtil;
 import com.karandev.util.net.exception.NetworkException;
 import lombok.extern.slf4j.Slf4j;
