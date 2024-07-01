@@ -14,22 +14,18 @@ import java.util.concurrent.ExecutorService;
 @Component
 public class TicketCardPaymentServiceRunner implements ApplicationRunner {
     private final InformationClient m_informationClient;
-    //private final ExecutorService m_threadPool;
-    private final ConfigurableApplicationContext m_applicationContext;
+    private final ExecutorService m_threadPool;
 
-
-    public TicketCardPaymentServiceRunner(InformationClient informationClient, ConfigurableApplicationContext applicationContext)
+    public TicketCardPaymentServiceRunner(InformationClient informationClient,
+                                          ExecutorService threadPool)
     {
         m_informationClient = informationClient;
-        m_applicationContext = applicationContext;
+        m_threadPool = threadPool;
     }
 
     @Override
     public void run(ApplicationArguments args)
     {
-        var thread = new Thread(m_informationClient::run);
-
-        thread.setDaemon(true);
-        thread.start();
+        m_threadPool.execute(m_informationClient::run);
     }
 }

@@ -1,8 +1,7 @@
-package org.csystem.app.payment.ticketcard.configuration.thread;
+package org.csystem.app.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,8 +9,7 @@ import java.util.concurrent.Executors;
 @Configuration
 public class ExecutorServiceConfig {
     @Bean
-    @Primary
-    public ExecutorService createThreadPool()
+    public ExecutorService createExecutorService()
     {
         return Executors.newCachedThreadPool();
     }

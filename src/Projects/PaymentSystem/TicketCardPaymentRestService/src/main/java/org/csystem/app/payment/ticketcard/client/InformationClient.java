@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 @Slf4j
 public class InformationClient {
     private final ConfigurableApplicationContext m_applicationContext;
-    //private final ExecutorService m_threadPool;
+    private final ExecutorService m_threadPool;
     private final Socket m_socket;
 
     @Value("${app.id}")
@@ -31,9 +31,25 @@ public class InformationClient {
         log.info("Rest service starts");
     }
 
-    public InformationClient(ConfigurableApplicationContext applicationContext, Socket socket)
+    private void failCallback()
+    {
+        log.info("Cannot connect to manager server");
+        m_threadPool.shutdown();
+        m_applicationContext.close();
+    }
+
+    private void closeApplication()
+    {
+        var closeThread = new Thread(this::failCallback);
+
+        closeThread.setDaemon(false);
+        closeThread.start();
+    }
+
+    public InformationClient(ConfigurableApplicationContext applicationContext, ExecutorService threadPool, Socket socket)
     {
         m_applicationContext = applicationContext;
+        m_threadPool = threadPool;
         m_socket = socket;
     }
 
@@ -51,12 +67,8 @@ public class InformationClient {
 
             log.info("Status:{}", status);
 
-            if (status == 1)
-                new Thread(this::startService).start();
-            else {
-                log.info("Cannot connect to manager server");
-                m_applicationContext.close();
-            }
+            if (status != 1)
+                closeApplication();
         }
         catch (IOException ex) {
             log.error("Send information problem:{}", ex.getMessage());
