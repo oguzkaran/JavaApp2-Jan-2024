@@ -1,6 +1,7 @@
 package org.csystem.app.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.csystem.app.event.MyAsyncEvent;
 import org.csystem.app.event.MyEvent;
 import org.csystem.app.event.YourEvent;
 import org.csystem.app.event.data.YourEventData;
@@ -38,11 +39,22 @@ public class MyEventController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("async/thread/my")
+    public ResponseEntity<String> triggerMyEventAsyncViaThread(@RequestParam(value = "msg") String message)
+    {
+        //...
+        m_threadPool.execute(() -> m_applicationEventPublisher.publishEvent(new MyEvent(this, message)));
+
+        log.info("Async Event via thread published with message:{}", message);
+
+        return ResponseEntity.ok(message);
+    }
+
     @GetMapping("async/my")
     public ResponseEntity<String> triggerMyEventAsync(@RequestParam(value = "msg") String message)
     {
         //...
-        m_threadPool.execute(() -> m_applicationEventPublisher.publishEvent(new MyEvent(this, message)));
+        m_applicationEventPublisher.publishEvent(new MyAsyncEvent(this, message));
 
         log.info("Async Event published with message:{}", message);
 
@@ -50,10 +62,10 @@ public class MyEventController {
     }
 
     @GetMapping("your")
-    public ResponseEntity<String> triggerYourEvent(@RequestParam("cnt") int count)
+    public ResponseEntity<String> triggerYourEvent(@RequestParam String username, @RequestParam("cnt") int count)
     {
         //...
-        var data = new YourEventData(count);
+        var data = new YourEventData(username, count);
 
         m_applicationEventPublisher.publishEvent(new YourEvent(this, data));
 
@@ -61,5 +73,6 @@ public class MyEventController {
 
         return ResponseEntity.ok(data.getNumbers());
     }
+
     //...
 }

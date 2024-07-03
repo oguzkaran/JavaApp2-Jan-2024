@@ -9,13 +9,17 @@ import lombok.experimental.Accessors;
 @Setter
 public class YourEventData {
     @Accessors(prefix = "m_")
+    private String m_username;
+
+    @Accessors(prefix = "m_")
     private int m_count;
 
     @Accessors(prefix = "m_")
     private String m_numbers;
 
-    public YourEventData(int count)
+    public YourEventData(String username, int count)
     {
+        m_username = username;
         m_count = count;
     }
 }

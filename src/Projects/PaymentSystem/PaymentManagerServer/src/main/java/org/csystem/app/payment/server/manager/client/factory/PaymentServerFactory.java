@@ -28,7 +28,6 @@ public class PaymentServerFactory {
         }
     }
 
-
     private Optional <PaymentServerInfo> protocolCallback(int id, String host, String [] info)
     {
         return switch (info[0]) {
@@ -37,6 +36,7 @@ public class PaymentServerFactory {
             default -> Optional.empty();
         };
     }
+
     public Optional<PaymentServerInfo> create(int id, String host, String infoStr)
     {
         //S;2323

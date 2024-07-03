@@ -11,7 +11,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class RestPaymentServiceInfo extends PaymentServerInfo {
-    @Accessors(prefix = "m_") private String m_endPoint;
+    @Accessors(prefix = "m_")
+    private String m_endPoint;
 
     public RestPaymentServiceInfo(int id, String endPoint)
     {

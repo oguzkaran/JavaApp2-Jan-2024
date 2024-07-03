@@ -28,4 +28,10 @@ public class TicketCardPaymentController {
     {
         throw new UnsupportedOperationException("Not yet implemented!....");
     }
+
+    @GetMapping("/report/date")
+    public ResponseEntity<Object> paymentsByDate(/*...*/)
+    {
+        throw new UnsupportedOperationException("Not yet implemented!....");
+    }
 }

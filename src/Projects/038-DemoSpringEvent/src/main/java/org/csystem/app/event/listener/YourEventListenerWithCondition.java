@@ -11,14 +11,14 @@ import java.util.stream.IntStream;
 
 @Component
 @Slf4j
-public class YourEventListener  {
-    @EventListener
+public class YourEventListenerWithCondition {
+    @EventListener(condition = "#event.yourEventData.username.contains('admin')")
     public void listen(YourEvent event)
     {
         var count = event.getYourEventData().getCount();
         var username = event.getYourEventData().getUsername();
 
-        log.info("YourEvent processing -> Username::{}, Count:{}", username, count);
+        log.info("YourEvent processing with condition -> Username::{}, Count:{}", username, count);
         var random = new Random();
 
         event.getYourEventData().setNumbers(IntStream.generate(() -> random.nextInt(100))
@@ -26,7 +26,7 @@ public class YourEventListener  {
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining("-")));
 
-        log.info("Numbers:{}", event.getYourEventData().getNumbers());
+        log.info("Numbers with condition:{}", event.getYourEventData().getNumbers());
 
         try {
             Thread.sleep(2000);
@@ -34,6 +34,6 @@ public class YourEventListener  {
             throw new RuntimeException(e);
         }
 
-        log.info("YourEvent processed -> Username::{}, Count:{}", username, count);
+        log.info("YourEvent processed with condition -> Username::{}, Count:{}", username, count);
     }
 }

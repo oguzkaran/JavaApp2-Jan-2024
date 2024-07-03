@@ -2,15 +2,9 @@ package org.csystem.app.payment.ticketcard.client;
 
 import com.karandev.util.net.TcpUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.payment.ticketcard.App;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +14,10 @@ import java.util.concurrent.ExecutorService;
 
 @Component
 @Slf4j
-@EnableAsync
 public class InformationClient {
     private final ConfigurableApplicationContext m_applicationContext;
     private final ExecutorService m_threadPool;
     private final Socket m_socket;
-    private final ApplicationEventPublisher m_applicationEventPublisher;
 
     @Value("${app.id}")
     private int m_id;
@@ -33,14 +25,15 @@ public class InformationClient {
     @Value("${server.port}")
     private int m_servicePort;
 
+    @Value("${spring.application.name}")
+    private String m_applicationName;
+
     private void startService()
     {
         log.info("Rest service starts");
     }
 
-    @EventListener
-    @Async
-    protected void failCallback(InformationClient ignore)
+    private void failCallback()
     {
         log.info("Cannot connect to manager server");
         m_threadPool.shutdown();
@@ -49,17 +42,20 @@ public class InformationClient {
 
     private void closeApplication()
     {
-        log.info("Application closing");
-        m_applicationEventPublisher.publishEvent(this);
+        log.info("%s closing".formatted(m_applicationName));
+
+        var closeThread = new Thread(this::failCallback);
+
+        closeThread.setDaemon(false);
+        closeThread.start();
     }
 
     public InformationClient(ConfigurableApplicationContext applicationContext, ExecutorService threadPool,
-                             Socket socket, ApplicationEventPublisher applicationEventPublisher)
+                             Socket socket)
     {
         m_applicationContext = applicationContext;
         m_threadPool = threadPool;
         m_socket = socket;
-        m_applicationEventPublisher = applicationEventPublisher;
     }
 
     public void run()

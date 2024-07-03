@@ -11,8 +11,11 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SocketPaymentServerInfo extends PaymentServerInfo {
-    @Accessors(prefix = "m_") private String m_host;
-    @Accessors(prefix = "m_") private int m_port;
+    @Accessors(prefix = "m_")
+    private String m_host;
+
+    @Accessors(prefix = "m_")
+    private int m_port;
 
     public SocketPaymentServerInfo(int id, String host, int port)
     {

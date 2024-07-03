@@ -14,7 +14,8 @@ public class PaymentManagerApplicationRunner implements ApplicationRunner {
     private final PaymentServerInfoServer m_paymentServerInfoServer;
     private final ExecutorService m_executorService;
 
-    public PaymentManagerApplicationRunner(Server server, PaymentServerInfoServer paymentServerInfoServer, ExecutorService executorService)
+    public PaymentManagerApplicationRunner(Server server, PaymentServerInfoServer paymentServerInfoServer,
+                                           ExecutorService executorService)
     {
         m_server = server;
         m_paymentServerInfoServer = paymentServerInfoServer;
