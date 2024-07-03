@@ -6,7 +6,12 @@ import org.csystem.app.payment.ticketcard.App;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,10 +20,12 @@ import java.util.concurrent.ExecutorService;
 
 @Component
 @Slf4j
+@EnableAsync
 public class InformationClient {
     private final ConfigurableApplicationContext m_applicationContext;
     private final ExecutorService m_threadPool;
     private final Socket m_socket;
+    private final ApplicationEventPublisher m_applicationEventPublisher;
 
     @Value("${app.id}")
     private int m_id;
@@ -31,7 +38,9 @@ public class InformationClient {
         log.info("Rest service starts");
     }
 
-    private void failCallback()
+    @EventListener
+    @Async
+    protected void failCallback(InformationClient ignore)
     {
         log.info("Cannot connect to manager server");
         m_threadPool.shutdown();
@@ -40,17 +49,17 @@ public class InformationClient {
 
     private void closeApplication()
     {
-        var closeThread = new Thread(this::failCallback);
-
-        closeThread.setDaemon(false);
-        closeThread.start();
+        log.info("Application closing");
+        m_applicationEventPublisher.publishEvent(this);
     }
 
-    public InformationClient(ConfigurableApplicationContext applicationContext, ExecutorService threadPool, Socket socket)
+    public InformationClient(ConfigurableApplicationContext applicationContext, ExecutorService threadPool,
+                             Socket socket, ApplicationEventPublisher applicationEventPublisher)
     {
         m_applicationContext = applicationContext;
         m_threadPool = threadPool;
         m_socket = socket;
+        m_applicationEventPublisher = applicationEventPublisher;
     }
 
     public void run()
