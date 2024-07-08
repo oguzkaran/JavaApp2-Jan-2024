@@ -14,7 +14,7 @@ public class RestPaymentServiceInfo extends PaymentServerInfo {
     @Accessors(prefix = "m_")
     private String m_endPoint;
 
-    public RestPaymentServiceInfo(int id, String endPoint)
+    public RestPaymentServiceInfo(String id, String endPoint)
     {
         super(id);
         m_endPoint = endPoint;
@@ -26,7 +26,7 @@ public class RestPaymentServiceInfo extends PaymentServerInfo {
         return m_endPoint;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }

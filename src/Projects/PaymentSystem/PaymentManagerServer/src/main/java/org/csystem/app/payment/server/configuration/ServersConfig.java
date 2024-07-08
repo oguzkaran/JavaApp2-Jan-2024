@@ -10,7 +10,7 @@ import java.util.Map;
 @Component
 public class ServersConfig {
     @Bean
-    public Map<Integer, PaymentServerInfo> createServersMap()
+    public Map<String, PaymentServerInfo> createServersMap()
     {
         return new HashMap<>();
     }

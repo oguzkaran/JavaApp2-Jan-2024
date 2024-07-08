@@ -20,7 +20,7 @@ import java.util.Map;
 public class PaymentServerInfoServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 4000;
     private final ConcurrentServer m_server;
-    private final Map<Integer, PaymentServerInfo> m_servers;
+    private final Map<String, PaymentServerInfo> m_servers;
     private final Object m_syncObject;
 
     @Value("${app.server.info.port}")
@@ -29,7 +29,7 @@ public class PaymentServerInfoServer implements Closeable {
     @Value("${app.server.info.backlog}")
     private int m_backlog;
 
-    private void addServerCallback(PaymentServerInfo paymentServerInfo, int id, Socket socket)
+    private void addServerCallback(PaymentServerInfo paymentServerInfo, String id, Socket socket)
     {
         m_servers.put(id, paymentServerInfo);
         log.info("Number of servers:{}", m_servers.size());
@@ -39,6 +39,7 @@ public class PaymentServerInfoServer implements Closeable {
     private void addServerFailCallback(Socket socket)
     {
         //...
+        log.info("addServerFailCallback");
         TcpUtil.sendByte(socket, (byte)0);
     }
 
@@ -47,7 +48,7 @@ public class PaymentServerInfoServer implements Closeable {
         try (socket) {
             socket.setSoTimeout(SOCKET_TIMEOUT);
             var host = socket.getInetAddress().getHostAddress();
-            var id = TcpUtil.receiveInt(socket);
+            var id = TcpUtil.receiveStringViaLength(socket);
             var infoStr = TcpUtil.receiveStringViaLength(socket);
 
             log.info("Payment Server Info -> id:{}, host:{}, info:{}", id, host, infoStr);
@@ -76,7 +77,7 @@ public class PaymentServerInfoServer implements Closeable {
         }
     }
 
-    public PaymentServerInfoServer(ConcurrentServer server, Map<Integer, PaymentServerInfo> servers,
+    public PaymentServerInfoServer(ConcurrentServer server, Map<String, PaymentServerInfo> servers,
                                    @Qualifier("sync") Object syncObject)
     {
         m_server = server;

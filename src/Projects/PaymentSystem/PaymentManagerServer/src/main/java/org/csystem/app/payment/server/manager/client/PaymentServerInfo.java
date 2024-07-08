@@ -4,11 +4,11 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public abstract class PaymentServerInfo {
-    protected int id;
+    protected String id;
 
-    public PaymentServerInfo(int id)
+    public PaymentServerInfo(String id)
     {
-        this.id = id;
+
     }
 
     public abstract String serverInfo();

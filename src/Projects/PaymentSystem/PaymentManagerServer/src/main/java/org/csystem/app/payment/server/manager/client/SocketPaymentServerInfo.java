@@ -17,7 +17,7 @@ public class SocketPaymentServerInfo extends PaymentServerInfo {
     @Accessors(prefix = "m_")
     private int m_port;
 
-    public SocketPaymentServerInfo(int id, String host, int port)
+    public SocketPaymentServerInfo(String id, String host, int port)
     {
         super(id);
         m_host = host;

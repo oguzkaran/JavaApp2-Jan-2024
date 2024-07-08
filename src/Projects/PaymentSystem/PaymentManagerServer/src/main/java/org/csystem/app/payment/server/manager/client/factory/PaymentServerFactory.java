@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PaymentServerFactory {
     //...
-    private Optional<PaymentServerInfo> socketServerCallback(int id, String host, String[] info)
+    private Optional<PaymentServerInfo> socketServerCallback(String id, String host, String[] info)
     {
         try {
             return Optional.of(new SocketPaymentServerInfo(id, host, Integer.parseInt(info[1])));
@@ -18,7 +18,7 @@ public class PaymentServerFactory {
         }
     }
 
-    private Optional<PaymentServerInfo> restServiceCallback(int id, String [] info)
+    private Optional<PaymentServerInfo> restServiceCallback(String id, String [] info)
     {
         try {
             return Optional.of(new RestPaymentServiceInfo(id, info[1]));
@@ -28,7 +28,7 @@ public class PaymentServerFactory {
         }
     }
 
-    private Optional <PaymentServerInfo> protocolCallback(int id, String host, String [] info)
+    private Optional <PaymentServerInfo> protocolCallback(String id, String host, String [] info)
     {
         return switch (info[0]) {
             case "S" -> socketServerCallback(id, host, info);
@@ -37,7 +37,7 @@ public class PaymentServerFactory {
         };
     }
 
-    public Optional<PaymentServerInfo> create(int id, String host, String infoStr)
+    public Optional<PaymentServerInfo> create(String id, String host, String infoStr)
     {
         //S;2323
         //R:http://......
