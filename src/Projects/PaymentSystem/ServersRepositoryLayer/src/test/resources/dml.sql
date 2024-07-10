@@ -1,4 +1,4 @@
-insert into server_info (id, communication_info, connection_info, register_datetime) values ('bfdb99f3-c8e3-4a68-9c69-752c855f2519', 'linkedin.com', 'yolasite.com', '2024-06-26');
+insert into server_info (id, communication_info, connection_info, register_datetime) values ('bfdb99f5-c8e3-4a68-9c69-752c855f2519', 'linkedin.com', 'yolasite.com', '2024-06-26');
 insert into server_info (id, communication_info, connection_info, register_datetime) values ('7262fde3-db79-432a-b584-dfaebe563a14', 'netlog.com', 'about.com', '2024-06-04');
 insert into server_info (id, communication_info, connection_info, register_datetime) values ('a62e082b-b64d-4cdc-948f-e66b34062b22', 'wikispaces.com', 'is.gd', '2024-02-26');
 insert into server_info (id, communication_info, connection_info, register_datetime) values ('231dda91-31d7-4081-afe5-17e632520cd8', 'cbc.ca', 'cdbaby.com', '2024-03-08');

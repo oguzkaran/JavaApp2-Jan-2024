@@ -1,0 +1,4 @@
+org\csystem\payment\server\data\repository\IServerInfoRepository.class
+org\csystem\payment\server\data\entity\ServerInfo.class
+org\csystem\payment\server\data\entity\Connection.class
+org\csystem\payment\server\data\repository\ServerRepository.class

@@ -1,0 +1,3 @@
+org\csystem\payment\server\data\ServerRepositoryFindAllTest.class
+org\csystem\payment\server\data\ServerRepositoryFindByIdTest.class
+org\csystem\payment\server\data\ServerRepositorySaveTest.class
