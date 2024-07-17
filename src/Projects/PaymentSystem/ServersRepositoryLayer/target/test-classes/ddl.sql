@@ -16,6 +16,15 @@ create table if not exists connections (
 truncate table connections restart identity;
 truncate table server_info cascade;
 
--- create or replace procedure sp_insert_server_first_time()
+drop function if exists find_server_by_id;
+
+create or replace function find_server_by_id(varchar(100))
+returns table (server_id varchar(100), com_info varchar(512), conn_info varchar(512), reg_datetime timestamp)
+as
+'
+    begin
+        return query select * from server_info where id = $1;
+    end
+' language plpgsql;
 
 

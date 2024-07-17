@@ -1,6 +1,7 @@
 package org.csystem.payment.server.data.repository;
 
 import org.csystem.payment.server.data.entity.ServerInfo;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,11 +14,12 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Repository
+@Lazy
 public class ServerRepository implements IServerInfoRepository {
-    private static final String SAVE_SQL = "INSERT INTO server_info (id, communication_info, connection_info, register_datetime) VALUES (:id, :communicationInfo, :connectionInfo, :registerDateTime)";
-    private static final String FIND_BY_ID_SQL = "SELECT * FROM server_info WHERE id = :id";
-    private static final String FIND_ALL_SQL = "SELECT * FROM server_info";
-    private static final String COUNT_SQL = "SELECt COUNT(*) FROM server_info";
+    private static final String SAVE_SQL = "insert into server_info (id, communication_info, connection_info, register_datetime) values (:id, :communicationInfo, :connectionInfo, :registerDateTime)";
+    private static final String FIND_BY_ID_SQL = "select * from find_server_by_id(:id)";
+    private static final String FIND_ALL_SQL = "select * from server_info";
+    private static final String COUNT_SQL = "select count(*) from server_info";
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
