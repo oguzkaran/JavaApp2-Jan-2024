@@ -1,0 +1,6 @@
+org\csystem\app\imageprocessing\server\manage\IBiConsumer.class
+org\csystem\app\imageprocessing\server\ImageProcessingServer.class
+org\csystem\app\imageprocessing\server\ImageProcessingServer$CommandInfo.class
+org\csystem\app\imageprocessing\App.class
+org\csystem\app\imageprocessing\Application.class
+org\csystem\app\imageprocessing\server\manage\ManageServerCommands.class

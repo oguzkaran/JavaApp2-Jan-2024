@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.csystem.util.exception.ExceptionUtil.*;
+
 public class ImageProcessingServer implements Closeable {
     private static final int SOCKET_TIMEOUT = 10000;
 
@@ -72,21 +74,27 @@ public class ImageProcessingServer implements Closeable {
         return index != -1 ? Optional.of(COMMANDS.get(index)) : Optional.empty();
     }
 
+    private void doGrayScaleFileCallback(Socket socket, String path) throws IOException
+    {
+        var file = new File(GS_IMAGE_PATH, String.format("%s.png", new File(path).getName()));
+
+        TcpUtil.receiveFile(socket, file);
+        file = doGrayscale(file);
+        TcpUtil.sendLine(socket, "SUC_GS");
+        TcpUtil.sendFile(socket, file, 1024);
+    }
+
+    private void doGrayScaleFileNetworkExceptionCallback(Socket socket, Throwable ex)
+    {
+        Console.Error.writeLine("Network problem:%s", ex.getMessage());
+        TcpUtil.sendLine(socket, "ERR_GS");
+        TcpUtil.sendLine(socket, "Problem occurred while making grayscale!...");
+    }
+
     private void doGrayScaleFile(Socket socket, String path) throws IOException
     {
-        try {
-            var file = new File(GS_IMAGE_PATH, String.format("%s.png", new File(path).getName()));
-
-            TcpUtil.receiveFile(socket, file);
-            file = doGrayscale(file);
-            TcpUtil.sendLine(socket, "SUC_GS");
-            TcpUtil.sendFile(socket, file, 1024);
-        }
-        catch (NetworkException ex) {
-            Console.Error.writeLine("Network problem:%s", ex.getMessage());
-            TcpUtil.sendLine(socket, "ERR_GS");
-            TcpUtil.sendLine(socket, "Problem occurred while making grayscale!...");
-        }
+        subscribeRunnable(() -> doGrayScaleFileCallback(socket, path),
+                ex -> doGrayScaleFileNetworkExceptionCallback(socket, ex));
     }
 
     private File doGrayscale(File file) throws IOException
@@ -102,24 +110,30 @@ public class ImageProcessingServer implements Closeable {
         return file;
     }
 
+    private void doBinaryImageFileCallback(Socket socket, String path) throws IOException
+    {
+        var file = new File(BIN_IMAGE_PATH, String.format("%s.png", new File(path).getName()));
+
+        TcpUtil.receiveFile(socket, file);
+        var threshold = TcpUtil.receiveInt(socket);
+
+        file = doBinaryImage(file, threshold);
+
+        TcpUtil.sendLine(socket, "SUC_BIN");
+        TcpUtil.sendFile(socket, file, 1024);
+    }
+
+    private void doBinaryImageFileNetworkExceptionCallback(Socket socket, Throwable ex)
+    {
+        Console.Error.writeLine("Network problem:%s", ex.getMessage());
+        TcpUtil.sendLine(socket, "ERR_BIN");
+        TcpUtil.sendLine(socket, "Problem occurred while making binary!...");
+    }
+
     private void doBinaryImageFile(Socket socket, String path) throws IOException
     {
-        try {
-            var file = new File(BIN_IMAGE_PATH, String.format("%s.png", new File(path).getName()));
-
-            TcpUtil.receiveFile(socket, file);
-            var threshold = TcpUtil.receiveInt(socket);
-
-            file = doBinaryImage(file, threshold);
-
-            TcpUtil.sendLine(socket, "SUC_BIN");
-            TcpUtil.sendFile(socket, file, 1024);
-        }
-        catch (NetworkException ex) {
-            Console.Error.writeLine("Network problem:%s", ex.getMessage());
-            TcpUtil.sendLine(socket, "ERR_BIN");
-            TcpUtil.sendLine(socket, "Problem occurred while making binary!...");
-        }
+        subscribeRunnable(() -> doBinaryImageFileCallback(socket, path),
+                ex -> doBinaryImageFileNetworkExceptionCallback(socket, ex));
     }
 
     private File doBinaryImage(File file, int threshold) throws IOException
