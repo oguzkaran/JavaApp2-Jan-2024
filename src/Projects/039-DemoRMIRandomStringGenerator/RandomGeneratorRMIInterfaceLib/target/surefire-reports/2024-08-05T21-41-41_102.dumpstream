@@ -1,0 +1,5 @@
+# Created at 2024-08-05T21:41:41.573
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp2-Jan-2024\src\Projects\039-DemoRMIRandomStringGenerator\RandomGeneratorRMIInterfaceLib\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
