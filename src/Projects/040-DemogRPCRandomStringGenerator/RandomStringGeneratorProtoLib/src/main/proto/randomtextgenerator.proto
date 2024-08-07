@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package org.csystem.generator.random.text;
+
+option java_multiple_files = true;
+
+service RandomTextGeneratorService {
+  rpc GenerateRandomTextEN(RandomTextGeneratorRequest) returns (RandomTextGeneratorResponse);
+  rpc GenerateRandomTextTR(RandomTextGeneratorRequest) returns (RandomTextGeneratorResponse);
+};
+
+message RandomTextGeneratorRequest {
+  sint32 count = 1;
+};
+
+message RandomTextGeneratorResponse {
+  string text = 1;
+};
+

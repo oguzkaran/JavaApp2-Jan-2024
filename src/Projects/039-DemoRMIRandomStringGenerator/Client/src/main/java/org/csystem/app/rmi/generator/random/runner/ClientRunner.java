@@ -26,8 +26,8 @@ public class ClientRunner implements ApplicationRunner {
     private void generateTextsCallback()
     {
         try {
-            System.out.printf("Text:%s%n", m_randomTextGenerator.generateRandomTextEN(m_count));
-            System.out.printf("Yazı:%s%n", m_randomTextGenerator.generateRandomTextTR(m_count));
+            log.info("Text:{}", m_randomTextGenerator.generateRandomTextEN(m_count));
+            log.info("Yazı:{}", m_randomTextGenerator.generateRandomTextTR(m_count));
             Thread.sleep(300);
         }
         catch (RemoteException ex) {
