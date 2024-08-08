@@ -1,7 +1,7 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.3.0"
-	id("io.spring.dependency-management") version "1.1.5"
+	id("org.springframework.boot") version "3.3.2"
+	id("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "org.csystem"
@@ -21,18 +21,18 @@ repositories {
 	mavenCentral()
 	mavenLocal()
 	maven {
-		url = uri("https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main")
+		url = uri("https://raw.github.com/oguzkaran/javaapp2-jan-2024-maven-repo/main")
 	}
 
 	maven {
-		url = uri("https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main")
+		url = uri("https://raw.github.com/oguzkaran/javaapp2-jan-2024-karandev-maven-repo/main")
 	}
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("com.karandev:com-karandev-util-console:11.2.0")
-	compileOnly("org.projectlombok:lombok:1.18.32")
+	implementation("com.karandev:com-karandev-util-console:1.0.0")
+	compileOnly("org.projectlombok:lombok:1.18.34")
 	annotationProcessor("org.projectlombok:lombok")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
