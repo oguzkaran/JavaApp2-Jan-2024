@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>GenericApp</artifactId>
+    <artifactId>Application</artifactId>
     <version>1.0.0</version>
     <name>GenericApp</name>
     <description>Generic Application Provider</description>
@@ -37,9 +37,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.karandev</groupId>
-            <artifactId>com-karandev-util-console</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

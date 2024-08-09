@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>org.csystem</groupId>
-	<artifactId>Application</artifactId>
+	<artifactId>Application-Maven-Web</artifactId>
 	<version>1.0.0</version>
-	<name>Application</name>
+	<name>Application-Maven-Webn</name>
 	<description>Generic project for Spring Boot</description>
 
 	<repositories>
@@ -28,7 +28,7 @@
 	</repositories>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -51,12 +51,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.karandev</groupId>
-			<artifactId>com-karandev-util-console</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -71,4 +65,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

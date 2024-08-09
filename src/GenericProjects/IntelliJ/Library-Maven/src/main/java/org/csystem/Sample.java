@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Sample.java
-	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 29th Oct 2023
+	AUTHOR		: JavaApp2-Jan-2024 Group
+	Last UPDATE	: 09th Aug 2024
 
 	Sample Class
 
@@ -9,7 +9,6 @@
 	All Right Free
 -------------------------------------------------------------*/
 package org.csystem;
-
 
 public class Sample {
 
