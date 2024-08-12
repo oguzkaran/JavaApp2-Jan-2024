@@ -15,66 +15,97 @@ public final class RandomTextGeneratorServiceGrpc {
   public static final String SERVICE_NAME = "org.csystem.generator.random.text.RandomTextGeneratorService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest,
-      org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextENMethod;
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest,
+      org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextENMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GenerateRandomTextEN",
-      requestType = org.csystem.generator.random.text.RandomTextGeneratorRequest.class,
-      responseType = org.csystem.generator.random.text.RandomTextGeneratorResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "GenerateTextEN",
+      requestType = org.csystem.generator.random.text.TextGeneratorRequest.class,
+      responseType = org.csystem.generator.random.text.TextGeneratorResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest,
-      org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextENMethod() {
-    io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest, org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextENMethod;
-    if ((getGenerateRandomTextENMethod = RandomTextGeneratorServiceGrpc.getGenerateRandomTextENMethod) == null) {
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest,
+      org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextENMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest, org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextENMethod;
+    if ((getGenerateTextENMethod = RandomTextGeneratorServiceGrpc.getGenerateTextENMethod) == null) {
       synchronized (RandomTextGeneratorServiceGrpc.class) {
-        if ((getGenerateRandomTextENMethod = RandomTextGeneratorServiceGrpc.getGenerateRandomTextENMethod) == null) {
-          RandomTextGeneratorServiceGrpc.getGenerateRandomTextENMethod = getGenerateRandomTextENMethod =
-              io.grpc.MethodDescriptor.<org.csystem.generator.random.text.RandomTextGeneratorRequest, org.csystem.generator.random.text.RandomTextGeneratorResponse>newBuilder()
+        if ((getGenerateTextENMethod = RandomTextGeneratorServiceGrpc.getGenerateTextENMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateTextENMethod = getGenerateTextENMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.text.TextGeneratorRequest, org.csystem.generator.random.text.TextGeneratorResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateRandomTextEN"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateTextEN"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.csystem.generator.random.text.RandomTextGeneratorRequest.getDefaultInstance()))
+                  org.csystem.generator.random.text.TextGeneratorRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.csystem.generator.random.text.RandomTextGeneratorResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateRandomTextEN"))
+                  org.csystem.generator.random.text.TextGeneratorResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateTextEN"))
               .build();
         }
       }
     }
-    return getGenerateRandomTextENMethod;
+    return getGenerateTextENMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest,
-      org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextTRMethod;
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest,
+      org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextTRMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GenerateRandomTextTR",
-      requestType = org.csystem.generator.random.text.RandomTextGeneratorRequest.class,
-      responseType = org.csystem.generator.random.text.RandomTextGeneratorResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "GenerateTextTR",
+      requestType = org.csystem.generator.random.text.TextGeneratorRequest.class,
+      responseType = org.csystem.generator.random.text.TextGeneratorResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest,
-      org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextTRMethod() {
-    io.grpc.MethodDescriptor<org.csystem.generator.random.text.RandomTextGeneratorRequest, org.csystem.generator.random.text.RandomTextGeneratorResponse> getGenerateRandomTextTRMethod;
-    if ((getGenerateRandomTextTRMethod = RandomTextGeneratorServiceGrpc.getGenerateRandomTextTRMethod) == null) {
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest,
+      org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextTRMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.text.TextGeneratorRequest, org.csystem.generator.random.text.TextGeneratorResponse> getGenerateTextTRMethod;
+    if ((getGenerateTextTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextTRMethod) == null) {
       synchronized (RandomTextGeneratorServiceGrpc.class) {
-        if ((getGenerateRandomTextTRMethod = RandomTextGeneratorServiceGrpc.getGenerateRandomTextTRMethod) == null) {
-          RandomTextGeneratorServiceGrpc.getGenerateRandomTextTRMethod = getGenerateRandomTextTRMethod =
-              io.grpc.MethodDescriptor.<org.csystem.generator.random.text.RandomTextGeneratorRequest, org.csystem.generator.random.text.RandomTextGeneratorResponse>newBuilder()
+        if ((getGenerateTextTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextTRMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateTextTRMethod = getGenerateTextTRMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.text.TextGeneratorRequest, org.csystem.generator.random.text.TextGeneratorResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateRandomTextTR"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateTextTR"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.csystem.generator.random.text.RandomTextGeneratorRequest.getDefaultInstance()))
+                  org.csystem.generator.random.text.TextGeneratorRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.csystem.generator.random.text.RandomTextGeneratorResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateRandomTextTR"))
+                  org.csystem.generator.random.text.TextGeneratorResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateTextTR"))
               .build();
         }
       }
     }
-    return getGenerateRandomTextTRMethod;
+    return getGenerateTextTRMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.text.NoParam,
+      org.csystem.generator.random.text.TextBound> getGetBoundMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetBound",
+      requestType = org.csystem.generator.random.text.NoParam.class,
+      responseType = org.csystem.generator.random.text.TextBound.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.text.NoParam,
+      org.csystem.generator.random.text.TextBound> getGetBoundMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.text.NoParam, org.csystem.generator.random.text.TextBound> getGetBoundMethod;
+    if ((getGetBoundMethod = RandomTextGeneratorServiceGrpc.getGetBoundMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGetBoundMethod = RandomTextGeneratorServiceGrpc.getGetBoundMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGetBoundMethod = getGetBoundMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.text.NoParam, org.csystem.generator.random.text.TextBound>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetBound"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.text.NoParam.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.text.TextBound.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GetBound"))
+              .build();
+        }
+      }
+    }
+    return getGetBoundMethod;
   }
 
   /**
@@ -127,34 +158,48 @@ public final class RandomTextGeneratorServiceGrpc {
 
     /**
      */
-    public void generateRandomTextEN(org.csystem.generator.random.text.RandomTextGeneratorRequest request,
-        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateRandomTextENMethod(), responseObserver);
+    public void generateTextEN(org.csystem.generator.random.text.TextGeneratorRequest request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateTextENMethod(), responseObserver);
     }
 
     /**
      */
-    public void generateRandomTextTR(org.csystem.generator.random.text.RandomTextGeneratorRequest request,
-        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateRandomTextTRMethod(), responseObserver);
+    public void generateTextTR(org.csystem.generator.random.text.TextGeneratorRequest request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateTextTRMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getBound(org.csystem.generator.random.text.NoParam request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextBound> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBoundMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getGenerateRandomTextENMethod(),
+            getGenerateTextENMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                org.csystem.generator.random.text.RandomTextGeneratorRequest,
-                org.csystem.generator.random.text.RandomTextGeneratorResponse>(
-                  this, METHODID_GENERATE_RANDOM_TEXT_EN)))
+                org.csystem.generator.random.text.TextGeneratorRequest,
+                org.csystem.generator.random.text.TextGeneratorResponse>(
+                  this, METHODID_GENERATE_TEXT_EN)))
           .addMethod(
-            getGenerateRandomTextTRMethod(),
+            getGenerateTextTRMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                org.csystem.generator.random.text.RandomTextGeneratorRequest,
-                org.csystem.generator.random.text.RandomTextGeneratorResponse>(
-                  this, METHODID_GENERATE_RANDOM_TEXT_TR)))
+                org.csystem.generator.random.text.TextGeneratorRequest,
+                org.csystem.generator.random.text.TextGeneratorResponse>(
+                  this, METHODID_GENERATE_TEXT_TR)))
+          .addMethod(
+            getGetBoundMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.csystem.generator.random.text.NoParam,
+                org.csystem.generator.random.text.TextBound>(
+                  this, METHODID_GET_BOUND)))
           .build();
     }
   }
@@ -175,18 +220,26 @@ public final class RandomTextGeneratorServiceGrpc {
 
     /**
      */
-    public void generateRandomTextEN(org.csystem.generator.random.text.RandomTextGeneratorRequest request,
-        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse> responseObserver) {
+    public void generateTextEN(org.csystem.generator.random.text.TextGeneratorRequest request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGenerateRandomTextENMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGenerateTextENMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void generateRandomTextTR(org.csystem.generator.random.text.RandomTextGeneratorRequest request,
-        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse> responseObserver) {
+    public void generateTextTR(org.csystem.generator.random.text.TextGeneratorRequest request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGenerateRandomTextTRMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGenerateTextTRMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getBound(org.csystem.generator.random.text.NoParam request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextBound> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetBoundMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -206,16 +259,23 @@ public final class RandomTextGeneratorServiceGrpc {
 
     /**
      */
-    public org.csystem.generator.random.text.RandomTextGeneratorResponse generateRandomTextEN(org.csystem.generator.random.text.RandomTextGeneratorRequest request) {
+    public org.csystem.generator.random.text.TextGeneratorResponse generateTextEN(org.csystem.generator.random.text.TextGeneratorRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGenerateRandomTextENMethod(), getCallOptions(), request);
+          getChannel(), getGenerateTextENMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public org.csystem.generator.random.text.RandomTextGeneratorResponse generateRandomTextTR(org.csystem.generator.random.text.RandomTextGeneratorRequest request) {
+    public org.csystem.generator.random.text.TextGeneratorResponse generateTextTR(org.csystem.generator.random.text.TextGeneratorRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGenerateRandomTextTRMethod(), getCallOptions(), request);
+          getChannel(), getGenerateTextTRMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.csystem.generator.random.text.TextBound getBound(org.csystem.generator.random.text.NoParam request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetBoundMethod(), getCallOptions(), request);
     }
   }
 
@@ -235,23 +295,32 @@ public final class RandomTextGeneratorServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.csystem.generator.random.text.RandomTextGeneratorResponse> generateRandomTextEN(
-        org.csystem.generator.random.text.RandomTextGeneratorRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<org.csystem.generator.random.text.TextGeneratorResponse> generateTextEN(
+        org.csystem.generator.random.text.TextGeneratorRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGenerateRandomTextENMethod(), getCallOptions()), request);
+          getChannel().newCall(getGenerateTextENMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.csystem.generator.random.text.RandomTextGeneratorResponse> generateRandomTextTR(
-        org.csystem.generator.random.text.RandomTextGeneratorRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<org.csystem.generator.random.text.TextGeneratorResponse> generateTextTR(
+        org.csystem.generator.random.text.TextGeneratorRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGenerateRandomTextTRMethod(), getCallOptions()), request);
+          getChannel().newCall(getGenerateTextTRMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.csystem.generator.random.text.TextBound> getBound(
+        org.csystem.generator.random.text.NoParam request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetBoundMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_GENERATE_RANDOM_TEXT_EN = 0;
-  private static final int METHODID_GENERATE_RANDOM_TEXT_TR = 1;
+  private static final int METHODID_GENERATE_TEXT_EN = 0;
+  private static final int METHODID_GENERATE_TEXT_TR = 1;
+  private static final int METHODID_GET_BOUND = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -270,13 +339,17 @@ public final class RandomTextGeneratorServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GENERATE_RANDOM_TEXT_EN:
-          serviceImpl.generateRandomTextEN((org.csystem.generator.random.text.RandomTextGeneratorRequest) request,
-              (io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse>) responseObserver);
+        case METHODID_GENERATE_TEXT_EN:
+          serviceImpl.generateTextEN((org.csystem.generator.random.text.TextGeneratorRequest) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse>) responseObserver);
           break;
-        case METHODID_GENERATE_RANDOM_TEXT_TR:
-          serviceImpl.generateRandomTextTR((org.csystem.generator.random.text.RandomTextGeneratorRequest) request,
-              (io.grpc.stub.StreamObserver<org.csystem.generator.random.text.RandomTextGeneratorResponse>) responseObserver);
+        case METHODID_GENERATE_TEXT_TR:
+          serviceImpl.generateTextTR((org.csystem.generator.random.text.TextGeneratorRequest) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextGeneratorResponse>) responseObserver);
+          break;
+        case METHODID_GET_BOUND:
+          serviceImpl.getBound((org.csystem.generator.random.text.NoParam) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.text.TextBound>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -339,8 +412,9 @@ public final class RandomTextGeneratorServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new RandomTextGeneratorServiceFileDescriptorSupplier())
-              .addMethod(getGenerateRandomTextENMethod())
-              .addMethod(getGenerateRandomTextTRMethod())
+              .addMethod(getGenerateTextENMethod())
+              .addMethod(getGenerateTextTRMethod())
+              .addMethod(getGetBoundMethod())
               .build();
         }
       }

@@ -34,6 +34,7 @@ dependencies {
 	implementation("org.csystem:org-csystem-util:12.0.0")
 	implementation("org.csystem:RandomGeneratorProtoLib:1.0.0")
 	implementation("net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE")
+	implementation("org.csystem:org-csystem-util-grpc:1.0.0")
 
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")

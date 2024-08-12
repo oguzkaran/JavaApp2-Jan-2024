@@ -15,15 +15,25 @@ public final class Randomtextgenerator {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorRequest_descriptor;
+    internal_static_org_csystem_generator_random_text_NoParam_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_org_csystem_generator_random_text_RandomTextGeneratorRequest_fieldAccessorTable;
+      internal_static_org_csystem_generator_random_text_NoParam_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorResponse_descriptor;
+    internal_static_org_csystem_generator_random_text_TextBound_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_org_csystem_generator_random_text_RandomTextGeneratorResponse_fieldAccessorTable;
+      internal_static_org_csystem_generator_random_text_TextBound_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_csystem_generator_random_text_TextGeneratorRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_org_csystem_generator_random_text_TextGeneratorRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_org_csystem_generator_random_text_TextGeneratorResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -34,34 +44,49 @@ public final class Randomtextgenerator {
   static {
     java.lang.String[] descriptorData = {
       "\n\031randomtextgenerator.proto\022!org.csystem" +
-      ".generator.random.text\"+\n\032RandomTextGene" +
-      "ratorRequest\022\r\n\005count\030\001 \001(\021\"+\n\033RandomTex" +
-      "tGeneratorResponse\022\014\n\004text\030\001 \001(\t2\314\002\n\032Ran" +
-      "domTextGeneratorService\022\225\001\n\024GenerateRand" +
-      "omTextEN\022=.org.csystem.generator.random." +
-      "text.RandomTextGeneratorRequest\032>.org.cs" +
-      "ystem.generator.random.text.RandomTextGe" +
-      "neratorResponse\022\225\001\n\024GenerateRandomTextTR" +
-      "\022=.org.csystem.generator.random.text.Ran" +
-      "domTextGeneratorRequest\032>.org.csystem.ge" +
-      "nerator.random.text.RandomTextGeneratorR" +
-      "esponseB\002P\001b\006proto3"
+      ".generator.random.text\"\t\n\007NoParam\"/\n\tTex" +
+      "tBound\022\020\n\010minCount\030\001 \001(\021\022\020\n\010maxCount\030\002 \001" +
+      "(\021\"%\n\024TextGeneratorRequest\022\r\n\005count\030\001 \001(" +
+      "\021\"%\n\025TextGeneratorResponse\022\014\n\004text\030\001 \001(\t" +
+      "2\216\003\n\032RandomTextGeneratorService\022\203\001\n\016Gene" +
+      "rateTextEN\0227.org.csystem.generator.rando" +
+      "m.text.TextGeneratorRequest\0328.org.csyste" +
+      "m.generator.random.text.TextGeneratorRes" +
+      "ponse\022\203\001\n\016GenerateTextTR\0227.org.csystem.g" +
+      "enerator.random.text.TextGeneratorReques" +
+      "t\0328.org.csystem.generator.random.text.Te" +
+      "xtGeneratorResponse\022d\n\010GetBound\022*.org.cs" +
+      "ystem.generator.random.text.NoParam\032,.or" +
+      "g.csystem.generator.random.text.TextBoun" +
+      "dB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorRequest_descriptor =
+    internal_static_org_csystem_generator_random_text_NoParam_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorRequest_fieldAccessorTable = new
+    internal_static_org_csystem_generator_random_text_NoParam_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_org_csystem_generator_random_text_RandomTextGeneratorRequest_descriptor,
-        new java.lang.String[] { "Count", });
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorResponse_descriptor =
+        internal_static_org_csystem_generator_random_text_NoParam_descriptor,
+        new java.lang.String[] { });
+    internal_static_org_csystem_generator_random_text_TextBound_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_org_csystem_generator_random_text_RandomTextGeneratorResponse_fieldAccessorTable = new
+    internal_static_org_csystem_generator_random_text_TextBound_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_org_csystem_generator_random_text_RandomTextGeneratorResponse_descriptor,
+        internal_static_org_csystem_generator_random_text_TextBound_descriptor,
+        new java.lang.String[] { "MinCount", "MaxCount", });
+    internal_static_org_csystem_generator_random_text_TextGeneratorRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_org_csystem_generator_random_text_TextGeneratorRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_org_csystem_generator_random_text_TextGeneratorRequest_descriptor,
+        new java.lang.String[] { "Count", });
+    internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_org_csystem_generator_random_text_TextGeneratorResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor,
         new java.lang.String[] { "Text", });
   }
 

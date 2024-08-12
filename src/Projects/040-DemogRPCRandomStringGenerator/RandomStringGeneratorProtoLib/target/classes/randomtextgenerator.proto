@@ -5,15 +5,22 @@ package org.csystem.generator.random.text;
 option java_multiple_files = true;
 
 service RandomTextGeneratorService {
-  rpc GenerateRandomTextEN(RandomTextGeneratorRequest) returns (RandomTextGeneratorResponse);
-  rpc GenerateRandomTextTR(RandomTextGeneratorRequest) returns (RandomTextGeneratorResponse);
+  rpc GenerateTextEN(TextGeneratorRequest) returns (TextGeneratorResponse);
+  rpc GenerateTextTR(TextGeneratorRequest) returns (TextGeneratorResponse);
+  rpc GetBound(NoParam) returns (TextBound);
 };
 
-message RandomTextGeneratorRequest {
+message NoParam {}
+
+message TextBound {
+  sint32 minCount = 1;
+  sint32 maxCount = 2;
+}
+message TextGeneratorRequest {
   sint32 count = 1;
 };
 
-message RandomTextGeneratorResponse {
+message TextGeneratorResponse {
   string text = 1;
 };
 
