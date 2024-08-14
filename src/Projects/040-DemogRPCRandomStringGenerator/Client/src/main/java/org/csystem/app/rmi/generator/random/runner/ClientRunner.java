@@ -44,7 +44,7 @@ public class ClientRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception
     {
-        m_executorService.submit(this::generateAllTextsTRCallback);
+        //m_executorService.submit(this::generateAllTextsTRCallback);
         m_executorService.submit(this::generateAllTextsENCallback);
     }
 }

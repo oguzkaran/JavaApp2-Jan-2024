@@ -3,8 +3,7 @@ package org.csystem.app.generator.random.server;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.checkerframework.common.value.qual.IntRange;
-import org.csystem.generator.random.text.*;
+import org.csystem.generator.random.*;
 import org.csystem.util.grpc.error.GrpcErrorUtil;
 import org.csystem.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,10 +26,19 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
 
     private void generateTextsOnNextCallback(StreamObserver<TextInfo> responseObserver, int count)
     {
-        var textInfo = TextInfo.newBuilder().setText(StringUtil.generateRandomTextEN(m_randomGenerator, count))
-                .build();
+        try {
+            var text = StringUtil.generateRandomTextEN(m_randomGenerator, count);
 
-        responseObserver.onNext(textInfo);
+            log.info("Generated Text:{}", text);
+
+            var textInfo = TextInfo.newBuilder().setText(text).build();
+
+            responseObserver.onNext(textInfo);
+            Thread.sleep(300);
+        }
+        catch (InterruptedException ignore) {
+
+        }
     }
 
     public RandomGeneratorServer(RandomGenerator randomGenerator)
@@ -115,11 +123,47 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
     }
 
     @Override
-    public void getBound(NoParam request, StreamObserver<TextBound> responseObserver)
+    public void getTextBound(NoParam request, StreamObserver<TextBound> responseObserver)
     {
         var bound = TextBound.newBuilder().setMaxCount(m_maxCount).setMinCount(m_minCount).build();
 
         responseObserver.onNext(bound);
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void generateInt32(Int32GenerateInfo request, StreamObserver<Int32Result> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateDouble(DoubleGenerateInfo request, StreamObserver<DoubleResult> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateInt64(Int64GenerateInfo request, StreamObserver<Int64Result> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateInt32s(Int32sGenerateInfo request, StreamObserver<Int32Result> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateDoubles(DoublesGenerateInfo request, StreamObserver<DoubleResult> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateInt64s(Int64sGenerateInfo request, StreamObserver<Int64Result> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

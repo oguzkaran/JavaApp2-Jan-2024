@@ -3,9 +3,9 @@ package org.csystem.app.rmi.generator.random.client;
 import io.grpc.StatusRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.csystem.generator.random.text.NoParam;
-import org.csystem.generator.random.text.RandomTextGeneratorServiceGrpc;
-import org.csystem.generator.random.text.TextGeneratorRequest;
+import org.csystem.generator.random.NoParam;
+import org.csystem.generator.random.RandomTextGeneratorServiceGrpc;
+import org.csystem.generator.random.TextGenerateInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.random.RandomGenerator;
@@ -19,7 +19,7 @@ public class RandomGeneratorTRClient {
 
     private final RandomGenerator m_randomGenerator;
 
-    private void generateTextsCallback(TextGeneratorRequest request)
+    private void generateTextsCallback(TextGenerateInfo request)
     {
         try {
             var response = m_stub.generateTextTR(request);
@@ -44,11 +44,11 @@ public class RandomGeneratorTRClient {
     {
         var boundRequest = NoParam.newBuilder().build();
 
-        var bound = m_stub.getBound(boundRequest);
+        var bound = m_stub.getTextBound(boundRequest);
         var minCount = bound.getMinCount();
         var maxCount = bound.getMaxCount();
         var count = m_randomGenerator.nextInt(minCount, maxCount + 1);
-        var request = TextGeneratorRequest.newBuilder().setCount(count).build();
+        var request = TextGenerateInfo.newBuilder().setCount(count).build();
 
         log.info("Min:{}, Max:{}, Generated Count:{}",minCount, maxCount, count);
 
