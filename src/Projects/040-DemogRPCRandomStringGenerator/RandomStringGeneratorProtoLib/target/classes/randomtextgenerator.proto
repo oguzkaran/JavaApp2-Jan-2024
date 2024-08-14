@@ -5,8 +5,9 @@ package org.csystem.generator.random.text;
 option java_multiple_files = true;
 
 service RandomTextGeneratorService {
-  rpc GenerateTextEN(TextGeneratorRequest) returns (TextGeneratorResponse);
-  rpc GenerateTextTR(TextGeneratorRequest) returns (TextGeneratorResponse);
+  rpc GenerateTextEN(TextGenerateInfo) returns (TextInfo);
+  rpc GenerateTextTR(TextGenerateInfo) returns (TextInfo);
+  rpc GenerateTextsEN(TextsGenerateInfo) returns (stream TextInfo); //Server side streaming RPC
   rpc GetBound(NoParam) returns (TextBound);
 };
 
@@ -16,11 +17,16 @@ message TextBound {
   sint32 minCount = 1;
   sint32 maxCount = 2;
 }
-message TextGeneratorRequest {
+
+message TextGenerateInfo {
   sint32 count = 1;
 };
 
-message TextGeneratorResponse {
-  string text = 1;
+message TextsGenerateInfo {
+  sint32 count = 1;
+  sint32 n = 2;
 };
 
+message TextInfo {
+  string text = 1;
+};

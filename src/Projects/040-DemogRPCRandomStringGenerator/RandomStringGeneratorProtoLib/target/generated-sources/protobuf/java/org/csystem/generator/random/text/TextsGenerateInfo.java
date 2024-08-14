@@ -4,26 +4,25 @@
 package org.csystem.generator.random.text;
 
 /**
- * Protobuf type {@code org.csystem.generator.random.text.TextGeneratorResponse}
+ * Protobuf type {@code org.csystem.generator.random.text.TextsGenerateInfo}
  */
-public final class TextGeneratorResponse extends
+public final class TextsGenerateInfo extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:org.csystem.generator.random.text.TextGeneratorResponse)
-    TextGeneratorResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:org.csystem.generator.random.text.TextsGenerateInfo)
+    TextsGenerateInfoOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use TextGeneratorResponse.newBuilder() to construct.
-  private TextGeneratorResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use TextsGenerateInfo.newBuilder() to construct.
+  private TextsGenerateInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private TextGeneratorResponse() {
-    text_ = "";
+  private TextsGenerateInfo() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new TextGeneratorResponse();
+    return new TextsGenerateInfo();
   }
 
   @java.lang.Override
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private TextGeneratorResponse(
+  private TextsGenerateInfo(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49,10 +48,14 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            text_ = s;
+            count_ = input.readSInt32();
+            break;
+          }
+          case 16: {
+
+            n_ = input.readSInt32();
             break;
           }
           default: {
@@ -76,53 +79,37 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor;
+    return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextsGenerateInfo_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextGeneratorResponse_fieldAccessorTable
+    return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextsGenerateInfo_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            org.csystem.generator.random.text.TextGeneratorResponse.class, org.csystem.generator.random.text.TextGeneratorResponse.Builder.class);
+            org.csystem.generator.random.text.TextsGenerateInfo.class, org.csystem.generator.random.text.TextsGenerateInfo.Builder.class);
   }
 
-  public static final int TEXT_FIELD_NUMBER = 1;
-  private volatile java.lang.Object text_;
+  public static final int COUNT_FIELD_NUMBER = 1;
+  private int count_;
   /**
-   * <code>string text = 1;</code>
-   * @return The text.
+   * <code>sint32 count = 1;</code>
+   * @return The count.
    */
   @java.lang.Override
-  public java.lang.String getText() {
-    java.lang.Object ref = text_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      text_ = s;
-      return s;
-    }
+  public int getCount() {
+    return count_;
   }
+
+  public static final int N_FIELD_NUMBER = 2;
+  private int n_;
   /**
-   * <code>string text = 1;</code>
-   * @return The bytes for text.
+   * <code>sint32 n = 2;</code>
+   * @return The n.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getTextBytes() {
-    java.lang.Object ref = text_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      text_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getN() {
+    return n_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -139,8 +126,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(text_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
+    if (count_ != 0) {
+      output.writeSInt32(1, count_);
+    }
+    if (n_ != 0) {
+      output.writeSInt32(2, n_);
     }
     unknownFields.writeTo(output);
   }
@@ -151,8 +141,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(text_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
+    if (count_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeSInt32Size(1, count_);
+    }
+    if (n_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeSInt32Size(2, n_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -164,13 +159,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof org.csystem.generator.random.text.TextGeneratorResponse)) {
+    if (!(obj instanceof org.csystem.generator.random.text.TextsGenerateInfo)) {
       return super.equals(obj);
     }
-    org.csystem.generator.random.text.TextGeneratorResponse other = (org.csystem.generator.random.text.TextGeneratorResponse) obj;
+    org.csystem.generator.random.text.TextsGenerateInfo other = (org.csystem.generator.random.text.TextsGenerateInfo) obj;
 
-    if (!getText()
-        .equals(other.getText())) return false;
+    if (getCount()
+        != other.getCount()) return false;
+    if (getN()
+        != other.getN()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -182,76 +179,78 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TEXT_FIELD_NUMBER;
-    hash = (53 * hash) + getText().hashCode();
+    hash = (37 * hash) + COUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getCount();
+    hash = (37 * hash) + N_FIELD_NUMBER;
+    hash = (53 * hash) + getN();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(byte[] data)
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(java.io.InputStream input)
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseDelimitedFrom(java.io.InputStream input)
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseDelimitedFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.csystem.generator.random.text.TextGeneratorResponse parseFrom(
+  public static org.csystem.generator.random.text.TextsGenerateInfo parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -264,7 +263,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(org.csystem.generator.random.text.TextGeneratorResponse prototype) {
+  public static Builder newBuilder(org.csystem.generator.random.text.TextsGenerateInfo prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -280,26 +279,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code org.csystem.generator.random.text.TextGeneratorResponse}
+   * Protobuf type {@code org.csystem.generator.random.text.TextsGenerateInfo}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:org.csystem.generator.random.text.TextGeneratorResponse)
-      org.csystem.generator.random.text.TextGeneratorResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:org.csystem.generator.random.text.TextsGenerateInfo)
+      org.csystem.generator.random.text.TextsGenerateInfoOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor;
+      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextsGenerateInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextGeneratorResponse_fieldAccessorTable
+      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextsGenerateInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.csystem.generator.random.text.TextGeneratorResponse.class, org.csystem.generator.random.text.TextGeneratorResponse.Builder.class);
+              org.csystem.generator.random.text.TextsGenerateInfo.class, org.csystem.generator.random.text.TextsGenerateInfo.Builder.class);
     }
 
-    // Construct using org.csystem.generator.random.text.TextGeneratorResponse.newBuilder()
+    // Construct using org.csystem.generator.random.text.TextsGenerateInfo.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -317,7 +316,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      text_ = "";
+      count_ = 0;
+
+      n_ = 0;
 
       return this;
     }
@@ -325,17 +326,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextGeneratorResponse_descriptor;
+      return org.csystem.generator.random.text.Randomtextgenerator.internal_static_org_csystem_generator_random_text_TextsGenerateInfo_descriptor;
     }
 
     @java.lang.Override
-    public org.csystem.generator.random.text.TextGeneratorResponse getDefaultInstanceForType() {
-      return org.csystem.generator.random.text.TextGeneratorResponse.getDefaultInstance();
+    public org.csystem.generator.random.text.TextsGenerateInfo getDefaultInstanceForType() {
+      return org.csystem.generator.random.text.TextsGenerateInfo.getDefaultInstance();
     }
 
     @java.lang.Override
-    public org.csystem.generator.random.text.TextGeneratorResponse build() {
-      org.csystem.generator.random.text.TextGeneratorResponse result = buildPartial();
+    public org.csystem.generator.random.text.TextsGenerateInfo build() {
+      org.csystem.generator.random.text.TextsGenerateInfo result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -343,9 +344,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public org.csystem.generator.random.text.TextGeneratorResponse buildPartial() {
-      org.csystem.generator.random.text.TextGeneratorResponse result = new org.csystem.generator.random.text.TextGeneratorResponse(this);
-      result.text_ = text_;
+    public org.csystem.generator.random.text.TextsGenerateInfo buildPartial() {
+      org.csystem.generator.random.text.TextsGenerateInfo result = new org.csystem.generator.random.text.TextsGenerateInfo(this);
+      result.count_ = count_;
+      result.n_ = n_;
       onBuilt();
       return result;
     }
@@ -384,19 +386,21 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.csystem.generator.random.text.TextGeneratorResponse) {
-        return mergeFrom((org.csystem.generator.random.text.TextGeneratorResponse)other);
+      if (other instanceof org.csystem.generator.random.text.TextsGenerateInfo) {
+        return mergeFrom((org.csystem.generator.random.text.TextsGenerateInfo)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(org.csystem.generator.random.text.TextGeneratorResponse other) {
-      if (other == org.csystem.generator.random.text.TextGeneratorResponse.getDefaultInstance()) return this;
-      if (!other.getText().isEmpty()) {
-        text_ = other.text_;
-        onChanged();
+    public Builder mergeFrom(org.csystem.generator.random.text.TextsGenerateInfo other) {
+      if (other == org.csystem.generator.random.text.TextsGenerateInfo.getDefaultInstance()) return this;
+      if (other.getCount() != 0) {
+        setCount(other.getCount());
+      }
+      if (other.getN() != 0) {
+        setN(other.getN());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -413,11 +417,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      org.csystem.generator.random.text.TextGeneratorResponse parsedMessage = null;
+      org.csystem.generator.random.text.TextsGenerateInfo parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (org.csystem.generator.random.text.TextGeneratorResponse) e.getUnfinishedMessage();
+        parsedMessage = (org.csystem.generator.random.text.TextsGenerateInfo) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -427,78 +431,64 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object text_ = "";
+    private int count_ ;
     /**
-     * <code>string text = 1;</code>
-     * @return The text.
+     * <code>sint32 count = 1;</code>
+     * @return The count.
      */
-    public java.lang.String getText() {
-      java.lang.Object ref = text_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        text_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    @java.lang.Override
+    public int getCount() {
+      return count_;
     }
     /**
-     * <code>string text = 1;</code>
-     * @return The bytes for text.
-     */
-    public com.google.protobuf.ByteString
-        getTextBytes() {
-      java.lang.Object ref = text_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        text_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string text = 1;</code>
-     * @param value The text to set.
+     * <code>sint32 count = 1;</code>
+     * @param value The count to set.
      * @return This builder for chaining.
      */
-    public Builder setText(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      text_ = value;
+    public Builder setCount(int value) {
+      
+      count_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
+     * <code>sint32 count = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearText() {
+    public Builder clearCount() {
       
-      text_ = getDefaultInstance().getText();
+      count_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int n_ ;
+    /**
+     * <code>sint32 n = 2;</code>
+     * @return The n.
+     */
+    @java.lang.Override
+    public int getN() {
+      return n_;
+    }
+    /**
+     * <code>sint32 n = 2;</code>
+     * @param value The n to set.
+     * @return This builder for chaining.
+     */
+    public Builder setN(int value) {
+      
+      n_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string text = 1;</code>
-     * @param value The bytes for text to set.
+     * <code>sint32 n = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder setTextBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+    public Builder clearN() {
       
-      text_ = value;
+      n_ = 0;
       onChanged();
       return this;
     }
@@ -515,41 +505,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:org.csystem.generator.random.text.TextGeneratorResponse)
+    // @@protoc_insertion_point(builder_scope:org.csystem.generator.random.text.TextsGenerateInfo)
   }
 
-  // @@protoc_insertion_point(class_scope:org.csystem.generator.random.text.TextGeneratorResponse)
-  private static final org.csystem.generator.random.text.TextGeneratorResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:org.csystem.generator.random.text.TextsGenerateInfo)
+  private static final org.csystem.generator.random.text.TextsGenerateInfo DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new org.csystem.generator.random.text.TextGeneratorResponse();
+    DEFAULT_INSTANCE = new org.csystem.generator.random.text.TextsGenerateInfo();
   }
 
-  public static org.csystem.generator.random.text.TextGeneratorResponse getDefaultInstance() {
+  public static org.csystem.generator.random.text.TextsGenerateInfo getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<TextGeneratorResponse>
-      PARSER = new com.google.protobuf.AbstractParser<TextGeneratorResponse>() {
+  private static final com.google.protobuf.Parser<TextsGenerateInfo>
+      PARSER = new com.google.protobuf.AbstractParser<TextsGenerateInfo>() {
     @java.lang.Override
-    public TextGeneratorResponse parsePartialFrom(
+    public TextsGenerateInfo parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new TextGeneratorResponse(input, extensionRegistry);
+      return new TextsGenerateInfo(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<TextGeneratorResponse> parser() {
+  public static com.google.protobuf.Parser<TextsGenerateInfo> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<TextGeneratorResponse> getParserForType() {
+  public com.google.protobuf.Parser<TextsGenerateInfo> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public org.csystem.generator.random.text.TextGeneratorResponse getDefaultInstanceForType() {
+  public org.csystem.generator.random.text.TextsGenerateInfo getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

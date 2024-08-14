@@ -3,8 +3,8 @@
 
 package org.csystem.generator.random.text;
 
-public interface TextGeneratorResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:org.csystem.generator.random.text.TextGeneratorResponse)
+public interface TextInfoOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:org.csystem.generator.random.text.TextInfo)
     com.google.protobuf.MessageOrBuilder {
 
   /**
