@@ -12,7 +12,7 @@
 	<groupId>org.csystem</groupId>
 	<artifactId>Application-Maven-Web</artifactId>
 	<version>1.0.0</version>
-	<name>Application-Maven-Webn</name>
+	<name>Application-Maven-Web</name>
 	<description>Generic project for Spring Boot</description>
 
 	<repositories>
