@@ -109,7 +109,7 @@ public final class Randomgenerator {
       "4GenerateInfo\022\013\n\003min\030\001 \001(\022\022\r\n\005bound\030\002 \001(" +
       "\022\"?\n\022Int64sGenerateInfo\022\013\n\003min\030\001 \001(\022\022\r\n\005" +
       "bound\030\002 \001(\022\022\r\n\005count\030\003 \001(\021\"\034\n\013Int64Resul" +
-      "t\022\r\n\005value\030\001 \001(\0222\336\010\n\032RandomTextGenerator" +
+      "t\022\r\n\005value\030\001 \001(\0222\242\r\n\032RandomTextGenerator" +
       "Service\022h\n\016GenerateTextEN\022..org.csystem." +
       "generator.random.TextGenerateInfo\032&.org." +
       "csystem.generator.random.TextInfo\022h\n\016Gen" +
@@ -118,26 +118,41 @@ public final class Randomgenerator {
       "tor.random.TextInfo\022l\n\017GenerateTextsEN\022/" +
       ".org.csystem.generator.random.TextsGener" +
       "ateInfo\032&.org.csystem.generator.random.T" +
-      "extInfo0\001\022^\n\014GetTextBound\022%.org.csystem." +
-      "generator.random.NoParam\032\'.org.csystem.g" +
-      "enerator.random.TextBound\022k\n\rGenerateInt" +
-      "32\022/.org.csystem.generator.random.Int32G" +
-      "enerateInfo\032).org.csystem.generator.rand" +
-      "om.Int32Result\022n\n\016GenerateDouble\0220.org.c" +
-      "system.generator.random.DoubleGenerateIn" +
-      "fo\032*.org.csystem.generator.random.Double" +
-      "Result\022k\n\rGenerateInt64\022/.org.csystem.ge" +
-      "nerator.random.Int64GenerateInfo\032).org.c" +
-      "system.generator.random.Int64Result\022o\n\016G" +
-      "enerateInt32s\0220.org.csystem.generator.ra" +
-      "ndom.Int32sGenerateInfo\032).org.csystem.ge" +
-      "nerator.random.Int32Result0\001\022r\n\017Generate" +
-      "Doubles\0221.org.csystem.generator.random.D" +
-      "oublesGenerateInfo\032*.org.csystem.generat" +
-      "or.random.DoubleResult0\001\022o\n\016GenerateInt6" +
-      "4s\0220.org.csystem.generator.random.Int64s" +
+      "extInfo0\001\022l\n\017GenerateTextsTR\022/.org.csyst" +
+      "em.generator.random.TextsGenerateInfo\032&." +
+      "org.csystem.generator.random.TextInfo0\001\022" +
+      "r\n\026GenerateAndJoinTextsEN\022..org.csystem." +
+      "generator.random.TextGenerateInfo\032&.org." +
+      "csystem.generator.random.TextInfo(\001\022r\n\026G" +
+      "enerateAndJoinTextsTR\022..org.csystem.gene" +
+      "rator.random.TextGenerateInfo\032&.org.csys" +
+      "tem.generator.random.TextInfo(\001\022u\n\027Gener" +
+      "ateMultipleTextsEN\022..org.csystem.generat" +
+      "or.random.TextGenerateInfo\032&.org.csystem" +
+      ".generator.random.TextInfo(\0010\001\022u\n\027Genera" +
+      "teMultipleTextsTR\022..org.csystem.generato" +
+      "r.random.TextGenerateInfo\032&.org.csystem." +
+      "generator.random.TextInfo(\0010\001\022^\n\014GetText" +
+      "Bound\022%.org.csystem.generator.random.NoP" +
+      "aram\032\'.org.csystem.generator.random.Text" +
+      "Bound\022k\n\rGenerateInt32\022/.org.csystem.gen" +
+      "erator.random.Int32GenerateInfo\032).org.cs" +
+      "ystem.generator.random.Int32Result\022n\n\016Ge" +
+      "nerateDouble\0220.org.csystem.generator.ran" +
+      "dom.DoubleGenerateInfo\032*.org.csystem.gen" +
+      "erator.random.DoubleResult\022k\n\rGenerateIn" +
+      "t64\022/.org.csystem.generator.random.Int64" +
       "GenerateInfo\032).org.csystem.generator.ran" +
-      "dom.Int64Result0\001B\002P\001b\006proto3"
+      "dom.Int64Result\022o\n\016GenerateInt32s\0220.org." +
+      "csystem.generator.random.Int32sGenerateI" +
+      "nfo\032).org.csystem.generator.random.Int32" +
+      "Result0\001\022r\n\017GenerateDoubles\0221.org.csyste" +
+      "m.generator.random.DoublesGenerateInfo\032*" +
+      ".org.csystem.generator.random.DoubleResu" +
+      "lt0\001\022o\n\016GenerateInt64s\0220.org.csystem.gen" +
+      "erator.random.Int64sGenerateInfo\032).org.c" +
+      "system.generator.random.Int64Result0\001B\002P" +
+      "\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

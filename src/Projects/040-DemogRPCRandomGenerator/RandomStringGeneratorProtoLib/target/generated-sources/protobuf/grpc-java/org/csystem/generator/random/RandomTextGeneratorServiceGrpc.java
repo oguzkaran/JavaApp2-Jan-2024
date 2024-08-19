@@ -108,6 +108,161 @@ public final class RandomTextGeneratorServiceGrpc {
     return getGenerateTextsENMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextsGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateTextsTRMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateTextsTR",
+      requestType = org.csystem.generator.random.TextsGenerateInfo.class,
+      responseType = org.csystem.generator.random.TextInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextsGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateTextsTRMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextsGenerateInfo, org.csystem.generator.random.TextInfo> getGenerateTextsTRMethod;
+    if ((getGenerateTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsTRMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsTRMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateTextsTRMethod = getGenerateTextsTRMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextsGenerateInfo, org.csystem.generator.random.TextInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateTextsTR"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextsGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextInfo.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateTextsTR"))
+              .build();
+        }
+      }
+    }
+    return getGenerateTextsTRMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsENMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateAndJoinTextsEN",
+      requestType = org.csystem.generator.random.TextGenerateInfo.class,
+      responseType = org.csystem.generator.random.TextInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsENMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsENMethod;
+    if ((getGenerateAndJoinTextsENMethod = RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsENMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateAndJoinTextsENMethod = RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsENMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsENMethod = getGenerateAndJoinTextsENMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateAndJoinTextsEN"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextInfo.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateAndJoinTextsEN"))
+              .build();
+        }
+      }
+    }
+    return getGenerateAndJoinTextsENMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsTRMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateAndJoinTextsTR",
+      requestType = org.csystem.generator.random.TextGenerateInfo.class,
+      responseType = org.csystem.generator.random.TextInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsTRMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo> getGenerateAndJoinTextsTRMethod;
+    if ((getGenerateAndJoinTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsTRMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateAndJoinTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsTRMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateAndJoinTextsTRMethod = getGenerateAndJoinTextsTRMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateAndJoinTextsTR"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextInfo.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateAndJoinTextsTR"))
+              .build();
+        }
+      }
+    }
+    return getGenerateAndJoinTextsTRMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateMultipleTextsENMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateMultipleTextsEN",
+      requestType = org.csystem.generator.random.TextGenerateInfo.class,
+      responseType = org.csystem.generator.random.TextInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateMultipleTextsENMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo> getGenerateMultipleTextsENMethod;
+    if ((getGenerateMultipleTextsENMethod = RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsENMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateMultipleTextsENMethod = RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsENMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsENMethod = getGenerateMultipleTextsENMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateMultipleTextsEN"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextInfo.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateMultipleTextsEN"))
+              .build();
+        }
+      }
+    }
+    return getGenerateMultipleTextsENMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateMultipleTextsTRMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateMultipleTextsTR",
+      requestType = org.csystem.generator.random.TextGenerateInfo.class,
+      responseType = org.csystem.generator.random.TextInfo.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo,
+      org.csystem.generator.random.TextInfo> getGenerateMultipleTextsTRMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo> getGenerateMultipleTextsTRMethod;
+    if ((getGenerateMultipleTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsTRMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateMultipleTextsTRMethod = RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsTRMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateMultipleTextsTRMethod = getGenerateMultipleTextsTRMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextGenerateInfo, org.csystem.generator.random.TextInfo>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateMultipleTextsTR"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextInfo.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateMultipleTextsTR"))
+              .build();
+        }
+      }
+    }
+    return getGenerateMultipleTextsTRMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.NoParam,
       org.csystem.generator.random.TextBound> getGetTextBoundMethod;
 
@@ -398,6 +553,56 @@ public final class RandomTextGeneratorServiceGrpc {
     }
 
     /**
+     * <pre>
+     *Server side streaming RPC
+     * </pre>
+     */
+    public void generateTextsTR(org.csystem.generator.random.TextsGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateTextsTRMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Client side streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateAndJoinTextsEN(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGenerateAndJoinTextsENMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Client side streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateAndJoinTextsTR(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGenerateAndJoinTextsTRMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Bidirectional streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateMultipleTextsEN(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGenerateMultipleTextsENMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Bidirectional streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateMultipleTextsTR(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGenerateMultipleTextsTRMethod(), responseObserver);
+    }
+
+    /**
      */
     public void getTextBound(org.csystem.generator.random.NoParam request,
         io.grpc.stub.StreamObserver<org.csystem.generator.random.TextBound> responseObserver) {
@@ -487,6 +692,41 @@ public final class RandomTextGeneratorServiceGrpc {
                 org.csystem.generator.random.TextsGenerateInfo,
                 org.csystem.generator.random.TextInfo>(
                   this, METHODID_GENERATE_TEXTS_EN)))
+          .addMethod(
+            getGenerateTextsTRMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextsGenerateInfo,
+                org.csystem.generator.random.TextInfo>(
+                  this, METHODID_GENERATE_TEXTS_TR)))
+          .addMethod(
+            getGenerateAndJoinTextsENMethod(),
+            io.grpc.stub.ServerCalls.asyncClientStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextGenerateInfo,
+                org.csystem.generator.random.TextInfo>(
+                  this, METHODID_GENERATE_AND_JOIN_TEXTS_EN)))
+          .addMethod(
+            getGenerateAndJoinTextsTRMethod(),
+            io.grpc.stub.ServerCalls.asyncClientStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextGenerateInfo,
+                org.csystem.generator.random.TextInfo>(
+                  this, METHODID_GENERATE_AND_JOIN_TEXTS_TR)))
+          .addMethod(
+            getGenerateMultipleTextsENMethod(),
+            io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextGenerateInfo,
+                org.csystem.generator.random.TextInfo>(
+                  this, METHODID_GENERATE_MULTIPLE_TEXTS_EN)))
+          .addMethod(
+            getGenerateMultipleTextsTRMethod(),
+            io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextGenerateInfo,
+                org.csystem.generator.random.TextInfo>(
+                  this, METHODID_GENERATE_MULTIPLE_TEXTS_TR)))
           .addMethod(
             getGetTextBoundMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -579,6 +819,61 @@ public final class RandomTextGeneratorServiceGrpc {
         io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGenerateTextsENMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Server side streaming RPC
+     * </pre>
+     */
+    public void generateTextsTR(org.csystem.generator.random.TextsGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGenerateTextsTRMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Client side streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateAndJoinTextsEN(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
+          getChannel().newCall(getGenerateAndJoinTextsENMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Client side streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateAndJoinTextsTR(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
+          getChannel().newCall(getGenerateAndJoinTextsTRMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Bidirectional streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateMultipleTextsEN(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
+          getChannel().newCall(getGenerateMultipleTextsENMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Bidirectional streaming RPC
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<org.csystem.generator.random.TextGenerateInfo> generateMultipleTextsTR(
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
+          getChannel().newCall(getGenerateMultipleTextsTRMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -693,6 +988,17 @@ public final class RandomTextGeneratorServiceGrpc {
         org.csystem.generator.random.TextsGenerateInfo request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGenerateTextsENMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Server side streaming RPC
+     * </pre>
+     */
+    public java.util.Iterator<org.csystem.generator.random.TextInfo> generateTextsTR(
+        org.csystem.generator.random.TextsGenerateInfo request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGenerateTextsTRMethod(), getCallOptions(), request);
     }
 
     /**
@@ -841,13 +1147,18 @@ public final class RandomTextGeneratorServiceGrpc {
   private static final int METHODID_GENERATE_TEXT_EN = 0;
   private static final int METHODID_GENERATE_TEXT_TR = 1;
   private static final int METHODID_GENERATE_TEXTS_EN = 2;
-  private static final int METHODID_GET_TEXT_BOUND = 3;
-  private static final int METHODID_GENERATE_INT32 = 4;
-  private static final int METHODID_GENERATE_DOUBLE = 5;
-  private static final int METHODID_GENERATE_INT64 = 6;
-  private static final int METHODID_GENERATE_INT32S = 7;
-  private static final int METHODID_GENERATE_DOUBLES = 8;
-  private static final int METHODID_GENERATE_INT64S = 9;
+  private static final int METHODID_GENERATE_TEXTS_TR = 3;
+  private static final int METHODID_GET_TEXT_BOUND = 4;
+  private static final int METHODID_GENERATE_INT32 = 5;
+  private static final int METHODID_GENERATE_DOUBLE = 6;
+  private static final int METHODID_GENERATE_INT64 = 7;
+  private static final int METHODID_GENERATE_INT32S = 8;
+  private static final int METHODID_GENERATE_DOUBLES = 9;
+  private static final int METHODID_GENERATE_INT64S = 10;
+  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_EN = 11;
+  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_TR = 12;
+  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_EN = 13;
+  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_TR = 14;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -876,6 +1187,10 @@ public final class RandomTextGeneratorServiceGrpc {
           break;
         case METHODID_GENERATE_TEXTS_EN:
           serviceImpl.generateTextsEN((org.csystem.generator.random.TextsGenerateInfo) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
+          break;
+        case METHODID_GENERATE_TEXTS_TR:
+          serviceImpl.generateTextsTR((org.csystem.generator.random.TextsGenerateInfo) request,
               (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
           break;
         case METHODID_GET_TEXT_BOUND:
@@ -916,6 +1231,18 @@ public final class RandomTextGeneratorServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GENERATE_AND_JOIN_TEXTS_EN:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.generateAndJoinTextsEN(
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
+        case METHODID_GENERATE_AND_JOIN_TEXTS_TR:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.generateAndJoinTextsTR(
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
+        case METHODID_GENERATE_MULTIPLE_TEXTS_EN:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.generateMultipleTextsEN(
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
+        case METHODID_GENERATE_MULTIPLE_TEXTS_TR:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.generateMultipleTextsTR(
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextInfo>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -970,6 +1297,11 @@ public final class RandomTextGeneratorServiceGrpc {
               .addMethod(getGenerateTextENMethod())
               .addMethod(getGenerateTextTRMethod())
               .addMethod(getGenerateTextsENMethod())
+              .addMethod(getGenerateTextsTRMethod())
+              .addMethod(getGenerateAndJoinTextsENMethod())
+              .addMethod(getGenerateAndJoinTextsTRMethod())
+              .addMethod(getGenerateMultipleTextsENMethod())
+              .addMethod(getGenerateMultipleTextsTRMethod())
               .addMethod(getGetTextBoundMethod())
               .addMethod(getGenerateInt32Method())
               .addMethod(getGenerateDoubleMethod())

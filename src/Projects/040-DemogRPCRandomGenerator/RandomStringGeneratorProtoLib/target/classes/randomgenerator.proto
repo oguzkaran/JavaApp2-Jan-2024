@@ -8,6 +8,11 @@ service RandomTextGeneratorService {
   rpc GenerateTextEN(TextGenerateInfo) returns (TextInfo);
   rpc GenerateTextTR(TextGenerateInfo) returns (TextInfo);
   rpc GenerateTextsEN(TextsGenerateInfo) returns (stream TextInfo); //Server side streaming RPC
+  rpc GenerateTextsTR(TextsGenerateInfo) returns (stream TextInfo); //Server side streaming RPC
+  rpc GenerateAndJoinTextsEN(stream TextGenerateInfo) returns (TextInfo); //Client side streaming RPC
+  rpc GenerateAndJoinTextsTR(stream TextGenerateInfo) returns (TextInfo); //Client side streaming RPC
+  rpc GenerateMultipleTextsEN(stream TextGenerateInfo) returns (stream TextInfo); //Bidirectional streaming RPC
+  rpc GenerateMultipleTextsTR(stream TextGenerateInfo) returns (stream TextInfo); //Bidirectional streaming RPC
   rpc GetTextBound(NoParam) returns (TextBound);
   rpc GenerateInt32(Int32GenerateInfo) returns (Int32Result); //TODO
   rpc GenerateDouble(DoubleGenerateInfo) returns (DoubleResult); //TODO

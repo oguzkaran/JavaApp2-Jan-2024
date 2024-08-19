@@ -108,7 +108,7 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
         }
 
         if (count > m_maxCount) {
-            GrpcErrorUtil.outOfRangeError(responseObserver, "Cound %d sayısından küçük olamaz".formatted(m_maxCount));
+            GrpcErrorUtil.outOfRangeError(responseObserver, "Count %d sayısından küçük olamaz".formatted(m_maxCount));
             return;
         }
         var text = StringUtil.generateRandomTextTR(m_randomGenerator, count);
@@ -120,6 +120,62 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<TextGenerateInfo> generateAndJoinTextsEN(StreamObserver<TextInfo> responseObserver)
+    {
+        return new StreamObserver<>() {
+            final StringBuilder sb = new StringBuilder();
+
+            @Override
+            public void onNext(TextGenerateInfo textGenerateInfo)
+            {
+                var count = textGenerateInfo.getCount();
+
+                if (count <= 0) {
+                    GrpcErrorUtil.invalidArgumentError(responseObserver, "Count must be positive");
+                    return;
+                }
+
+                if (count > m_maxCount) {
+                    GrpcErrorUtil.outOfRangeError(responseObserver, "Count can not be greater than %d".formatted(m_maxCount));
+                    return;
+                }
+
+                var text = StringUtil.generateRandomTextEN(m_randomGenerator, textGenerateInfo.getCount());
+
+                log.info("{}", text);
+                sb.append(text);
+
+                if (sb.length() > m_maxCount)
+                    GrpcErrorUtil.outOfRangeError(responseObserver, "Text length can not be greater than %d".formatted(m_maxCount));
+
+            }
+
+            @Override
+            public void onError(Throwable throwable)
+            {
+                log.error("Error occurred:{}", throwable.getMessage());
+            }
+
+            @Override
+            public void onCompleted()
+            {
+                var text = sb.toString();
+
+                log.info("Completed text:{}", text);
+
+                responseObserver.onNext(TextInfo.newBuilder().setText(text).build());
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public StreamObserver<TextGenerateInfo> generateMultipleTextsEN(StreamObserver<TextInfo> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
