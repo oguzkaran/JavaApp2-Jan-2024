@@ -9,6 +9,8 @@ import org.csystem.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.IntStream;
 
@@ -39,6 +41,14 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
         catch (InterruptedException ignore) {
 
         }
+    }
+
+    private void generateMultipleTextsTRResponseCallback(StreamObserver<TextInfo> responseObserver, int count)
+    {
+        var text = StringUtil.generateRandomTextTR(m_randomGenerator, count);
+
+        log.info("Yazı:{}", text);
+        responseObserver.onNext(TextInfo.newBuilder().setText(text).build());
     }
 
     public RandomGeneratorServer(RandomGenerator randomGenerator)
@@ -88,6 +98,28 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
 
         if (n <= 0) {
             GrpcErrorUtil.invalidArgumentError(responseObserver, "N must be positive");
+            return;
+        }
+
+        IntStream.range(0, n).forEach(i -> generateTextsOnNextCallback(responseObserver, count));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void generateTextsTR(TextsGenerateInfo request, StreamObserver<TextInfo> responseObserver)
+    {
+        var n = request.getN();
+        var count = request.getCount();
+
+        log.info("N:{}, Count:{}, ", n, count);
+
+        if (count <= 0) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "Count pozitif olmalıdır");
+            return;
+        }
+
+        if (n <= 0) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "N pozitif olmalıdır");
             return;
         }
 
@@ -173,9 +205,111 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
     }
 
     @Override
+    public StreamObserver<TextGenerateInfo> generateAndJoinTextsTR(StreamObserver<TextInfo> responseObserver)
+    {
+        return new StreamObserver<>() {
+            final StringBuilder sb = new StringBuilder();
+
+            @Override
+            public void onNext(TextGenerateInfo textGenerateInfo)
+            {
+                var count = textGenerateInfo.getCount();
+
+                if (count <= 0) {
+                    GrpcErrorUtil.invalidArgumentError(responseObserver, "Count pozitif olmalıdır");
+                    return;
+                }
+
+                if (count > m_maxCount) {
+                    GrpcErrorUtil.outOfRangeError(responseObserver, "Count fazla %d olmalıdır".formatted(m_maxCount));
+                    return;
+                }
+
+                var text = StringUtil.generateRandomTextTR(m_randomGenerator, textGenerateInfo.getCount());
+
+                log.info("{}", text);
+                sb.append(text);
+
+                if (sb.length() > m_maxCount)
+                    GrpcErrorUtil.outOfRangeError(responseObserver, "Yazı uzunluğu en fazla %d olmalıdır".formatted(m_maxCount));
+
+            }
+
+            @Override
+            public void onError(Throwable throwable)
+            {
+                log.error("Hata:{}", throwable.getMessage());
+            }
+
+            @Override
+            public void onCompleted()
+            {
+                var text = sb.toString();
+
+                log.info("Yazı:{}", text);
+
+                responseObserver.onNext(TextInfo.newBuilder().setText(text).build());
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
     public StreamObserver<TextGenerateInfo> generateMultipleTextsEN(StreamObserver<TextInfo> responseObserver)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new StreamObserver<>() {
+            @Override
+            public void onNext(TextGenerateInfo textGenerateInfo)
+            {
+                var count = textGenerateInfo.getCount();
+                var text = StringUtil.generateRandomTextEN(m_randomGenerator, count);
+
+                log.info("Generated Text:{}", text);
+                responseObserver.onNext(TextInfo.newBuilder().setText(text).build());
+            }
+
+            @Override
+            public void onError(Throwable throwable)
+            {
+                log.error("Error occurred:{}", throwable.getMessage());
+            }
+
+            @Override
+            public void onCompleted()
+            {
+                log.info("Request:OnCompleted");
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public StreamObserver<TextGenerateInfo> generateMultipleTextsTR(StreamObserver<TextInfo> responseObserver)
+    {
+        return new StreamObserver<>() {
+            final List<Integer> counts = new ArrayList<>();
+
+            @Override
+            public void onNext(TextGenerateInfo textGenerateInfo)
+            {
+                var count = textGenerateInfo.getCount();
+
+                counts.add(count);
+            }
+
+            @Override
+            public void onError(Throwable throwable)
+            {
+                log.error("Hata:{}", throwable.getMessage());
+            }
+
+            @Override
+            public void onCompleted()
+            {
+                counts.forEach(c -> generateMultipleTextsTRResponseCallback(responseObserver, c));
+                responseObserver.onCompleted();
+            }
+        };
     }
 
     @Override
