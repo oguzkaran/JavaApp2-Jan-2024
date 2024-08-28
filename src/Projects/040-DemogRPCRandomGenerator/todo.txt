@@ -1,0 +1,8 @@
+TODO:
+- proto dosyasındaki değişikliklere göre ilgili metotları update ediniz. Değişiklikleri client uygulamalar için de yapınız.
+- Metotlar birer username ile geleceklerdir. username'ler blank olamayacak ve whitespace içermeyecektir.
+- İlgili username ve generate edilen bilgiler veritabanında saklanacaktır.
+- Aynı username ile tekrar istek yapıldığında varolan username için ekleme yapılacaktır.
+- Her bir istek için tarih-zaman bilgisi de tutulacaktır.
+- Veritabanı tasarımı tamamen size aittir.
+- JDBC, JPA veya her ikisini birden kullanabilirsiniz.

@@ -32,12 +32,14 @@ message TextBound {
 }
 
 message TextGenerateInfo {
-  sint32 count = 1;
+  string username = 1;
+  sint32 count = 2;
 };
 
 message TextsGenerateInfo {
-  sint32 count = 1;
-  sint32 n = 2;
+  string username = 1;
+  sint32 count = 2;
+  sint32 n = 3;
 };
 
 message TextInfo {
@@ -45,13 +47,15 @@ message TextInfo {
 };
 
 message Int32GenerateInfo {
-  sint32 min = 1;
-  sint32 bound = 2;
+  string username = 1;
+  sint32 min = 2;
+  sint32 bound = 3;
 }
 message Int32sGenerateInfo {
-  sint32 min = 1;
-  sint32 bound = 2;
-  sint32 count = 3;
+  string username = 1;
+  sint32 min = 2;
+  sint32 bound = 3;
+  sint32 count = 4;
 }
 
 message Int32Result {
@@ -59,8 +63,9 @@ message Int32Result {
 }
 
 message DoubleGenerateInfo {
-  double min = 1;
-  double bound = 2;
+  string username = 1;
+  double min = 2;
+  double bound = 3;
 }
 
 message DoubleResult {
@@ -68,20 +73,23 @@ message DoubleResult {
 }
 
 message DoublesGenerateInfo {
-  double min = 1;
-  double bound = 2;
-  sint32 count = 3;
+  string username = 1;
+  double min = 2;
+  double bound = 3;
+  sint32 count = 4;
 }
 
 message Int64GenerateInfo {
-  sint64 min = 1;
-  sint64 bound = 2;
+  string username = 1;
+  sint64 min = 2;
+  sint64 bound = 3;
 }
 
 message Int64sGenerateInfo {
-  sint64 min = 1;
-  sint64 bound = 2;
-  sint32 count = 3;
+  string username = 1;
+  sint64 min = 2;
+  sint64 bound = 3;
+  sint32 count = 4;
 }
 
 message Int64Result {
