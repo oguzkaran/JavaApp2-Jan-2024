@@ -1,4 +1,4 @@
-package org.csystem.util.challenge;
+package org.csystem.app;
 
 import org.junit.jupiter.api.Test;
 
