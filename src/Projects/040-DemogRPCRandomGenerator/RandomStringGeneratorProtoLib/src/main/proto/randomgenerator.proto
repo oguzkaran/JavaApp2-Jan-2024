@@ -34,23 +34,24 @@ message TextBound {
 message TextGenerateInfo {
   string username = 1;
   sint32 count = 2;
-};
+}
 
 message TextsGenerateInfo {
   string username = 1;
   sint32 count = 2;
   sint32 n = 3;
-};
+}
 
 message TextInfo {
   string text = 1;
-};
+}
 
 message Int32GenerateInfo {
   string username = 1;
   sint32 min = 2;
   sint32 bound = 3;
 }
+
 message Int32sGenerateInfo {
   string username = 1;
   sint32 min = 2;
