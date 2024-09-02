@@ -11,10 +11,12 @@ service RandomTextGeneratorService {
   rpc GenerateTextsTR(TextsGenerateInfo) returns (stream TextInfo); //Server side streaming RPC
   rpc GenerateAndJoinTextsEN(stream TextGenerateInfo) returns (TextInfo); //Client side streaming RPC
   rpc GenerateAndJoinTextsTR(stream TextGenerateInfo) returns (TextInfo); //Client side streaming RPC
-
   rpc GenerateMultipleTextsEN(stream TextGenerateInfo) returns (stream TextInfo); //Bidirectional streaming RPC
   rpc GenerateMultipleTextsTR(stream TextGenerateInfo) returns (stream TextInfo); //Bidirectional streaming RPC
   rpc GetTextBound(NoParam) returns (TextBound);
+
+  rpc GenerateTextsFileEN(TextsFileGenerateInfo) returns (stream Chunk);
+  rpc GenerateTextsFileTR(TextsFileGenerateInfo) returns (stream Chunk);
 
   rpc GenerateInt32(Int32GenerateInfo) returns (Int32Result); //TODO
   rpc GenerateDouble(DoubleGenerateInfo) returns (DoubleResult); //TODO
@@ -40,6 +42,18 @@ message TextsGenerateInfo {
   string username = 1;
   sint32 count = 2;
   sint32 n = 3;
+}
+
+message TextsFileGenerateInfo {
+  string username = 1;
+  sint32 count = 2;
+  sint32 n = 3;
+  string fileName = 4;
+}
+
+message Chunk {
+  bytes data = 1;
+  sint32 size = 2;
 }
 
 message TextInfo {

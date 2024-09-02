@@ -294,6 +294,68 @@ public final class RandomTextGeneratorServiceGrpc {
     return getGetTextBoundMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo,
+      org.csystem.generator.random.Chunk> getGenerateTextsFileENMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateTextsFileEN",
+      requestType = org.csystem.generator.random.TextsFileGenerateInfo.class,
+      responseType = org.csystem.generator.random.Chunk.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo,
+      org.csystem.generator.random.Chunk> getGenerateTextsFileENMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo, org.csystem.generator.random.Chunk> getGenerateTextsFileENMethod;
+    if ((getGenerateTextsFileENMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsFileENMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateTextsFileENMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsFileENMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateTextsFileENMethod = getGenerateTextsFileENMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextsFileGenerateInfo, org.csystem.generator.random.Chunk>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateTextsFileEN"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextsFileGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.Chunk.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateTextsFileEN"))
+              .build();
+        }
+      }
+    }
+    return getGenerateTextsFileENMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo,
+      org.csystem.generator.random.Chunk> getGenerateTextsFileTRMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GenerateTextsFileTR",
+      requestType = org.csystem.generator.random.TextsFileGenerateInfo.class,
+      responseType = org.csystem.generator.random.Chunk.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo,
+      org.csystem.generator.random.Chunk> getGenerateTextsFileTRMethod() {
+    io.grpc.MethodDescriptor<org.csystem.generator.random.TextsFileGenerateInfo, org.csystem.generator.random.Chunk> getGenerateTextsFileTRMethod;
+    if ((getGenerateTextsFileTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsFileTRMethod) == null) {
+      synchronized (RandomTextGeneratorServiceGrpc.class) {
+        if ((getGenerateTextsFileTRMethod = RandomTextGeneratorServiceGrpc.getGenerateTextsFileTRMethod) == null) {
+          RandomTextGeneratorServiceGrpc.getGenerateTextsFileTRMethod = getGenerateTextsFileTRMethod =
+              io.grpc.MethodDescriptor.<org.csystem.generator.random.TextsFileGenerateInfo, org.csystem.generator.random.Chunk>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GenerateTextsFileTR"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.TextsFileGenerateInfo.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.csystem.generator.random.Chunk.getDefaultInstance()))
+              .setSchemaDescriptor(new RandomTextGeneratorServiceMethodDescriptorSupplier("GenerateTextsFileTR"))
+              .build();
+        }
+      }
+    }
+    return getGenerateTextsFileTRMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<org.csystem.generator.random.Int32GenerateInfo,
       org.csystem.generator.random.Int32Result> getGenerateInt32Method;
 
@@ -610,6 +672,20 @@ public final class RandomTextGeneratorServiceGrpc {
     }
 
     /**
+     */
+    public void generateTextsFileEN(org.csystem.generator.random.TextsFileGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateTextsFileENMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void generateTextsFileTR(org.csystem.generator.random.TextsFileGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateTextsFileTRMethod(), responseObserver);
+    }
+
+    /**
      * <pre>
      *TODO
      * </pre>
@@ -734,6 +810,20 @@ public final class RandomTextGeneratorServiceGrpc {
                 org.csystem.generator.random.NoParam,
                 org.csystem.generator.random.TextBound>(
                   this, METHODID_GET_TEXT_BOUND)))
+          .addMethod(
+            getGenerateTextsFileENMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextsFileGenerateInfo,
+                org.csystem.generator.random.Chunk>(
+                  this, METHODID_GENERATE_TEXTS_FILE_EN)))
+          .addMethod(
+            getGenerateTextsFileTRMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                org.csystem.generator.random.TextsFileGenerateInfo,
+                org.csystem.generator.random.Chunk>(
+                  this, METHODID_GENERATE_TEXTS_FILE_TR)))
           .addMethod(
             getGenerateInt32Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -885,6 +975,22 @@ public final class RandomTextGeneratorServiceGrpc {
     }
 
     /**
+     */
+    public void generateTextsFileEN(org.csystem.generator.random.TextsFileGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGenerateTextsFileENMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void generateTextsFileTR(org.csystem.generator.random.TextsFileGenerateInfo request,
+        io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGenerateTextsFileTRMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      * <pre>
      *TODO
      * </pre>
@@ -1006,6 +1112,22 @@ public final class RandomTextGeneratorServiceGrpc {
     public org.csystem.generator.random.TextBound getTextBound(org.csystem.generator.random.NoParam request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetTextBoundMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<org.csystem.generator.random.Chunk> generateTextsFileEN(
+        org.csystem.generator.random.TextsFileGenerateInfo request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGenerateTextsFileENMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<org.csystem.generator.random.Chunk> generateTextsFileTR(
+        org.csystem.generator.random.TextsFileGenerateInfo request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGenerateTextsFileTRMethod(), getCallOptions(), request);
     }
 
     /**
@@ -1149,16 +1271,18 @@ public final class RandomTextGeneratorServiceGrpc {
   private static final int METHODID_GENERATE_TEXTS_EN = 2;
   private static final int METHODID_GENERATE_TEXTS_TR = 3;
   private static final int METHODID_GET_TEXT_BOUND = 4;
-  private static final int METHODID_GENERATE_INT32 = 5;
-  private static final int METHODID_GENERATE_DOUBLE = 6;
-  private static final int METHODID_GENERATE_INT64 = 7;
-  private static final int METHODID_GENERATE_INT32S = 8;
-  private static final int METHODID_GENERATE_DOUBLES = 9;
-  private static final int METHODID_GENERATE_INT64S = 10;
-  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_EN = 11;
-  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_TR = 12;
-  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_EN = 13;
-  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_TR = 14;
+  private static final int METHODID_GENERATE_TEXTS_FILE_EN = 5;
+  private static final int METHODID_GENERATE_TEXTS_FILE_TR = 6;
+  private static final int METHODID_GENERATE_INT32 = 7;
+  private static final int METHODID_GENERATE_DOUBLE = 8;
+  private static final int METHODID_GENERATE_INT64 = 9;
+  private static final int METHODID_GENERATE_INT32S = 10;
+  private static final int METHODID_GENERATE_DOUBLES = 11;
+  private static final int METHODID_GENERATE_INT64S = 12;
+  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_EN = 13;
+  private static final int METHODID_GENERATE_AND_JOIN_TEXTS_TR = 14;
+  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_EN = 15;
+  private static final int METHODID_GENERATE_MULTIPLE_TEXTS_TR = 16;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1196,6 +1320,14 @@ public final class RandomTextGeneratorServiceGrpc {
         case METHODID_GET_TEXT_BOUND:
           serviceImpl.getTextBound((org.csystem.generator.random.NoParam) request,
               (io.grpc.stub.StreamObserver<org.csystem.generator.random.TextBound>) responseObserver);
+          break;
+        case METHODID_GENERATE_TEXTS_FILE_EN:
+          serviceImpl.generateTextsFileEN((org.csystem.generator.random.TextsFileGenerateInfo) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk>) responseObserver);
+          break;
+        case METHODID_GENERATE_TEXTS_FILE_TR:
+          serviceImpl.generateTextsFileTR((org.csystem.generator.random.TextsFileGenerateInfo) request,
+              (io.grpc.stub.StreamObserver<org.csystem.generator.random.Chunk>) responseObserver);
           break;
         case METHODID_GENERATE_INT32:
           serviceImpl.generateInt32((org.csystem.generator.random.Int32GenerateInfo) request,
@@ -1303,6 +1435,8 @@ public final class RandomTextGeneratorServiceGrpc {
               .addMethod(getGenerateMultipleTextsENMethod())
               .addMethod(getGenerateMultipleTextsTRMethod())
               .addMethod(getGetTextBoundMethod())
+              .addMethod(getGenerateTextsFileENMethod())
+              .addMethod(getGenerateTextsFileTRMethod())
               .addMethod(getGenerateInt32Method())
               .addMethod(getGenerateDoubleMethod())
               .addMethod(getGenerateInt64Method())

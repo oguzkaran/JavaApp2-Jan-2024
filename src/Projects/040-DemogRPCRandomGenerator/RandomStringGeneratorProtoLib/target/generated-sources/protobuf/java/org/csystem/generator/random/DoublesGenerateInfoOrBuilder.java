@@ -8,19 +8,31 @@ public interface DoublesGenerateInfoOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>double min = 1;</code>
+   * <code>string username = 1;</code>
+   * @return The username.
+   */
+  java.lang.String getUsername();
+  /**
+   * <code>string username = 1;</code>
+   * @return The bytes for username.
+   */
+  com.google.protobuf.ByteString
+      getUsernameBytes();
+
+  /**
+   * <code>double min = 2;</code>
    * @return The min.
    */
   double getMin();
 
   /**
-   * <code>double bound = 2;</code>
+   * <code>double bound = 3;</code>
    * @return The bound.
    */
   double getBound();
 
   /**
-   * <code>sint32 count = 3;</code>
+   * <code>sint32 count = 4;</code>
    * @return The count.
    */
   int getCount();

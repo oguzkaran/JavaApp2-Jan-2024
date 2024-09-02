@@ -3,6 +3,7 @@ D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\Rando
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32GenerateInfoOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\DoubleResult.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32sGenerateInfoOrBuilder.java
+D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\ChunkOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextBoundOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32ResultOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int64Result.java
@@ -18,13 +19,16 @@ D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\Rando
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\NoParamOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int64ResultOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\DoublesGenerateInfo.java
+D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextsFileGenerateInfoOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32Result.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextInfoOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32GenerateInfo.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextBound.java
+D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextsFileGenerateInfo.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\DoubleResultOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextGenerateInfoOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int64sGenerateInfoOrBuilder.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\DoublesGenerateInfoOrBuilder.java
+D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Chunk.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\Int32sGenerateInfo.java
 D:\Repositories\JavaApp2-Jan-2024\src\Projects\040-DemogRPCRandomGenerator\RandomStringGeneratorProtoLib\target\generated-sources\protobuf\java\org\csystem\generator\random\TextInfo.java

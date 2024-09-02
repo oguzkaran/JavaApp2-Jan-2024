@@ -35,6 +35,16 @@ public final class Randomgenerator {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_org_csystem_generator_random_TextsGenerateInfo_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_csystem_generator_random_TextsFileGenerateInfo_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_org_csystem_generator_random_TextsFileGenerateInfo_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_csystem_generator_random_Chunk_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_org_csystem_generator_random_Chunk_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_org_csystem_generator_random_TextInfo_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -95,64 +105,76 @@ public final class Randomgenerator {
     java.lang.String[] descriptorData = {
       "\n\025randomgenerator.proto\022\034org.csystem.gen" +
       "erator.random\"\t\n\007NoParam\"/\n\tTextBound\022\020\n" +
-      "\010minCount\030\001 \001(\021\022\020\n\010maxCount\030\002 \001(\021\"!\n\020Tex" +
-      "tGenerateInfo\022\r\n\005count\030\001 \001(\021\"-\n\021TextsGen" +
-      "erateInfo\022\r\n\005count\030\001 \001(\021\022\t\n\001n\030\002 \001(\021\"\030\n\010T" +
-      "extInfo\022\014\n\004text\030\001 \001(\t\"/\n\021Int32GenerateIn" +
-      "fo\022\013\n\003min\030\001 \001(\021\022\r\n\005bound\030\002 \001(\021\"?\n\022Int32s" +
-      "GenerateInfo\022\013\n\003min\030\001 \001(\021\022\r\n\005bound\030\002 \001(\021" +
-      "\022\r\n\005count\030\003 \001(\021\"\034\n\013Int32Result\022\r\n\005value\030" +
-      "\001 \001(\021\"0\n\022DoubleGenerateInfo\022\013\n\003min\030\001 \001(\001" +
-      "\022\r\n\005bound\030\002 \001(\001\"\035\n\014DoubleResult\022\r\n\005value" +
-      "\030\001 \001(\001\"@\n\023DoublesGenerateInfo\022\013\n\003min\030\001 \001" +
-      "(\001\022\r\n\005bound\030\002 \001(\001\022\r\n\005count\030\003 \001(\021\"/\n\021Int6" +
-      "4GenerateInfo\022\013\n\003min\030\001 \001(\022\022\r\n\005bound\030\002 \001(" +
-      "\022\"?\n\022Int64sGenerateInfo\022\013\n\003min\030\001 \001(\022\022\r\n\005" +
-      "bound\030\002 \001(\022\022\r\n\005count\030\003 \001(\021\"\034\n\013Int64Resul" +
-      "t\022\r\n\005value\030\001 \001(\0222\242\r\n\032RandomTextGenerator" +
-      "Service\022h\n\016GenerateTextEN\022..org.csystem." +
-      "generator.random.TextGenerateInfo\032&.org." +
-      "csystem.generator.random.TextInfo\022h\n\016Gen" +
-      "erateTextTR\022..org.csystem.generator.rand" +
-      "om.TextGenerateInfo\032&.org.csystem.genera" +
-      "tor.random.TextInfo\022l\n\017GenerateTextsEN\022/" +
-      ".org.csystem.generator.random.TextsGener" +
+      "\010minCount\030\001 \001(\021\022\020\n\010maxCount\030\002 \001(\021\"3\n\020Tex" +
+      "tGenerateInfo\022\020\n\010username\030\001 \001(\t\022\r\n\005count" +
+      "\030\002 \001(\021\"?\n\021TextsGenerateInfo\022\020\n\010username\030" +
+      "\001 \001(\t\022\r\n\005count\030\002 \001(\021\022\t\n\001n\030\003 \001(\021\"U\n\025Texts" +
+      "FileGenerateInfo\022\020\n\010username\030\001 \001(\t\022\r\n\005co" +
+      "unt\030\002 \001(\021\022\t\n\001n\030\003 \001(\021\022\020\n\010fileName\030\004 \001(\t\"#" +
+      "\n\005Chunk\022\014\n\004data\030\001 \001(\014\022\014\n\004size\030\002 \001(\021\"\030\n\010T" +
+      "extInfo\022\014\n\004text\030\001 \001(\t\"A\n\021Int32GenerateIn" +
+      "fo\022\020\n\010username\030\001 \001(\t\022\013\n\003min\030\002 \001(\021\022\r\n\005bou" +
+      "nd\030\003 \001(\021\"Q\n\022Int32sGenerateInfo\022\020\n\010userna" +
+      "me\030\001 \001(\t\022\013\n\003min\030\002 \001(\021\022\r\n\005bound\030\003 \001(\021\022\r\n\005" +
+      "count\030\004 \001(\021\"\034\n\013Int32Result\022\r\n\005value\030\001 \001(" +
+      "\021\"B\n\022DoubleGenerateInfo\022\020\n\010username\030\001 \001(" +
+      "\t\022\013\n\003min\030\002 \001(\001\022\r\n\005bound\030\003 \001(\001\"\035\n\014DoubleR" +
+      "esult\022\r\n\005value\030\001 \001(\001\"R\n\023DoublesGenerateI" +
+      "nfo\022\020\n\010username\030\001 \001(\t\022\013\n\003min\030\002 \001(\001\022\r\n\005bo" +
+      "und\030\003 \001(\001\022\r\n\005count\030\004 \001(\021\"A\n\021Int64Generat" +
+      "eInfo\022\020\n\010username\030\001 \001(\t\022\013\n\003min\030\002 \001(\022\022\r\n\005" +
+      "bound\030\003 \001(\022\"Q\n\022Int64sGenerateInfo\022\020\n\010use" +
+      "rname\030\001 \001(\t\022\013\n\003min\030\002 \001(\022\022\r\n\005bound\030\003 \001(\022\022" +
+      "\r\n\005count\030\004 \001(\021\"\034\n\013Int64Result\022\r\n\005value\030\001" +
+      " \001(\0222\210\017\n\032RandomTextGeneratorService\022h\n\016G" +
+      "enerateTextEN\022..org.csystem.generator.ra" +
+      "ndom.TextGenerateInfo\032&.org.csystem.gene" +
+      "rator.random.TextInfo\022h\n\016GenerateTextTR\022" +
+      "..org.csystem.generator.random.TextGener" +
       "ateInfo\032&.org.csystem.generator.random.T" +
-      "extInfo0\001\022l\n\017GenerateTextsTR\022/.org.csyst" +
-      "em.generator.random.TextsGenerateInfo\032&." +
-      "org.csystem.generator.random.TextInfo0\001\022" +
-      "r\n\026GenerateAndJoinTextsEN\022..org.csystem." +
-      "generator.random.TextGenerateInfo\032&.org." +
-      "csystem.generator.random.TextInfo(\001\022r\n\026G" +
-      "enerateAndJoinTextsTR\022..org.csystem.gene" +
-      "rator.random.TextGenerateInfo\032&.org.csys" +
-      "tem.generator.random.TextInfo(\001\022u\n\027Gener" +
-      "ateMultipleTextsEN\022..org.csystem.generat" +
-      "or.random.TextGenerateInfo\032&.org.csystem" +
-      ".generator.random.TextInfo(\0010\001\022u\n\027Genera" +
-      "teMultipleTextsTR\022..org.csystem.generato" +
-      "r.random.TextGenerateInfo\032&.org.csystem." +
-      "generator.random.TextInfo(\0010\001\022^\n\014GetText" +
-      "Bound\022%.org.csystem.generator.random.NoP" +
-      "aram\032\'.org.csystem.generator.random.Text" +
-      "Bound\022k\n\rGenerateInt32\022/.org.csystem.gen" +
-      "erator.random.Int32GenerateInfo\032).org.cs" +
-      "ystem.generator.random.Int32Result\022n\n\016Ge" +
-      "nerateDouble\0220.org.csystem.generator.ran" +
-      "dom.DoubleGenerateInfo\032*.org.csystem.gen" +
-      "erator.random.DoubleResult\022k\n\rGenerateIn" +
-      "t64\022/.org.csystem.generator.random.Int64" +
-      "GenerateInfo\032).org.csystem.generator.ran" +
-      "dom.Int64Result\022o\n\016GenerateInt32s\0220.org." +
-      "csystem.generator.random.Int32sGenerateI" +
-      "nfo\032).org.csystem.generator.random.Int32" +
-      "Result0\001\022r\n\017GenerateDoubles\0221.org.csyste" +
-      "m.generator.random.DoublesGenerateInfo\032*" +
-      ".org.csystem.generator.random.DoubleResu" +
-      "lt0\001\022o\n\016GenerateInt64s\0220.org.csystem.gen" +
-      "erator.random.Int64sGenerateInfo\032).org.c" +
-      "system.generator.random.Int64Result0\001B\002P" +
-      "\001b\006proto3"
+      "extInfo\022l\n\017GenerateTextsEN\022/.org.csystem" +
+      ".generator.random.TextsGenerateInfo\032&.or" +
+      "g.csystem.generator.random.TextInfo0\001\022l\n" +
+      "\017GenerateTextsTR\022/.org.csystem.generator" +
+      ".random.TextsGenerateInfo\032&.org.csystem." +
+      "generator.random.TextInfo0\001\022r\n\026GenerateA" +
+      "ndJoinTextsEN\022..org.csystem.generator.ra" +
+      "ndom.TextGenerateInfo\032&.org.csystem.gene" +
+      "rator.random.TextInfo(\001\022r\n\026GenerateAndJo" +
+      "inTextsTR\022..org.csystem.generator.random" +
+      ".TextGenerateInfo\032&.org.csystem.generato" +
+      "r.random.TextInfo(\001\022u\n\027GenerateMultipleT" +
+      "extsEN\022..org.csystem.generator.random.Te" +
+      "xtGenerateInfo\032&.org.csystem.generator.r" +
+      "andom.TextInfo(\0010\001\022u\n\027GenerateMultipleTe" +
+      "xtsTR\022..org.csystem.generator.random.Tex" +
+      "tGenerateInfo\032&.org.csystem.generator.ra" +
+      "ndom.TextInfo(\0010\001\022^\n\014GetTextBound\022%.org." +
+      "csystem.generator.random.NoParam\032\'.org.c" +
+      "system.generator.random.TextBound\022q\n\023Gen" +
+      "erateTextsFileEN\0223.org.csystem.generator" +
+      ".random.TextsFileGenerateInfo\032#.org.csys" +
+      "tem.generator.random.Chunk0\001\022q\n\023Generate" +
+      "TextsFileTR\0223.org.csystem.generator.rand" +
+      "om.TextsFileGenerateInfo\032#.org.csystem.g" +
+      "enerator.random.Chunk0\001\022k\n\rGenerateInt32" +
+      "\022/.org.csystem.generator.random.Int32Gen" +
+      "erateInfo\032).org.csystem.generator.random" +
+      ".Int32Result\022n\n\016GenerateDouble\0220.org.csy" +
+      "stem.generator.random.DoubleGenerateInfo" +
+      "\032*.org.csystem.generator.random.DoubleRe" +
+      "sult\022k\n\rGenerateInt64\022/.org.csystem.gene" +
+      "rator.random.Int64GenerateInfo\032).org.csy" +
+      "stem.generator.random.Int64Result\022o\n\016Gen" +
+      "erateInt32s\0220.org.csystem.generator.rand" +
+      "om.Int32sGenerateInfo\032).org.csystem.gene" +
+      "rator.random.Int32Result0\001\022r\n\017GenerateDo" +
+      "ubles\0221.org.csystem.generator.random.Dou" +
+      "blesGenerateInfo\032*.org.csystem.generator" +
+      ".random.DoubleResult0\001\022o\n\016GenerateInt64s" +
+      "\0220.org.csystem.generator.random.Int64sGe" +
+      "nerateInfo\032).org.csystem.generator.rando" +
+      "m.Int64Result0\001B\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -175,69 +197,81 @@ public final class Randomgenerator {
     internal_static_org_csystem_generator_random_TextGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_TextGenerateInfo_descriptor,
-        new java.lang.String[] { "Count", });
+        new java.lang.String[] { "Username", "Count", });
     internal_static_org_csystem_generator_random_TextsGenerateInfo_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_org_csystem_generator_random_TextsGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_TextsGenerateInfo_descriptor,
-        new java.lang.String[] { "Count", "N", });
-    internal_static_org_csystem_generator_random_TextInfo_descriptor =
+        new java.lang.String[] { "Username", "Count", "N", });
+    internal_static_org_csystem_generator_random_TextsFileGenerateInfo_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_org_csystem_generator_random_TextsFileGenerateInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_org_csystem_generator_random_TextsFileGenerateInfo_descriptor,
+        new java.lang.String[] { "Username", "Count", "N", "FileName", });
+    internal_static_org_csystem_generator_random_Chunk_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_org_csystem_generator_random_Chunk_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_org_csystem_generator_random_Chunk_descriptor,
+        new java.lang.String[] { "Data", "Size", });
+    internal_static_org_csystem_generator_random_TextInfo_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_org_csystem_generator_random_TextInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_TextInfo_descriptor,
         new java.lang.String[] { "Text", });
     internal_static_org_csystem_generator_random_Int32GenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_org_csystem_generator_random_Int32GenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int32GenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", });
+        new java.lang.String[] { "Username", "Min", "Bound", });
     internal_static_org_csystem_generator_random_Int32sGenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_org_csystem_generator_random_Int32sGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int32sGenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", "Count", });
+        new java.lang.String[] { "Username", "Min", "Bound", "Count", });
     internal_static_org_csystem_generator_random_Int32Result_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_org_csystem_generator_random_Int32Result_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int32Result_descriptor,
         new java.lang.String[] { "Value", });
     internal_static_org_csystem_generator_random_DoubleGenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_org_csystem_generator_random_DoubleGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_DoubleGenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", });
+        new java.lang.String[] { "Username", "Min", "Bound", });
     internal_static_org_csystem_generator_random_DoubleResult_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_org_csystem_generator_random_DoubleResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_DoubleResult_descriptor,
         new java.lang.String[] { "Value", });
     internal_static_org_csystem_generator_random_DoublesGenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_org_csystem_generator_random_DoublesGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_DoublesGenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", "Count", });
+        new java.lang.String[] { "Username", "Min", "Bound", "Count", });
     internal_static_org_csystem_generator_random_Int64GenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_org_csystem_generator_random_Int64GenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int64GenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", });
+        new java.lang.String[] { "Username", "Min", "Bound", });
     internal_static_org_csystem_generator_random_Int64sGenerateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_org_csystem_generator_random_Int64sGenerateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int64sGenerateInfo_descriptor,
-        new java.lang.String[] { "Min", "Bound", "Count", });
+        new java.lang.String[] { "Username", "Min", "Bound", "Count", });
     internal_static_org_csystem_generator_random_Int64Result_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_org_csystem_generator_random_Int64Result_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_csystem_generator_random_Int64Result_descriptor,

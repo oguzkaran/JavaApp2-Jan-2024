@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private TextGenerateInfo() {
+    username_ = "";
   }
 
   @java.lang.Override
@@ -48,7 +49,13 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            username_ = s;
+            break;
+          }
+          case 16: {
 
             count_ = input.readSInt32();
             break;
@@ -85,10 +92,48 @@ private static final long serialVersionUID = 0L;
             org.csystem.generator.random.TextGenerateInfo.class, org.csystem.generator.random.TextGenerateInfo.Builder.class);
   }
 
-  public static final int COUNT_FIELD_NUMBER = 1;
+  public static final int USERNAME_FIELD_NUMBER = 1;
+  private volatile java.lang.Object username_;
+  /**
+   * <code>string username = 1;</code>
+   * @return The username.
+   */
+  @java.lang.Override
+  public java.lang.String getUsername() {
+    java.lang.Object ref = username_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      username_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string username = 1;</code>
+   * @return The bytes for username.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getUsernameBytes() {
+    java.lang.Object ref = username_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      username_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int COUNT_FIELD_NUMBER = 2;
   private int count_;
   /**
-   * <code>sint32 count = 1;</code>
+   * <code>sint32 count = 2;</code>
    * @return The count.
    */
   @java.lang.Override
@@ -110,8 +155,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+    }
     if (count_ != 0) {
-      output.writeSInt32(1, count_);
+      output.writeSInt32(2, count_);
     }
     unknownFields.writeTo(output);
   }
@@ -122,9 +170,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+    }
     if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeSInt32Size(1, count_);
+        .computeSInt32Size(2, count_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -141,6 +192,8 @@ private static final long serialVersionUID = 0L;
     }
     org.csystem.generator.random.TextGenerateInfo other = (org.csystem.generator.random.TextGenerateInfo) obj;
 
+    if (!getUsername()
+        .equals(other.getUsername())) return false;
     if (getCount()
         != other.getCount()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -154,6 +207,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getUsername().hashCode();
     hash = (37 * hash) + COUNT_FIELD_NUMBER;
     hash = (53 * hash) + getCount();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -289,6 +344,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      username_ = "";
+
       count_ = 0;
 
       return this;
@@ -317,6 +374,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.csystem.generator.random.TextGenerateInfo buildPartial() {
       org.csystem.generator.random.TextGenerateInfo result = new org.csystem.generator.random.TextGenerateInfo(this);
+      result.username_ = username_;
       result.count_ = count_;
       onBuilt();
       return result;
@@ -366,6 +424,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.csystem.generator.random.TextGenerateInfo other) {
       if (other == org.csystem.generator.random.TextGenerateInfo.getDefaultInstance()) return this;
+      if (!other.getUsername().isEmpty()) {
+        username_ = other.username_;
+        onChanged();
+      }
       if (other.getCount() != 0) {
         setCount(other.getCount());
       }
@@ -398,9 +460,85 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object username_ = "";
+    /**
+     * <code>string username = 1;</code>
+     * @return The username.
+     */
+    public java.lang.String getUsername() {
+      java.lang.Object ref = username_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        username_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @return The bytes for username.
+     */
+    public com.google.protobuf.ByteString
+        getUsernameBytes() {
+      java.lang.Object ref = username_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        username_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @param value The username to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUsername(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      username_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUsername() {
+      
+      username_ = getDefaultInstance().getUsername();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @param value The bytes for username to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUsernameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      username_ = value;
+      onChanged();
+      return this;
+    }
+
     private int count_ ;
     /**
-     * <code>sint32 count = 1;</code>
+     * <code>sint32 count = 2;</code>
      * @return The count.
      */
     @java.lang.Override
@@ -408,7 +546,7 @@ private static final long serialVersionUID = 0L;
       return count_;
     }
     /**
-     * <code>sint32 count = 1;</code>
+     * <code>sint32 count = 2;</code>
      * @param value The count to set.
      * @return This builder for chaining.
      */
@@ -419,7 +557,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>sint32 count = 1;</code>
+     * <code>sint32 count = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearCount() {

@@ -1,5 +1,6 @@
 package org.csystem.app.generator.random.server;
 
+import com.google.protobuf.ByteString;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -9,6 +10,13 @@ import org.csystem.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;
@@ -25,6 +33,9 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
 
     @Value("${grpc.server.maxCount}")
     private int m_maxCount;
+
+    @Value("${grpc.server.chunkSize}")
+    private int m_chunkSize;
 
     private void generateTextsOnNextCallback(StreamObserver<TextInfo> responseObserver, int count)
     {
@@ -84,6 +95,34 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
     }
 
     @Override
+    public void generateTextTR(TextGenerateInfo request, StreamObserver<TextInfo> responseObserver)
+    {
+        var count = request.getCount();
+
+        log.info("Count:{}", count);
+
+        if (count <= 0) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "Count pozitif olmalıdır");
+            return;
+        }
+
+        if (count > m_maxCount) {
+            GrpcErrorUtil.outOfRangeError(responseObserver, "Count %d sayısından küçük olamaz".formatted(m_maxCount));
+            return;
+        }
+        var text = StringUtil.generateRandomTextTR(m_randomGenerator, count);
+
+        log.info("generateRandomTextTR:Count:{}, Text:{}", count, text);
+
+        var response = TextInfo.newBuilder()
+                .setText(text).build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
     public void generateTextsEN(TextsGenerateInfo request, StreamObserver<TextInfo> responseObserver)
     {
         var n = request.getN();
@@ -127,32 +166,6 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
         responseObserver.onCompleted();
     }
 
-    @Override
-    public void generateTextTR(TextGenerateInfo request, StreamObserver<TextInfo> responseObserver)
-    {
-        var count = request.getCount();
-
-        log.info("Count:{}", count);
-
-        if (count <= 0) {
-            GrpcErrorUtil.invalidArgumentError(responseObserver, "Count pozitif olmalıdır");
-            return;
-        }
-
-        if (count > m_maxCount) {
-            GrpcErrorUtil.outOfRangeError(responseObserver, "Count %d sayısından küçük olamaz".formatted(m_maxCount));
-            return;
-        }
-        var text = StringUtil.generateRandomTextTR(m_randomGenerator, count);
-
-        log.info("generateRandomTextTR:Count:{}, Text:{}", count, text);
-
-        var response = TextInfo.newBuilder()
-                .setText(text).build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
 
     @Override
     public StreamObserver<TextGenerateInfo> generateAndJoinTextsEN(StreamObserver<TextInfo> responseObserver)
@@ -319,6 +332,91 @@ public class RandomGeneratorServer extends RandomTextGeneratorServiceGrpc.Random
 
         responseObserver.onNext(bound);
         responseObserver.onCompleted();
+    }
+
+    private boolean createTextsFileEN(int n, int count, String fileName, StreamObserver<Chunk> responseObserver)
+    {
+        var path = Path.of(fileName);
+
+        if (Files.exists(path)) {
+            GrpcErrorUtil.internalError(responseObserver, "File exists!...");
+            return false;
+        }
+
+        var result = true;
+
+        try (var bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING)) {
+            while (n-- > 0)
+                bw.write("%s\r\n".formatted(StringUtil.generateRandomTextEN(m_randomGenerator, count)));
+        }
+        catch (IOException ex) {
+            GrpcErrorUtil.internalError(responseObserver, "IO problem");
+            result = false;
+        }
+
+        return result;
+
+    }
+
+    private boolean sendFile(String fileName, StreamObserver<Chunk> responseObserver)
+    {
+        var result = true;
+        var data = new byte[m_chunkSize];
+
+        try (var bis = new BufferedInputStream(new FileInputStream(fileName))) {
+            int read;
+
+            while ((read = bis.read(data)) > 0)
+                responseObserver.onNext(Chunk.newBuilder().setData(ByteString.copyFrom(data, 0, read))
+                        .setSize(read).build());
+        }
+        catch (IOException ex) {
+            GrpcErrorUtil.internalError(responseObserver, "IO Problem occurred while sending");
+            result = false;
+        }
+
+        return result;
+    }
+
+    @Override
+    public void generateTextsFileEN(TextsFileGenerateInfo request, StreamObserver<Chunk> responseObserver)
+    {
+        var n = request.getN();
+        var count = request.getCount();
+        var fileName = request.getFileName();
+
+        log.info("N:{}, Count:{}, File Name:{}", n, count, fileName);
+
+        if (count <= 0) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "Count must be positive");
+            return;
+        }
+
+        if (n <= 0) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "N must be positive");
+            return;
+        }
+
+        if (fileName.isEmpty()) {
+            GrpcErrorUtil.invalidArgumentError(responseObserver, "fileName can not be blank");
+            return;
+        }
+
+        if (!createTextsFileEN(n, count, fileName, responseObserver)) //Burada demo olarak fileName doğrudan verilmiştir
+            return;
+
+
+        if (!sendFile(fileName, responseObserver))
+            return;
+
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void generateTextsFileTR(TextsFileGenerateInfo request, StreamObserver<Chunk> responseObserver)
+    {
+        throw new UnsupportedOperationException("Not yet implemented!...");
     }
 
     @Override

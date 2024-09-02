@@ -8,7 +8,19 @@ public interface TextGenerateInfoOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>sint32 count = 1;</code>
+   * <code>string username = 1;</code>
+   * @return The username.
+   */
+  java.lang.String getUsername();
+  /**
+   * <code>string username = 1;</code>
+   * @return The bytes for username.
+   */
+  com.google.protobuf.ByteString
+      getUsernameBytes();
+
+  /**
+   * <code>sint32 count = 2;</code>
    * @return The count.
    */
   int getCount();

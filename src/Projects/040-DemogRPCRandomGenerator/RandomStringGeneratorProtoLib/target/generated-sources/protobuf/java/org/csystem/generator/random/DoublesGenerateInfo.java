@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private DoublesGenerateInfo() {
+    username_ = "";
   }
 
   @java.lang.Override
@@ -48,17 +49,23 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 9: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            min_ = input.readDouble();
+            username_ = s;
             break;
           }
           case 17: {
 
+            min_ = input.readDouble();
+            break;
+          }
+          case 25: {
+
             bound_ = input.readDouble();
             break;
           }
-          case 24: {
+          case 32: {
 
             count_ = input.readSInt32();
             break;
@@ -95,10 +102,48 @@ private static final long serialVersionUID = 0L;
             org.csystem.generator.random.DoublesGenerateInfo.class, org.csystem.generator.random.DoublesGenerateInfo.Builder.class);
   }
 
-  public static final int MIN_FIELD_NUMBER = 1;
+  public static final int USERNAME_FIELD_NUMBER = 1;
+  private volatile java.lang.Object username_;
+  /**
+   * <code>string username = 1;</code>
+   * @return The username.
+   */
+  @java.lang.Override
+  public java.lang.String getUsername() {
+    java.lang.Object ref = username_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      username_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string username = 1;</code>
+   * @return The bytes for username.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getUsernameBytes() {
+    java.lang.Object ref = username_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      username_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int MIN_FIELD_NUMBER = 2;
   private double min_;
   /**
-   * <code>double min = 1;</code>
+   * <code>double min = 2;</code>
    * @return The min.
    */
   @java.lang.Override
@@ -106,10 +151,10 @@ private static final long serialVersionUID = 0L;
     return min_;
   }
 
-  public static final int BOUND_FIELD_NUMBER = 2;
+  public static final int BOUND_FIELD_NUMBER = 3;
   private double bound_;
   /**
-   * <code>double bound = 2;</code>
+   * <code>double bound = 3;</code>
    * @return The bound.
    */
   @java.lang.Override
@@ -117,10 +162,10 @@ private static final long serialVersionUID = 0L;
     return bound_;
   }
 
-  public static final int COUNT_FIELD_NUMBER = 3;
+  public static final int COUNT_FIELD_NUMBER = 4;
   private int count_;
   /**
-   * <code>sint32 count = 3;</code>
+   * <code>sint32 count = 4;</code>
    * @return The count.
    */
   @java.lang.Override
@@ -142,14 +187,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+    }
     if (java.lang.Double.doubleToRawLongBits(min_) != 0) {
-      output.writeDouble(1, min_);
+      output.writeDouble(2, min_);
     }
     if (java.lang.Double.doubleToRawLongBits(bound_) != 0) {
-      output.writeDouble(2, bound_);
+      output.writeDouble(3, bound_);
     }
     if (count_ != 0) {
-      output.writeSInt32(3, count_);
+      output.writeSInt32(4, count_);
     }
     unknownFields.writeTo(output);
   }
@@ -160,17 +208,20 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(username_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+    }
     if (java.lang.Double.doubleToRawLongBits(min_) != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, min_);
+        .computeDoubleSize(2, min_);
     }
     if (java.lang.Double.doubleToRawLongBits(bound_) != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(2, bound_);
+        .computeDoubleSize(3, bound_);
     }
     if (count_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeSInt32Size(3, count_);
+        .computeSInt32Size(4, count_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -187,6 +238,8 @@ private static final long serialVersionUID = 0L;
     }
     org.csystem.generator.random.DoublesGenerateInfo other = (org.csystem.generator.random.DoublesGenerateInfo) obj;
 
+    if (!getUsername()
+        .equals(other.getUsername())) return false;
     if (java.lang.Double.doubleToLongBits(getMin())
         != java.lang.Double.doubleToLongBits(
             other.getMin())) return false;
@@ -206,6 +259,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getUsername().hashCode();
     hash = (37 * hash) + MIN_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         java.lang.Double.doubleToLongBits(getMin()));
@@ -347,6 +402,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      username_ = "";
+
       min_ = 0D;
 
       bound_ = 0D;
@@ -379,6 +436,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.csystem.generator.random.DoublesGenerateInfo buildPartial() {
       org.csystem.generator.random.DoublesGenerateInfo result = new org.csystem.generator.random.DoublesGenerateInfo(this);
+      result.username_ = username_;
       result.min_ = min_;
       result.bound_ = bound_;
       result.count_ = count_;
@@ -430,6 +488,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.csystem.generator.random.DoublesGenerateInfo other) {
       if (other == org.csystem.generator.random.DoublesGenerateInfo.getDefaultInstance()) return this;
+      if (!other.getUsername().isEmpty()) {
+        username_ = other.username_;
+        onChanged();
+      }
       if (other.getMin() != 0D) {
         setMin(other.getMin());
       }
@@ -468,9 +530,85 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object username_ = "";
+    /**
+     * <code>string username = 1;</code>
+     * @return The username.
+     */
+    public java.lang.String getUsername() {
+      java.lang.Object ref = username_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        username_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @return The bytes for username.
+     */
+    public com.google.protobuf.ByteString
+        getUsernameBytes() {
+      java.lang.Object ref = username_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        username_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @param value The username to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUsername(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      username_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUsername() {
+      
+      username_ = getDefaultInstance().getUsername();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string username = 1;</code>
+     * @param value The bytes for username to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUsernameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      username_ = value;
+      onChanged();
+      return this;
+    }
+
     private double min_ ;
     /**
-     * <code>double min = 1;</code>
+     * <code>double min = 2;</code>
      * @return The min.
      */
     @java.lang.Override
@@ -478,7 +616,7 @@ private static final long serialVersionUID = 0L;
       return min_;
     }
     /**
-     * <code>double min = 1;</code>
+     * <code>double min = 2;</code>
      * @param value The min to set.
      * @return This builder for chaining.
      */
@@ -489,7 +627,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double min = 1;</code>
+     * <code>double min = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearMin() {
@@ -501,7 +639,7 @@ private static final long serialVersionUID = 0L;
 
     private double bound_ ;
     /**
-     * <code>double bound = 2;</code>
+     * <code>double bound = 3;</code>
      * @return The bound.
      */
     @java.lang.Override
@@ -509,7 +647,7 @@ private static final long serialVersionUID = 0L;
       return bound_;
     }
     /**
-     * <code>double bound = 2;</code>
+     * <code>double bound = 3;</code>
      * @param value The bound to set.
      * @return This builder for chaining.
      */
@@ -520,7 +658,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double bound = 2;</code>
+     * <code>double bound = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearBound() {
@@ -532,7 +670,7 @@ private static final long serialVersionUID = 0L;
 
     private int count_ ;
     /**
-     * <code>sint32 count = 3;</code>
+     * <code>sint32 count = 4;</code>
      * @return The count.
      */
     @java.lang.Override
@@ -540,7 +678,7 @@ private static final long serialVersionUID = 0L;
       return count_;
     }
     /**
-     * <code>sint32 count = 3;</code>
+     * <code>sint32 count = 4;</code>
      * @param value The count to set.
      * @return This builder for chaining.
      */
@@ -551,7 +689,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>sint32 count = 3;</code>
+     * <code>sint32 count = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearCount() {
