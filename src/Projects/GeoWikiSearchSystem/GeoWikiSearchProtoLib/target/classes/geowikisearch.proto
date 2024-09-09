@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package org.csystem.app.gis.wiki;
+
+option java_multiple_files = true;
+
+service GeoWikiSearchService {
+  rpc FindWikiSearchInfo(GeoWikiSearchRequest) returns (stream GeoWikiSearchInfo);
+}
+
+message GeoWikiSearchRequest {
+  string queryText = 1;
+  sint32 dataPerPage = 2;
+  sint32 pageNumber = 3;
+}
+
+message GeoWikiSearchInfo {
+  string summary = 1;
+  double elevation = 2;
+  sint32 geoNameId = 3;
+  string feature = 4;
+  double longitude = 5;
+  string countryCode = 6;
+  sint32 rank = 7;
+  string thumbnailImg = 8;
+  string lang = 9;
+  string title = 10;
+  double latitude = 11;
+  string wikipediaUrl = 12;
+}

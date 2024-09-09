@@ -1,0 +1,4 @@
+org\csystem\app\gis\wiki\geonames\dto\GeonamesWikiSearchInfo.class
+org\csystem\app\gis\wiki\geonames\configuration\RestTemplateConfig.class
+org\csystem\app\gis\wiki\geonames\service\GeonamesWikiSearchService.class
+org\csystem\app\gis\wiki\geonames\dto\GeonamesWikiSearch.class
