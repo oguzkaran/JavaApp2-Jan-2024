@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.app.gis.wiki.geonames.GeonamesWikiSearchServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.405 s -- in org.csystem.app.gis.wiki.geonames.GeonamesWikiSearchServiceTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.826 s -- in org.csystem.app.gis.wiki.geonames.GeonamesWikiSearchServiceTest

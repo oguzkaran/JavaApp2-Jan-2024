@@ -1,16 +1,22 @@
 package org.csystem.app.gis.wiki.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
+@Table(name = "wiki_search_info")
+@EqualsAndHashCode
+@ToString
 public class WikiSearchInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wiki_search_info_id")
     public long id;
 
+    @Column(length = 1024)
     public String summary;
+
     public double elevation;
     public int geoNameId;
     public String feature;
@@ -23,5 +29,7 @@ public class WikiSearchInfo {
     public double latitude;
     public String wikipediaUrl;
 
-    //...
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "query_text", nullable = false)
+    public WikiSearch wikiSearch;
 }

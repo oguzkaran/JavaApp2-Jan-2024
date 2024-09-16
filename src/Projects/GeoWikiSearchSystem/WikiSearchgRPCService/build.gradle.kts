@@ -37,6 +37,8 @@ dependencies {
 	implementation("org.csystem:GeonamesWikiSearchServiceLib:1.0.0")
 	implementation("org.csystem:GeoWikiSearchProtoLib:1.0.0")
 
+	implementation("org.postgresql:postgresql:42.7.4")
+
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

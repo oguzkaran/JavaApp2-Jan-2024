@@ -9,6 +9,7 @@ import org.csystem.app.gis.wiki.GeoWikiSearchServiceGrpc;
 import org.csystem.app.gis.wiki.data.service.WikiSearchDataService;
 import org.csystem.app.gis.wiki.geonames.service.GeonamesWikiSearchService;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.PageRequest;
 
 @GrpcService
 @Scope("prototype")
@@ -32,8 +33,8 @@ public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchSer
 
         log.info("Query text:{}, Data per page:{}, Page number:{}", queryText, dataPerPage, pageNumber);
 
-        // Check data in database, if found add to response else get from Geonames, save db then add to response.
-        // Save db and add to response will be asynchronous operations.
+        // Check data in database, if found add to responseObserver else get from Geonames, save db then add to response.
+        // Save db and add to responseObserver will be asynchronous operations.
         //...
     }
 }
