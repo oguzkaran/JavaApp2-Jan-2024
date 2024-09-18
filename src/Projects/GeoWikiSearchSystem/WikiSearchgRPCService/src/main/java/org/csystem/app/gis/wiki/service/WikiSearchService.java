@@ -7,20 +7,27 @@ import org.csystem.app.gis.wiki.GeoWikiSearchInfo;
 import org.csystem.app.gis.wiki.GeoWikiSearchRequest;
 import org.csystem.app.gis.wiki.GeoWikiSearchServiceGrpc;
 import org.csystem.app.gis.wiki.data.service.WikiSearchDataService;
-import org.csystem.app.gis.wiki.geonames.service.GeonamesWikiSearchService;
+import org.csystem.util.data.service.exception.DataServiceException;
+import org.csystem.util.grpc.error.GrpcErrorUtil;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.PageRequest;
 
 @GrpcService
 @Scope("prototype")
 @Slf4j
 public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchServiceImplBase {
-    private final GeonamesWikiSearchService m_geonamesWikiSearchService;
     private final WikiSearchDataService m_wikiSearchDataService;
 
-    public WikiSearchService(GeonamesWikiSearchService geonamesWikiSearchService, WikiSearchDataService wikiSearchDataService)
+    private void doFind(String queryText, int dataPerPage, int pageNumber, StreamObserver<GeoWikiSearchInfo> responseObserver)
     {
-        m_geonamesWikiSearchService = geonamesWikiSearchService;
+        var wikiSearch = m_wikiSearchDataService.findWikiSearchByQueryText(queryText, dataPerPage, pageNumber);
+
+        wikiSearch.stream().peek(wi -> log.info("WikiSearchInfo:{}", wi.getSummary()))
+                .forEach(responseObserver::onNext);
+        responseObserver.onCompleted();
+    }
+
+    public WikiSearchService(WikiSearchDataService wikiSearchDataService)
+    {
         m_wikiSearchDataService = wikiSearchDataService;
     }
 
@@ -31,10 +38,18 @@ public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchSer
         var dataPerPage = request.getDataPerPage();
         var pageNumber = request.getPageNumber();
 
+        //Error handling
+
         log.info("Query text:{}, Data per page:{}, Page number:{}", queryText, dataPerPage, pageNumber);
 
-        // Check data in database, if found add to responseObserver else get from Geonames, save db then add to response.
-        // Save db and add to responseObserver will be asynchronous operations.
-        //...
+        try {
+            doFind(queryText, dataPerPage, pageNumber, responseObserver);
+        }
+        catch (DataServiceException ex) {
+            GrpcErrorUtil.unavailableError(responseObserver, ex.getCause().getMessage());
+        }
+        catch (Throwable ex) {
+            GrpcErrorUtil.internalError(responseObserver, ex.getMessage());
+        }
     }
 }

@@ -2,12 +2,16 @@ package org.csystem.app.gis.wiki.data.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Table(name = "wiki_search_info")
 @EqualsAndHashCode
 @ToString
+@Getter
+@Setter
 public class WikiSearchInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

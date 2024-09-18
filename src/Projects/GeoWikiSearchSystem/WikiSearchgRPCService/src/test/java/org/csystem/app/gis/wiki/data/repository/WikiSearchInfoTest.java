@@ -1,8 +1,10 @@
 package org.csystem.app.gis.wiki.data.repository;
 
+import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.csystem.app.gis.wiki.GeoWikiSearchServiceGrpc;
 import org.csystem.app.gis.wiki.data.dal.WikiSearchDataHelper;
-import org.csystem.app.gis.wiki.data.mapper.IWikiSearchInfoMapper;
 import org.csystem.app.gis.wiki.geonames.service.GeonamesWikiSearchService;
+import org.csystem.app.gis.wiki.mapper.IWikiSearchInfoMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -33,16 +33,18 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE")
+	implementation("org.modelmapper:modelmapper:3.2.1")
 	implementation("org.csystem:org-csystem-util-grpc:1.0.0")
+	implementation("org.csystem:org-csystem-util-data:1.0.0")
 	implementation("org.csystem:GeonamesWikiSearchServiceLib:1.0.0")
 	implementation("org.csystem:GeoWikiSearchProtoLib:1.0.0")
-
 	implementation("org.postgresql:postgresql:42.7.4")
-
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("net.devh:grpc-client-spring-boot-autoconfigure:2.15.0.RELEASE")
 }
 
 tasks.withType<Test> {
