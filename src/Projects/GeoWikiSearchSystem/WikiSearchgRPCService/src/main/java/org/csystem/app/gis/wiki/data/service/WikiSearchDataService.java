@@ -19,7 +19,6 @@ public class WikiSearchDataService {
     private final GeonamesWikiSearchService m_geonamesWikiSearchService;
     private final WikiSearchDataHelper m_wikiSearchDataHelper;
     private final IWikiSearchInfoMapper m_wikiSearchMapper;
-    private final ExecutorService m_threadPool;
 
     private void saveDatabaseThreadCallback(String queryText, List<GeonamesWikiSearchInfo> geonamesWikiSearchInfo)
     {
@@ -33,22 +32,21 @@ public class WikiSearchDataService {
         return wikiSearchInfo.stream().map(m_wikiSearchMapper::toGeoWikiSearchInfo).toList();
     }
 
-    private List<GeoWikiSearchInfo> notInDatabase(String queryText)
+    private List<GeoWikiSearchInfo> notInDatabase(String queryText, int dataPerPage, int pageNumber)
     {
         var wikiSearchInfo = m_geonamesWikiSearchService.findWikiSearchInfo(queryText, 1000);
 
-        //...
-        m_threadPool.execute(() -> saveDatabaseThreadCallback(queryText, wikiSearchInfo));
+        saveDatabaseThreadCallback(queryText, wikiSearchInfo);
 
-        return wikiSearchInfo.stream().map(m_wikiSearchMapper::toGeoWikiSearchInfo).toList();
+        return m_wikiSearchDataHelper.findWikiSearchInfoByQueryText(queryText, dataPerPage, pageNumber).stream()
+                .map(m_wikiSearchMapper::toGeoWikiSearchInfo).toList();
     }
 
-    public WikiSearchDataService(GeonamesWikiSearchService geonamesWikiSearchService, WikiSearchDataHelper wikiSearchDataHelper, IWikiSearchInfoMapper wikiSearchMapper, ExecutorService threadPool)
+    public WikiSearchDataService(GeonamesWikiSearchService geonamesWikiSearchService, WikiSearchDataHelper wikiSearchDataHelper, IWikiSearchInfoMapper wikiSearchMapper)
     {
         m_geonamesWikiSearchService = geonamesWikiSearchService;
         m_wikiSearchDataHelper = wikiSearchDataHelper;
         m_wikiSearchMapper = wikiSearchMapper;
-        m_threadPool = threadPool;
     }
 
     public List<GeoWikiSearchInfo> findWikiSearchByQueryText(String queryText, int dataPerPage, int pageNumber)
@@ -56,7 +54,7 @@ public class WikiSearchDataService {
         try {
             var wikiSearchInfo = m_wikiSearchDataHelper.findWikiSearchInfoByQueryText(queryText, dataPerPage, pageNumber);
 
-            return wikiSearchInfo.isEmpty() ? notInDatabase(queryText) : inDatabase(wikiSearchInfo);
+            return wikiSearchInfo.isEmpty() ? notInDatabase(queryText, dataPerPage, pageNumber) : inDatabase(wikiSearchInfo);
         }
         catch (Throwable ex) {
             log.error("Exception occurred in WikiSearchDataService.findWikiSearchByQueryText:{}", ex.getMessage());

@@ -18,7 +18,10 @@ public class WikiSearchInfoInfoMapper implements IWikiSearchInfoMapper {
     @Override
     public GeoWikiSearchInfo toGeoWikiSearchInfo(WikiSearchInfo wikiSearchInfo)
     {
-        return m_modelMapper.map(wikiSearchInfo, GeoWikiSearchInfo.class);
+        return GeoWikiSearchInfo.newBuilder()
+                .setSummary(wikiSearchInfo.getSummary())
+                .build();
+
     }
 
     @Override
@@ -30,6 +33,8 @@ public class WikiSearchInfoInfoMapper implements IWikiSearchInfoMapper {
     @Override
     public GeoWikiSearchInfo toGeoWikiSearchInfo(GeonamesWikiSearchInfo geonamesWikiSearchInfo)
     {
-        return m_modelMapper.map(geonamesWikiSearchInfo, GeoWikiSearchInfo.class);
+        return GeoWikiSearchInfo.newBuilder()
+                .setSummary(geonamesWikiSearchInfo.getSummary())
+                .build();
     }
 }

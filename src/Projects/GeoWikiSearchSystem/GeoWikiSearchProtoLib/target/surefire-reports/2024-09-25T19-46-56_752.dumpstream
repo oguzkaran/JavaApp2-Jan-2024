@@ -1,4 +1,4 @@
-# Created at 2024-09-09T22:08:51.211
+# Created at 2024-09-25T19:46:57.250
 Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp2-Jan-2024\src\Projects\GeoWikiSearchSystem\GeoWikiSearchProtoLib\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

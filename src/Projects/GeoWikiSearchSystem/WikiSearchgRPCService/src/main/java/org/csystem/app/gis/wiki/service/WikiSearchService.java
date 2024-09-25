@@ -38,7 +38,10 @@ public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchSer
         var dataPerPage = request.getDataPerPage();
         var pageNumber = request.getPageNumber();
 
-        //Error handling
+        if (dataPerPage <= 0 || pageNumber <= 0) {
+            GrpcErrorUtil.outOfRangeError(responseObserver, "Data per page value and page number must be positive");
+            return;
+        }
 
         log.info("Query text:{}, Data per page:{}, Page number:{}", queryText, dataPerPage, pageNumber);
 

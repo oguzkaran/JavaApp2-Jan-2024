@@ -5,7 +5,7 @@ import org.csystem.app.gis.wiki.data.entity.WikiSearchInfo;
 import org.csystem.app.gis.wiki.geonames.dto.GeonamesWikiSearchInfo;
 
 public interface IWikiSearchInfoMapper {
-    GeoWikiSearchInfo toGeoWikiSearchInfo(WikiSearchInfo wikiSearchInfo);
     WikiSearchInfo toWikiSearchInfo(GeonamesWikiSearchInfo geonamesWikiSearchInfo);
+    GeoWikiSearchInfo toGeoWikiSearchInfo(WikiSearchInfo wikiSearchInfo);
     GeoWikiSearchInfo toGeoWikiSearchInfo(GeonamesWikiSearchInfo geonamesWikiSearchInfo);
 }
