@@ -8,10 +8,10 @@ import org.csystem.app.gis.wiki.geonames.dto.GeonamesWikiSearchInfo;
 import org.csystem.app.gis.wiki.geonames.service.GeonamesWikiSearchService;
 import org.csystem.app.gis.wiki.mapper.IWikiSearchInfoMapper;
 import org.csystem.util.data.service.exception.DataServiceException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 @Service
 @Slf4j
@@ -20,7 +20,10 @@ public class WikiSearchDataService {
     private final WikiSearchDataHelper m_wikiSearchDataHelper;
     private final IWikiSearchInfoMapper m_wikiSearchMapper;
 
-    private void saveDatabaseThreadCallback(String queryText, List<GeonamesWikiSearchInfo> geonamesWikiSearchInfo)
+    @Value("${app.geonames.maxrows}")
+    private int m_maxRows;
+
+    private void saveDatabase(String queryText, List<GeonamesWikiSearchInfo> geonamesWikiSearchInfo)
     {
         var wikiSearchInfo = geonamesWikiSearchInfo.stream().map(m_wikiSearchMapper::toWikiSearchInfo).toList();
 
@@ -34,9 +37,9 @@ public class WikiSearchDataService {
 
     private List<GeoWikiSearchInfo> notInDatabase(String queryText, int dataPerPage, int pageNumber)
     {
-        var wikiSearchInfo = m_geonamesWikiSearchService.findWikiSearchInfo(queryText, 1000);
+        var wikiSearchInfo = m_geonamesWikiSearchService.findWikiSearchInfo(queryText, m_maxRows);
 
-        saveDatabaseThreadCallback(queryText, wikiSearchInfo);
+        saveDatabase(queryText, wikiSearchInfo);
 
         return m_wikiSearchDataHelper.findWikiSearchInfoByQueryText(queryText, dataPerPage, pageNumber).stream()
                 .map(m_wikiSearchMapper::toGeoWikiSearchInfo).toList();

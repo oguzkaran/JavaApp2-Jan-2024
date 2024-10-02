@@ -50,12 +50,12 @@ public class WikiSearchInfoTest {
     public void test()
     {
         var queryText = "zonguldak";
-        var pageSize = 5;
+        var datePerPage = 5;
         var pageNumber = 1; //second page
         var dataIndex = 1;
         var expectedSummaryText = "Monfalcone";
 
-        var pageable = PageRequest.of(pageNumber, pageSize);
+        var pageable = PageRequest.of(pageNumber, datePerPage);
         var result = m_wikiSearchInfoRepository.findByQueryText(queryText, pageable);
 
         assertFalse(result.isEmpty());

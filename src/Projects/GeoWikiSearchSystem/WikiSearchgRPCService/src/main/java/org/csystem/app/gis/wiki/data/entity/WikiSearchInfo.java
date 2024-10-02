@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "wiki_search_info")
-@EqualsAndHashCode
+@EqualsAndHashCode()
 @ToString
 @Getter
 @Setter
