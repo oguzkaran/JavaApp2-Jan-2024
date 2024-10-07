@@ -1,0 +1,5 @@
+org\csystem\app\gis\wiki\data\entity\WikiSearch.class
+org\csystem\app\gis\wiki\data\entity\WikiSearchInfo.class
+org\csystem\app\gis\wiki\data\repository\IWikiSearchRepository.class
+org\csystem\app\gis\wiki\data\dal\WikiSearchDataHelper.class
+org\csystem\app\gis\wiki\data\repository\IWikiSearchInfoRepository.class

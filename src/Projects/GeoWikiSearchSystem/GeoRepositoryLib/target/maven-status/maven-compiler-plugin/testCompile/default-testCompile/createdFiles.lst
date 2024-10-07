@@ -1,0 +1,3 @@
+org\csystem\app\gis\wiki\data\mapper\WikiSearchInfoInfoMapper.class
+org\csystem\app\gis\wiki\data\mapper\IWikiSearchInfoMapper.class
+org\csystem\app\gis\wiki\data\repository\WikiSearchInfoTest.class

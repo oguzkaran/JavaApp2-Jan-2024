@@ -38,7 +38,9 @@ dependencies {
 	implementation("org.csystem:org-csystem-util-data:1.0.0")
 	implementation("org.csystem:GeonamesWikiSearchServiceLib:1.0.0")
 	implementation("org.csystem:GeoWikiSearchProtoLib:1.0.0")
+	implementation("org.csystem:GeoRepositoryLib:1.0.0")
 	implementation("org.postgresql:postgresql:42.7.4")
+	implementation("com.h2database:h2")
 	compileOnly("org.projectlombok:lombok:1.18.34")
 	annotationProcessor("org.projectlombok:lombok")
 

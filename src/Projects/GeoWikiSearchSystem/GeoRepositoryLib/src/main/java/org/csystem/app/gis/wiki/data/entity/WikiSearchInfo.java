@@ -20,7 +20,6 @@ public class WikiSearchInfo {
 
     @Column(length = 1024)
     public String summary;
-
     public double elevation;
     public int geoNameId;
     public String feature;

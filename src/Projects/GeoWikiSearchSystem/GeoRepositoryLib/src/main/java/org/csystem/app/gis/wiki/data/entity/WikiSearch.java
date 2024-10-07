@@ -14,7 +14,7 @@ import java.util.Set;
 public class WikiSearch {
     @Id
     @Column(length = 512)
-    public String queryText; //"query_text"
+    public String queryText;
 
     @Column(nullable = false)
     public LocalDateTime firstQueryDateTime = LocalDateTime.now();

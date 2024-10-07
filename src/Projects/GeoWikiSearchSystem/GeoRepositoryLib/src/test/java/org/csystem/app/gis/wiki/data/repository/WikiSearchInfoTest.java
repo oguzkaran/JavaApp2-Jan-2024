@@ -1,10 +1,12 @@
 package org.csystem.app.gis.wiki.data.repository;
 
 import org.csystem.app.gis.wiki.data.dal.WikiSearchDataHelper;
+import org.csystem.app.gis.wiki.data.mapper.IWikiSearchInfoMapper;
+import org.csystem.app.gis.wiki.data.mapper.WikiSearchInfoInfoMapper;
 import org.csystem.app.gis.wiki.geonames.service.GeonamesWikiSearchService;
-import org.csystem.app.gis.wiki.mapper.IWikiSearchInfoMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -33,8 +35,7 @@ public class WikiSearchInfoTest {
     @Autowired
     private GeonamesWikiSearchService m_geonamesWikiSearchService;
 
-    @Autowired
-    private IWikiSearchInfoMapper m_wikiSearchInfoMapper;
+    private final IWikiSearchInfoMapper m_wikiSearchInfoMapper = new WikiSearchInfoInfoMapper(new ModelMapper());
 
     @BeforeEach
     public void setUp()
