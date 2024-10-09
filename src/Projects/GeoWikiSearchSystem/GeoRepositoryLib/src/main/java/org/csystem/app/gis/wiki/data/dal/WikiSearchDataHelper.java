@@ -50,4 +50,15 @@ public class WikiSearchDataHelper {
             throw ex;
         }
     }
+
+    public List<WikiSearch> findAllWikiSearches()
+    {
+        try {
+            return m_wikiSearchRepository.findAll();
+        }
+        catch (Throwable ex) {
+            log.error("Exception occurred WikiSearchDataHelper.findAllWikiSearches:{}", ex.getMessage());
+            throw ex;
+        }
+    }
 }
