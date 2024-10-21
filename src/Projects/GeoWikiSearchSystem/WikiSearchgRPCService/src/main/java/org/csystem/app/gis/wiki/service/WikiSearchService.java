@@ -8,8 +8,9 @@ import org.csystem.app.gis.wiki.GeoWikiSearchRequest;
 import org.csystem.app.gis.wiki.GeoWikiSearchServiceGrpc;
 import org.csystem.app.gis.wiki.data.service.WikiSearchDataService;
 import org.csystem.util.data.service.exception.DataServiceException;
-import org.csystem.util.grpc.error.GrpcErrorUtil;
 import org.springframework.context.annotation.Scope;
+
+import static org.csystem.util.grpc.error.GrpcErrorUtil.*;
 
 @GrpcService
 @Scope("prototype")
@@ -39,7 +40,7 @@ public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchSer
         var pageNumber = request.getPageNumber();
 
         if (dataPerPage <= 0 || pageNumber <= 0) {
-            GrpcErrorUtil.outOfRangeError(responseObserver, "Data per page value and page number must be positive");
+            outOfRangeError(responseObserver, "Data per page value and page number must be positive");
             return;
         }
 
@@ -49,10 +50,10 @@ public class WikiSearchService extends GeoWikiSearchServiceGrpc.GeoWikiSearchSer
             doFind(queryText, dataPerPage, pageNumber, responseObserver);
         }
         catch (DataServiceException ex) {
-            GrpcErrorUtil.unavailableError(responseObserver, ex.getCause().getMessage());
+            unavailableError(responseObserver, ex.getCause().getMessage());
         }
         catch (Throwable ex) {
-            GrpcErrorUtil.internalError(responseObserver, ex.getMessage());
+            internalError(responseObserver, ex.getMessage());
         }
     }
 }

@@ -6,6 +6,8 @@ import org.csystem.app.gis.wiki.GeoWikiSearchInfo;
 import org.csystem.app.gis.wiki.GeoWikiSearchRequest;
 import org.csystem.app.gis.wiki.GeoWikiSearchServiceGrpc;
 import org.csystem.app.gis.wiki.rest.dto.GeoWikiSearchDTO;
+import org.csystem.app.gis.wiki.rest.exception.BlankStringException;
+import org.csystem.app.gis.wiki.rest.exception.NegativeIntException;
 import org.csystem.app.gis.wiki.rest.mapper.IWikiInfoMapper;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,12 @@ public class WikiSearchService {
 
     public GeoWikiSearchDTO findGeoWikiInfo(String q, int dataPerPage, int pageNumber)
     {
+        if (q.isBlank())
+            throw new BlankStringException("Text can not be blank");
+
+        if (dataPerPage < 0 || pageNumber < 0)
+            throw new NegativeIntException("Invalid values:", dataPerPage, pageNumber);
+
         var request = GeoWikiSearchRequest.newBuilder()
                 .setQueryText(q)
                 .setDataPerPage(dataPerPage)
