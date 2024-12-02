@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="GenericLib" />
         <module name="Library-Maven" />
+        <module name="MessagesMongoDBRepositoryLib" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +21,7 @@
       <module name="GenericApp" options="-parameters" />
       <module name="GenericLib" options="-parameters" />
       <module name="Library-Maven" options="-parameters" />
+      <module name="MessagesMongoDBRepositoryLib" options="-parameters" />
     </option>
   </component>
 </project>
