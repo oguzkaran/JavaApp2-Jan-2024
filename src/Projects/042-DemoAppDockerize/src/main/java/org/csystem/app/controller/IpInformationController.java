@@ -20,8 +20,9 @@ public class IpInformationController {
     @GetMapping("/ip")
     public String ipInfo()
     {
-        log.info("Ip:{}", m_httpServletRequest.getRemoteAddr());
+        var remoteAdd = m_httpServletRequest.getRemoteAddr();
 
-        return m_httpServletRequest.getRemoteAddr();
+        log.info("Ip:{}", remoteAdd);
+        return remoteAdd;
     }
 }

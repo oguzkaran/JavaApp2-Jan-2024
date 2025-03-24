@@ -1,0 +1,4 @@
+cp ../build/libs/DemoDockerizeApp-1.0.0.jar .
+
+docker build --tag=ip-information-service:1.0.0 .
+
