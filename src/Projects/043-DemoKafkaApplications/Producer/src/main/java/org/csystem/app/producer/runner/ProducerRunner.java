@@ -39,6 +39,6 @@ public class ProducerRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
-        m_scheduledExecutorService.scheduleAtFixedRate(this::kafkaProducerCallback, 5, 1, TimeUnit.MILLISECONDS);
+        m_scheduledExecutorService.scheduleAtFixedRate(this::kafkaProducerCallback, 0, 1, TimeUnit.SECONDS);
     }
 }
