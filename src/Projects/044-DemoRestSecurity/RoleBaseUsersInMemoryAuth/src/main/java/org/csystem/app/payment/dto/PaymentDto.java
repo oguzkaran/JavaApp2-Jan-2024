@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(prefix = "m_")
-@Builder
 public class PaymentDto {
     private String m_cardNumber;
     private String m_description;

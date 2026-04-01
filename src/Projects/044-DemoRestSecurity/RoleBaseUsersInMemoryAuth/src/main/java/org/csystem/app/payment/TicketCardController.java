@@ -11,14 +11,15 @@ public class TicketCardController {
     @GetMapping("/all")
     public String getAllPayments()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Get all payments";
     }
 
     @PostMapping("/pay")
     public ResponseEntity<String> pay(@RequestBody PaymentDto paymentDto)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ResponseEntity.ok("Paid successfully via %s".formatted(paymentDto.getCardNumber()));
     }
 
     //...
 }
+
