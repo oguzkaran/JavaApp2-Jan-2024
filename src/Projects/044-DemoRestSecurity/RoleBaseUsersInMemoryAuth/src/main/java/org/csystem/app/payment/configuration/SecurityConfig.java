@@ -53,7 +53,7 @@ public class SecurityConfig {
         var payUser = User.builder()
                 .username("alican")
                 .password(m_passwordEncoder.encode("csd1993"))
-                .roles(ROLE_ADMIN, ROLE_USER)
+                .roles(ROLE_USER)
                 .build();
 
         var payViewer = User.builder()

@@ -5,16 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @Accessors(prefix = "m_")
 @Builder
-public class PaymentDto {
-    private String m_cardNumber;
-    private String m_description;
-    private double m_cash;
-    private LocalDateTime m_date;
-    //...
+public class PaymentListDto {
+    private List<PaymentDto> m_payments;
 }
