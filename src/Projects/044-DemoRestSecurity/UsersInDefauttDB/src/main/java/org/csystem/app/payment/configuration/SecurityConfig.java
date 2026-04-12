@@ -10,10 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -42,7 +39,6 @@ public class SecurityConfig {
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        log.info("Password:{}", m_passwordEncoder.encode("admin"));
         auth.jdbcAuthentication().dataSource(m_datasource);
     }
 }

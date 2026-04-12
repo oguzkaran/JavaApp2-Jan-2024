@@ -4,7 +4,7 @@ drop table if exists users;
 create table users (
     username varchar(100) primary key,
     password varchar(100) not null,
-    enabled smallint not null
+    enabled smallint default(1) not null
     -- ...
 );
 
