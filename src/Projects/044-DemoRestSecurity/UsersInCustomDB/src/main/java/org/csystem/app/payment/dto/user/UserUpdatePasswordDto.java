@@ -1,4 +1,4 @@
-package org.csystem.app.payment.dto;
+package org.csystem.app.payment.dto.user;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(prefix = "m_")
 @Builder
-public class PaymentResultDto {
-    private String m_cardNumber;
-    private String m_description;
+public class UserUpdatePasswordDto {
+    private String m_username;
+    private String m_password;
+    //...
 }

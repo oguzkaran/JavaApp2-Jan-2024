@@ -1,16 +1,16 @@
-package org.csystem.app.payment.dto;
+package org.csystem.app.payment.dto.user;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Accessors(prefix = "m_")
 @Builder
-public class PaymentListDto {
-    private List<PaymentDto> m_payments;
+public class UserUpdatePasswordDto {
+    private String m_username;
+    private String m_password;
+    //...
 }

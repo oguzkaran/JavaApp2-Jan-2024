@@ -1,4 +1,4 @@
-package org.csystem.app.payment.dto;
+package org.csystem.app.payment.dto.user;
 
 import lombok.Builder;
 import lombok.Getter;

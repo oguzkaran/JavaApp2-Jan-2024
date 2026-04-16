@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @AllArgsConstructor
 public class UserRepository implements IUserRepository {
-    private static final String SAVE_USER_SQL = "insert into users (username, password, enabled) values (?, ?, ?)";
-    private static final String SAVE_AUTHORITY_SQL = "insert into authorities (username, authority) values (?, ?)";
+    private static final String SAVE_USER_SQL = "insert into members (member_name, password) values (?, ?)";
+    private static final String SAVE_AUTHORITY_SQL = "insert into member_roles (member_name, role) values (?, ?)";
     private final JdbcTemplate m_jdbcTemplate;
     private final PasswordEncoder m_passwordEncoder;
 
@@ -20,7 +20,7 @@ public class UserRepository implements IUserRepository {
     @Transactional
     public UserDto save(UserDto userDto)
     {
-        m_jdbcTemplate.update(SAVE_USER_SQL, userDto.getUsername(), m_passwordEncoder.encode(userDto.getPassword()), Short.parseShort(userDto.getEnabled()));
+        m_jdbcTemplate.update(SAVE_USER_SQL, userDto.getUsername(), m_passwordEncoder.encode(userDto.getPassword()));
         m_jdbcTemplate.update(SAVE_AUTHORITY_SQL, userDto.getUsername(), userDto.getRole());
 
         return userDto;
