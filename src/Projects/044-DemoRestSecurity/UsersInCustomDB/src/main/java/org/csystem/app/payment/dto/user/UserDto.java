@@ -11,7 +11,9 @@ import lombok.experimental.Accessors;
 @Builder
 public class UserDto {
     private String m_username;
+    private String m_email;
     private String m_password;
+    private String m_birthDate;
     private String m_role;
     //...
 }

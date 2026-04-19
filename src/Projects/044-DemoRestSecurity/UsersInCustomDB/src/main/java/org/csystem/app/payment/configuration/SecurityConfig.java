@@ -20,10 +20,6 @@ import javax.sql.DataSource;
 @Accessors(prefix = "m_")
 @Slf4j
 public class SecurityConfig {
-    private static final String ROLE_ADMIN = "ADMIN";
-    private static final String ROLE_USER = "USER";
-    private static final String ROLE_VIEWER = "VIEWER";
-
     private final PasswordEncoder m_passwordEncoder;
     private final DataSource m_datasource;
 
@@ -31,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(a -> a.anyRequest().authenticated())
+                .authorizeHttpRequests(a -> a.requestMatchers("/payment/users/register").permitAll().anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }

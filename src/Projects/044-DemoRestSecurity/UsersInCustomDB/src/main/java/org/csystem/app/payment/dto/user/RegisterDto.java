@@ -9,10 +9,11 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(prefix = "m_")
 @Builder
-public class UserUpdateDto {
+public class RegisterDto {
     private String m_username;
     private String m_password;
-    private String m_email;
-    private String m_birthDate;
+    private String m_confirmPassword;
+    private String m_email; //not checked fpr validation in demo
+    private String m_birthDate; //yyyy-MM-dd
     //...
 }

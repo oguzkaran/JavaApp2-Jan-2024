@@ -3,6 +3,8 @@ drop table if exists members;
 
 create table members (
     member_name varchar(100) primary key,
+    email varchar(200) not null unique,
+    birth_date date default(current_date) not null,
     password varchar(100) not null
     -- ...
 );

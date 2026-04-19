@@ -9,8 +9,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(prefix = "m_")
 @Builder
-public class UserUpdatePasswordDto {
-    private String m_username;
+public class UpdatePasswordDto {
     private String m_password;
     //...
 }

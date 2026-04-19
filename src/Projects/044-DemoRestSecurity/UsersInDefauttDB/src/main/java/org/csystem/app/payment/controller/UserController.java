@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/password")
-    @PreAuthorize("hasRole('ADMIN') and hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updatePassword(@RequestBody UserUpdatePasswordDto userUpdatePasswordDto)
     {
         throw new UnsupportedOperationException("TODO");

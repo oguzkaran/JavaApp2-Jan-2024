@@ -1,7 +1,10 @@
 package org.csystem.app.payment.service;
 
 import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.csystem.app.payment.dto.user.RegisterDto;
+import org.csystem.app.payment.dto.user.UpdatePasswordDto;
 import org.csystem.app.payment.dto.user.UserDto;
 import org.csystem.app.payment.dto.user.UserUpdateDto;
 import org.csystem.app.payment.repository.helper.PaymentServiceHelper;
@@ -10,16 +13,41 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @AllArgsConstructor
+@Accessors(prefix = "m_")
 public class PaymentUserService {
-    private final PaymentServiceHelper paymentServiceHelper;
+    private final PaymentServiceHelper m_paymentServiceHelper;
+
+    //...
 
     public UserDto addUser(UserDto userDto)
     {
-        return paymentServiceHelper.addUser(userDto);
+        return m_paymentServiceHelper.addUser(userDto);
+    }
+
+    public RegisterDto register(RegisterDto registerDto)
+    {
+        return m_paymentServiceHelper.registerUser(registerDto);
     }
 
     public void updateUser(UserUpdateDto userUpdateDto)
     {
-        paymentServiceHelper.updateUser(userUpdateDto);
+        m_paymentServiceHelper.updateUser(userUpdateDto);
     }
+
+    public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
+    {
+        var result = false;
+
+        try {
+            m_paymentServiceHelper.updateUser(updatePasswordDto);
+            result = true;
+        }
+        catch (Exception ex) {
+            log.error("Error occurred:{}", ex.getMessage());
+        }
+
+        return result;
+    }
+
+    //...
 }
