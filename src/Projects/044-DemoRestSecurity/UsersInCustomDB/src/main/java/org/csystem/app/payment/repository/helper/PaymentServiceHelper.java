@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PaymentServiceHelper {
     private final IUserRepository m_userRepository;
-
     //...
 
     public UserDto addUser(UserDto userDto)
@@ -30,8 +29,8 @@ public class PaymentServiceHelper {
         m_userRepository.update(userUpdateDto);
     }
 
-    public void updateUser(UpdatePasswordDto updatePasswordDto)
+    public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
     {
-        m_userRepository.update(updatePasswordDto);
+        return m_userRepository.update(updatePasswordDto);
     }
 }

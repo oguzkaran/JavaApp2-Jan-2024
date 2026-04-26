@@ -9,6 +9,6 @@ public interface IUserRepository {
     UserDto save(UserDto userDto);
     RegisterDto register(RegisterDto registerDto);
     void update(UserUpdateDto userUpdateDto);
-    void update(UpdatePasswordDto updatePasswordDto);
+    boolean update(UpdatePasswordDto updatePasswordDto);
     //...
 }

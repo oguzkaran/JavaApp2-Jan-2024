@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @Accessors(prefix = "m_")
 @Builder
 public class UpdatePasswordDto {
+    private String m_username;
     private String m_password;
     //...
 }

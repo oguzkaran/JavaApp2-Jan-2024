@@ -14,15 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@Scope("prototype")
-@RequestMapping("/payment/users")
 @Slf4j
 @AllArgsConstructor
 @Accessors(prefix = "m_")
+@RestController
+@RequestMapping("/payment/users")
+@Scope("prototype")
 public class UserController {
     private final PaymentUserService m_paymentUserService;
-    private final HttpServletRequest m_request;
+    private final HttpServletRequest m_httpServletRequest;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -44,9 +44,12 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Boolean> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto)
     {
-        log.info("Username:{}", m_request.getUserPrincipal().getName());
+        var username = m_httpServletRequest.getUserPrincipal().getName();
+        log.info("Username:{}", username);
 
-        return m_paymentUserService.updatePassword(updatePasswordDto) ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
+        updatePasswordDto.setUsername(username);
+
+        return ResponseEntity.ok(m_paymentUserService.updatePassword(updatePasswordDto));
     }
 
     @PostMapping("/register")

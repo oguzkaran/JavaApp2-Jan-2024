@@ -26,27 +26,20 @@ public class PaymentUserService {
 
     public RegisterDto register(RegisterDto registerDto)
     {
+        //...
         return m_paymentServiceHelper.registerUser(registerDto);
     }
 
     public void updateUser(UserUpdateDto userUpdateDto)
     {
+        //...
         m_paymentServiceHelper.updateUser(userUpdateDto);
     }
 
     public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
     {
-        var result = false;
-
-        try {
-            m_paymentServiceHelper.updateUser(updatePasswordDto);
-            result = true;
-        }
-        catch (Exception ex) {
-            log.error("Error occurred:{}", ex.getMessage());
-        }
-
-        return result;
+        //...
+        return m_paymentServiceHelper.updatePassword(updatePasswordDto);
     }
 
     //...

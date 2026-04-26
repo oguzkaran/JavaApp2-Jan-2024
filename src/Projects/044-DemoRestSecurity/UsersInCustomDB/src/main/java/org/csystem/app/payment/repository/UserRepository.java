@@ -17,6 +17,8 @@ import java.time.LocalDate;
 public class UserRepository implements IUserRepository {
     private static final String SAVE_USER_SQL = "insert into members (member_name, email, birth_date, password) values (?, ?, ?, ?)";
     private static final String SAVE_AUTHORITY_SQL = "insert into member_roles (member_name, role) values (?, ?)";
+    private static final String UPDATE_PASSWORD_SQL = "update members set password=? where member_name = ?";
+
     private final JdbcTemplate m_jdbcTemplate;
     private final PasswordEncoder m_passwordEncoder;
 
@@ -47,8 +49,8 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public void update(UpdatePasswordDto updatePasswordDto)
+    public boolean update(UpdatePasswordDto updatePasswordDto)
     {
-        throw new UnsupportedOperationException("TODO:");
+        return m_jdbcTemplate.update(UPDATE_PASSWORD_SQL, m_passwordEncoder.encode(updatePasswordDto.getPassword()), updatePasswordDto.getUsername()) != 0;
     }
 }
