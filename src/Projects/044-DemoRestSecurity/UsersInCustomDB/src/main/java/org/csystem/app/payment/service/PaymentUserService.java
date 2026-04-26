@@ -8,6 +8,7 @@ import org.csystem.app.payment.dto.user.UpdatePasswordDto;
 import org.csystem.app.payment.dto.user.UserDto;
 import org.csystem.app.payment.dto.user.UserUpdateDto;
 import org.csystem.app.payment.repository.helper.PaymentServiceHelper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,6 +40,11 @@ public class PaymentUserService {
     public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
     {
         //...
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("Username : {}", username);
+
+        updatePasswordDto.setUsername(username);
+
         return m_paymentServiceHelper.updatePassword(updatePasswordDto);
     }
 

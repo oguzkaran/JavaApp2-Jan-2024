@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @Scope("prototype")
 public class UserController {
     private final PaymentUserService m_paymentUserService;
-    private final HttpServletRequest m_httpServletRequest;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -44,11 +43,6 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Boolean> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto)
     {
-        var username = m_httpServletRequest.getUserPrincipal().getName();
-        log.info("Username:{}", username);
-
-        updatePasswordDto.setUsername(username);
-
         return ResponseEntity.ok(m_paymentUserService.updatePassword(updatePasswordDto));
     }
 
