@@ -3,10 +3,7 @@ package org.csystem.app.payment.controller;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.payment.dto.user.RegisterDto;
-import org.csystem.app.payment.dto.user.UpdatePasswordDto;
 import org.csystem.app.payment.dto.user.UserDto;
-import org.csystem.app.payment.dto.user.UserUpdateDto;
 import org.csystem.app.payment.service.PaymentUserService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
@@ -31,26 +28,33 @@ public class UserController {
         return ResponseEntity.ok(m_paymentUserService.addUser(userDto));
     }
 
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UserDto> getUser(@RequestParam(name = "name") String username)
+    {
+        throw  new UnsupportedOperationException("Not supported yet.");
+    }
+
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public void updateUser(@RequestBody UserUpdateDto userUpdateDto)
+    public void updateUser(@RequestBody UserDto userDto)
     {
-        m_paymentUserService.updateUser(userUpdateDto);
+        m_paymentUserService.updateUser(userDto);
     }
 
     @PutMapping("/password")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public ResponseEntity<Boolean> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto)
+    public ResponseEntity<Boolean> updatePassword(@RequestBody UserDto userDto)
     {
-        return ResponseEntity.ok(m_paymentUserService.updatePassword(updatePasswordDto));
+        return ResponseEntity.ok(m_paymentUserService.updatePassword(userDto));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterDto> register(@RequestBody RegisterDto registerDto)
+    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto)
     {
-        log.info("Register user {}", registerDto.getUsername());
+        log.info("Register user {}", userDto.getUsername());
 
-        return ResponseEntity.ok(m_paymentUserService.register(registerDto));
+        return ResponseEntity.ok(m_paymentUserService.register(userDto));
     }
 
     //...

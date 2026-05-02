@@ -3,10 +3,7 @@ package org.csystem.app.payment.service;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.payment.dto.user.RegisterDto;
-import org.csystem.app.payment.dto.user.UpdatePasswordDto;
 import org.csystem.app.payment.dto.user.UserDto;
-import org.csystem.app.payment.dto.user.UserUpdateDto;
 import org.csystem.app.payment.repository.helper.PaymentServiceHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,27 +22,27 @@ public class PaymentUserService {
         return m_paymentServiceHelper.addUser(userDto);
     }
 
-    public RegisterDto register(RegisterDto registerDto)
+    public UserDto register(UserDto registerDto)
     {
         //...
         return m_paymentServiceHelper.registerUser(registerDto);
     }
 
-    public void updateUser(UserUpdateDto userUpdateDto)
+    public void updateUser(UserDto userDto)
     {
         //...
-        m_paymentServiceHelper.updateUser(userUpdateDto);
+        m_paymentServiceHelper.updateUser(userDto);
     }
 
-    public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
+    public boolean updatePassword(UserDto userDto)
     {
         //...
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Username : {}", username);
 
-        updatePasswordDto.setUsername(username);
+        userDto.setUsername(username);
 
-        return m_paymentServiceHelper.updatePassword(updatePasswordDto);
+        return m_paymentServiceHelper.updatePassword(userDto);
     }
 
     //...

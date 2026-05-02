@@ -1,10 +1,7 @@
 package org.csystem.app.payment.repository.helper;
 
 import lombok.AllArgsConstructor;
-import org.csystem.app.payment.dto.user.RegisterDto;
-import org.csystem.app.payment.dto.user.UpdatePasswordDto;
 import org.csystem.app.payment.dto.user.UserDto;
-import org.csystem.app.payment.dto.user.UserUpdateDto;
 import org.csystem.app.payment.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +16,18 @@ public class PaymentServiceHelper {
         return m_userRepository.save(userDto);
     }
 
-    public RegisterDto registerUser(RegisterDto registerDto)
+    public UserDto registerUser(UserDto userDto)
     {
-        return m_userRepository.register(registerDto);
+        return m_userRepository.register(userDto);
     }
 
-    public void updateUser(UserUpdateDto userUpdateDto)
+    public void updateUser(UserDto userDto)
     {
-        m_userRepository.update(userUpdateDto);
+        m_userRepository.update(userDto);
     }
 
-    public boolean updatePassword(UpdatePasswordDto updatePasswordDto)
+    public boolean updatePassword(UserDto userDto)
     {
-        return m_userRepository.update(updatePasswordDto);
+        return m_userRepository.updatePassword(userDto);
     }
 }
