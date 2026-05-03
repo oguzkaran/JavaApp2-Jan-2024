@@ -8,6 +8,8 @@ import org.csystem.app.payment.repository.helper.PaymentServiceHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -20,6 +22,11 @@ public class PaymentUserService {
     public UserDto addUser(UserDto userDto)
     {
         return m_paymentServiceHelper.addUser(userDto);
+    }
+
+    public Optional<UserDto> findByUsername(String username)
+    {
+        return m_paymentServiceHelper.finedByUsername(username);
     }
 
     public UserDto register(UserDto registerDto)

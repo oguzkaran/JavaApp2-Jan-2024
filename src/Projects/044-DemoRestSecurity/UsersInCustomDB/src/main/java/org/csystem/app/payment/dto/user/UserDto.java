@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 @Accessors(prefix = "m_")
@@ -17,6 +19,7 @@ public class UserDto {
     private String m_password;
     private String m_confirmPassword;
     private String m_birthDate;
-    private String m_role;
+    @Builder.Default
+    private ArrayList<String> m_roles = new ArrayList<>();
     //...
 }

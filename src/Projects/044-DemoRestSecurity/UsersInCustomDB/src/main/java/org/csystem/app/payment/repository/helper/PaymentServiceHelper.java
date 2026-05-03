@@ -5,6 +5,8 @@ import org.csystem.app.payment.dto.user.UserDto;
 import org.csystem.app.payment.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class PaymentServiceHelper {
@@ -16,8 +18,15 @@ public class PaymentServiceHelper {
         return m_userRepository.save(userDto);
     }
 
+    public Optional<UserDto> finedByUsername(String username)
+    {
+        //...
+        return m_userRepository.findByUsername(username);
+    }
+
     public UserDto registerUser(UserDto userDto)
     {
+        //...
         return m_userRepository.register(userDto);
     }
 

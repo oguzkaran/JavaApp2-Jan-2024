@@ -32,7 +32,7 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserDto> getUser(@RequestParam(name = "name") String username)
     {
-        throw  new UnsupportedOperationException("Not supported yet.");
+        return m_paymentUserService.findByUsername(username).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @PutMapping
