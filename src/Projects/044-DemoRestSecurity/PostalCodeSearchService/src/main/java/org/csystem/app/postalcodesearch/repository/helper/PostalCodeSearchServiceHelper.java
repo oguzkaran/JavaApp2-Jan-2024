@@ -1,0 +1,42 @@
+package org.csystem.app.postalcodesearch.repository.helper;
+
+import lombok.AllArgsConstructor;
+import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.repository.IUserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+public class PostalCodeSearchServiceHelper {
+    private final IUserRepository m_userRepository;
+    //...
+
+    public UserDto addUser(UserDto userDto)
+    {
+        return m_userRepository.save(userDto);
+    }
+
+    public Optional<UserDto> finedByUsername(String username)
+    {
+        //...
+        return m_userRepository.findByUsername(username);
+    }
+
+    public UserDto registerUser(UserDto userDto)
+    {
+        //...
+        return m_userRepository.register(userDto);
+    }
+
+    public void updateUser(UserDto userDto)
+    {
+        m_userRepository.update(userDto);
+    }
+
+    public boolean updatePassword(UserDto userDto)
+    {
+        return m_userRepository.updatePassword(userDto);
+    }
+}
