@@ -1,5 +1,6 @@
 drop table if exists member_roles;
 drop table if exists members;
+drop procedure if exists sp_insert_user;
 
 create table members (
     member_name varchar(100) primary key,
@@ -18,4 +19,13 @@ create table member_roles (
 );
 
 
+create or replace procedure sp_insert_user(varchar(100), varchar(100), date, varchar(100), varchar(100))
+language plpgsql
+as '
+begin
+    insert into members (member_name, email, birth_date, password) values ($1, $2, $3, $4);
+    insert into member_roles (member_name, role) values ($1, $5);
+    commit;
+end
+';
 -- ...

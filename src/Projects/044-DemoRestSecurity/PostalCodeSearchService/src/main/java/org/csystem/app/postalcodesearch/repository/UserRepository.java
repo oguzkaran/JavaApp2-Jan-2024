@@ -17,6 +17,7 @@ import java.util.Optional;
 @Repository
 @AllArgsConstructor
 public class UserRepository implements IUserRepository {
+    private static final String SAVE_USER_WITH_AUTHORITY_SQL = "call sp_insert_user(?, ?, ?, ?, ?)";
     private static final String SAVE_USER_SQL = "insert into members (member_name, email, birth_date, password) values (?, ?, ?, ?)";
     private static final String FIND_BY_USERNAME_SQL = "select m.member_name, m.email, m.birth_date from members m where m.member_name = ?";
     private static final String FIND_ROLES_BY_USERNAME_SQL = "select role from member_roles where member_name = ?";
@@ -73,11 +74,9 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    @Transactional
     public UserDto register(UserDto userDto)
     {
-        m_jdbcTemplate.update(SAVE_USER_SQL, userDto.getUsername(), userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()), m_passwordEncoder.encode(userDto.getPassword()));
-        m_jdbcTemplate.update(SAVE_AUTHORITY_SQL, userDto.getUsername(), "ROLE_USER");
+        m_jdbcTemplate.update(SAVE_USER_WITH_AUTHORITY_SQL, userDto.getUsername(), userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()), m_passwordEncoder.encode(userDto.getPassword()), "ROLE_USER");
 
         return userDto;
     }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @Accessors(prefix = "m_")
 @RestController
-@RequestMapping("/payment/users")
+@RequestMapping("/postalcodesearch/users")
 @Scope("prototype")
 public class UserController {
     private final PostalCodeSearchUserService m_postalCodeSearchUserService;
