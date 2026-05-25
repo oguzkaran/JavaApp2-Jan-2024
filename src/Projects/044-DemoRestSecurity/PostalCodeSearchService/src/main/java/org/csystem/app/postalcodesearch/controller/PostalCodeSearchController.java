@@ -1,6 +1,6 @@
 package org.csystem.app.postalcodesearch.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.postalcodesearch.dto.payment.PostalCodes;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/postalcodesearch")
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Accessors(prefix = "m_")
 public class PostalCodeSearchController {
     private final PostalCodeSearchService m_postalCodeSearchService;
@@ -23,14 +23,14 @@ public class PostalCodeSearchController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PostalCodes> postalCodes(String postalCode, int maxRows)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return ResponseEntity.ok(m_postalCodeSearchService.findPostalCodes(postalCode, maxRows));
     }
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<PostalCodes> postalCodes(String postalCodes)
+    public ResponseEntity<PostalCodes> postalCodes( String postalCode)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return ResponseEntity.ok(m_postalCodeSearchService.findPostalCodes(postalCode));
     }
 
     //...
