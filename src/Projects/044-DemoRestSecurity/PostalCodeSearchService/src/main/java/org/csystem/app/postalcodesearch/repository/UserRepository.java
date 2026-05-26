@@ -21,10 +21,9 @@ public class UserRepository implements IUserRepository {
     private static final String SAVE_USER_SQL = "insert into members (member_name, email, birth_date, password) values (?, ?, ?, ?)";
     private static final String FIND_BY_USERNAME_SQL = "select m.member_name, m.email, m.birth_date from members m where m.member_name = ?";
     private static final String FIND_ROLES_BY_USERNAME_SQL = "select role from member_roles where member_name = ?";
-    private static final String SAVE_AUTHORITY_SQL = "insert into member_roles (member_name, role) values (?, ?)";
     private static final String UPDATE_PASSWORD_SQL = "update members set password=? where member_name = ?";
     private static final String UPDATE_USER_SQL = "update members set email = ?, birth_date = ? where member_name = ?";
-    private static final String UPDATE_AUTHORITY_SQL = "update member_roles set role = ? where member_name = ?";
+    private static final String UPSERT_AUTHORITY_SQL = "insert into member_roles (member_name, role) values (?, ?) on conflict (member_name, role) do nothing";
 
     private final JdbcTemplate m_jdbcTemplate;
     private final PasswordEncoder m_passwordEncoder;
@@ -54,7 +53,7 @@ public class UserRepository implements IUserRepository {
     public UserDto save(UserDto userDto)
     {
         m_jdbcTemplate.update(SAVE_USER_SQL, userDto.getUsername(), userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()), m_passwordEncoder.encode(userDto.getPassword()));
-        userDto.getRoles().forEach(r -> m_jdbcTemplate.update(SAVE_AUTHORITY_SQL, userDto.getUsername(), r));
+        userDto.getRoles().forEach(r -> m_jdbcTemplate.update(UPSERT_AUTHORITY_SQL, userDto.getUsername(), r));
 
         return userDto;
     }
@@ -86,6 +85,7 @@ public class UserRepository implements IUserRepository {
     public void update(UserDto userDto)
     {
         m_jdbcTemplate.update(UPDATE_USER_SQL, userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()),  userDto.getUsername());
+        userDto.getRoles().forEach(r -> m_jdbcTemplate.update(UPSERT_AUTHORITY_SQL, userDto.getUsername(), r));
     }
 
     @Override
