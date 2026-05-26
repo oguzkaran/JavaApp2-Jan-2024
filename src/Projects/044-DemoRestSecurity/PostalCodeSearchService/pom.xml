@@ -5,15 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.10</version>
+		<version>3.5.10</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>org.csystem</groupId>
-	<artifactId>DemoApp</artifactId>
+	<artifactId>PostalCodeSearchApp</artifactId>
 	<version>1.0.0</version>
-	<name>DemoApp</name>
-	<description>Generic project for Spring Boot</description>
+	<name>PostalCodeSearchApp</name>
 
 	<repositories>
 		<repository>
