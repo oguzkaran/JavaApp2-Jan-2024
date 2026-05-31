@@ -1,6 +1,6 @@
 package org.csystem.app.postalcodesearch.repository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.csystem.app.postalcodesearch.dto.user.UserDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserRepository implements IUserRepository {
-    private static final String SAVE_USER_WITH_AUTHORITY_SQL = "call sp_insert_user(?, ?, ?, ?, ?)";
-    private static final String SAVE_USER_SQL = "insert into members (member_name, email, birth_date, password) values (?, ?, ?, ?)";
-    private static final String FIND_BY_USERNAME_SQL = "select m.member_name, m.email, m.birth_date from members m where m.member_name = ?";
-    private static final String FIND_ROLES_BY_USERNAME_SQL = "select role from member_roles where member_name = ?";
-    private static final String UPDATE_PASSWORD_SQL = "update members set password=? where member_name = ?";
-    private static final String UPDATE_USER_SQL = "update members set email = ?, birth_date = ? where member_name = ?";
-    private static final String UPSERT_AUTHORITY_SQL = "insert into member_roles (member_name, role) values (?, ?) on conflict (member_name, role) do nothing";
+    private static final String SAVE_USER_WITH_AUTHORITY_SQL = "call sp_insert_user_with_authority(?, ?, ?, ?, ?)";
+    private static final String SAVE_USER_SQL = "call sp_insert_user(?, ?, ?, ?)";
+    private static final String FIND_BY_USERNAME_SQL = "select * from find_user_by_username(?)";
+    private static final String FIND_ROLES_BY_USERNAME_SQL = "select * from find_authorities_by_username(?)";
+    private static final String UPDATE_PASSWORD_SQL = "call sp_update_password(?, ?)";
+    private static final String UPDATE_USER_SQL = "call sp_update_user(?, ?, ?)";
+    private static final String UPSERT_AUTHORITY_SQL = "call sp_upsert_authority(?, ?)";
 
     private final JdbcTemplate m_jdbcTemplate;
     private final PasswordEncoder m_passwordEncoder;
@@ -84,13 +84,13 @@ public class UserRepository implements IUserRepository {
     @Transactional
     public void update(UserDto userDto)
     {
-        m_jdbcTemplate.update(UPDATE_USER_SQL, userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()),  userDto.getUsername());
+        m_jdbcTemplate.update(UPDATE_USER_SQL, userDto.getUsername(), userDto.getEmail(), LocalDate.parse(userDto.getBirthDate()));
         userDto.getRoles().forEach(r -> m_jdbcTemplate.update(UPSERT_AUTHORITY_SQL, userDto.getUsername(), r));
     }
 
     @Override
     public boolean updatePassword(UserDto userDto)
     {
-        return m_jdbcTemplate.update(UPDATE_PASSWORD_SQL, m_passwordEncoder.encode(userDto.getPassword()), userDto.getUsername()) != 0;
+        return m_jdbcTemplate.update(UPDATE_PASSWORD_SQL, userDto.getUsername(), m_passwordEncoder.encode(userDto.getPassword())) != 0;
     }
 }

@@ -37,7 +37,7 @@ public class SecurityConfig {
     {
         auth.jdbcAuthentication()
                 .dataSource(m_datasource)
-                .usersByUsernameQuery("select member_name as username, password, 'true' as enabled from members where member_name = ?")
-                .authoritiesByUsernameQuery("select m.member_name as username, mr.role as authority from members m, member_roles mr where m.member_name = mr.member_name and m.member_name = ?");
+                .usersByUsernameQuery("select * from find_user_by_username_for_auth(?)")
+                .authoritiesByUsernameQuery("select * from find_authorities_by_username_for_auth(?)");
     }
 }
