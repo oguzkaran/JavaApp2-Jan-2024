@@ -1,4 +1,4 @@
-package org.csystem.app.postalcodesearch.dto.payment;
+package org.csystem.app.postalcodesearch.dto.postalcode;
 
 import lombok.Builder;
 import lombok.Getter;

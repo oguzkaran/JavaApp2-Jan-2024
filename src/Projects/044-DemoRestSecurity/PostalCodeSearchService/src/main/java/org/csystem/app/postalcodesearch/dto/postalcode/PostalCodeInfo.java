@@ -1,4 +1,4 @@
-package org.csystem.app.postalcodesearch.dto.payment;
+package org.csystem.app.postalcodesearch.dto.postalcode;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

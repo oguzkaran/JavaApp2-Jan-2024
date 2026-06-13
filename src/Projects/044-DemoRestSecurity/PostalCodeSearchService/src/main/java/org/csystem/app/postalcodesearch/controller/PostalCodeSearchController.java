@@ -3,7 +3,7 @@ package org.csystem.app.postalcodesearch.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.postalcodesearch.dto.payment.PostalCodes;
+import org.csystem.app.postalcodesearch.dto.postalcode.PostalCodes;
 import org.csystem.app.postalcodesearch.service.PostalCodeSearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +28,7 @@ public class PostalCodeSearchController {
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<PostalCodes> postalCodes( String postalCode)
+    public ResponseEntity<PostalCodes> postalCodes(String postalCode)
     {
         return ResponseEntity.ok(m_postalCodeSearchService.findPostalCodes(postalCode));
     }
