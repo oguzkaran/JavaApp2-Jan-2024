@@ -1,0 +1,11 @@
+drop table if exists member_roles;
+drop table if exists members;
+drop procedure if exists sp_insert_user_with_authority;
+drop procedure if exists sp_insert_upsert_authority;
+drop procedure if exists sp_insert_user;
+drop procedure if exists sp_update_password;
+drop procedure if exists sp_update_user;
+drop function if exists find_user_by_username;
+drop function if exists find_user_by_username_for_auth;
+drop function if exists find_authorities_by_username;
+drop function if exists find_authorities_by_username_for_auth;
