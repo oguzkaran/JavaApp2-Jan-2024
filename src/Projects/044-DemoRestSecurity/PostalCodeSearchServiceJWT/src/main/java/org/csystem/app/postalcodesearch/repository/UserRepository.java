@@ -39,6 +39,17 @@ public class UserRepository implements IUserRepository {
         users.add(user);
     }
 
+    private void findUserDetailsByUsernameCallback(ResultSet rs, ArrayList<UserDto> users) throws SQLException
+    {
+        var user = UserDto.builder()
+                .username(rs.getString(1))
+                .password(rs.getString(4))
+                .build();
+
+        users.add(user);
+    }
+
+
     private void findRolesByUsernameCallback(ResultSet rs, UserDto userDto) throws SQLException
     {
         var roles = userDto.getRoles();
@@ -68,6 +79,17 @@ public class UserRepository implements IUserRepository {
 
         if (!list.isEmpty())
             m_jdbcTemplate.query(FIND_ROLES_BY_USERNAME_SQL, (ResultSet rs) -> findRolesByUsernameCallback(rs,list.get(0)), username);
+
+        return list.stream().findFirst();
+    }
+
+
+    @Override
+    public Optional<UserDto> findUserDetailsByUsername(String username)
+    {
+        var list = new ArrayList<UserDto>();
+
+        m_jdbcTemplate.query(FIND_BY_USERNAME_SQL, (ResultSet rs) -> findUserDetailsByUsernameCallback(rs, list), username);
 
         return list.stream().findFirst();
     }
