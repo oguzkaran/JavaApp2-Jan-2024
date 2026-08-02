@@ -9,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.postalcodesearch.security.helper.JwtHelper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -42,8 +45,10 @@ public class PostalCodeSearchAuthTokenFilter extends OncePerRequestFilter {
                 log.debug("Fetching username from token: {}", username);
 
                 var userDetails = m_userDetailsService.loadUserByUsername(username);
+                var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
-                //...
+                authentication.setDetails(new WebAuthenticationDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
         catch (Exception e) {

@@ -3,6 +3,7 @@ package org.csystem.app.postalcodesearch.configuration.security;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.csystem.app.postalcodesearch.security.filter.PostalCodeSearchAuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +23,20 @@ import javax.sql.DataSource;
 public class SecurityConfig {
     private final PasswordEncoder m_passwordEncoder;
     private final DataSource m_datasource;
+    private final PostalCodeSearchAuthTokenFilter m_postalCodeSearchAuthTokenFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
-        return http.csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a.requestMatchers("/postalcodesearch/users/register").permitAll().anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .build();
+                .httpBasic(Customizer.withDefaults());
+
+        http.addFilterBefore(m_postalCodeSearchAuthTokenFilter, PostalCodeSearchAuthTokenFilter.class);
+
+        //..
+
+        return http.build();
     }
 
     @Autowired

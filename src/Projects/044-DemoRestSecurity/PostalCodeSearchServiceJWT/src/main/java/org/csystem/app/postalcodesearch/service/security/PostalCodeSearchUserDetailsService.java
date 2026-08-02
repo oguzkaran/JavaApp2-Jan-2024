@@ -1,6 +1,5 @@
 package org.csystem.app.postalcodesearch.service.security;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
