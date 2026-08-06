@@ -4,10 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.security.helper.JwtHelper;
 import org.csystem.app.postalcodesearch.service.PostalCodeSearchUserService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -18,6 +23,29 @@ import org.springframework.web.bind.annotation.*;
 @Scope("prototype")
 public class UserController {
     private final PostalCodeSearchUserService m_postalCodeSearchUserService;
+    private final AuthenticationManager m_authenticationManager;
+    private JwtHelper m_jwtHelper;
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserDto userDto)
+    {
+        log.info("Login user {}", userDto.getUsername());
+
+        var auth = m_authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
+        var userDetails = (UserDetails) auth.getPrincipal();
+
+        return m_jwtHelper.generateToken(userDetails.getUsername());
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto)
+    {
+        log.info("Register user {}", userDto.getUsername());
+
+        return ResponseEntity.ok(m_postalCodeSearchUserService.register(userDto));
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -48,15 +76,6 @@ public class UserController {
     {
         return ResponseEntity.ok(m_postalCodeSearchUserService.updatePassword(userDto));
     }
-
-    @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto)
-    {
-        log.info("Register user {}", userDto.getUsername());
-
-        return ResponseEntity.ok(m_postalCodeSearchUserService.register(userDto));
-    }
-
     //...
 }
 
