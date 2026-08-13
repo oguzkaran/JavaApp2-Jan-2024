@@ -1,6 +1,7 @@
 package org.csystem.app.postalcodesearch.repository;
 
-import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.dto.security.token.RefreshTokenDto;
+import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 
 import java.util.Optional;
 
@@ -12,5 +13,8 @@ public interface IUserRepository {
     UserDto register(UserDto userDto);
     void update(UserDto userDto);
     boolean updatePassword(UserDto userDto);
+    RefreshTokenDto save(RefreshTokenDto refreshTokenDto);
+    Optional<RefreshTokenDto> findRefreshTokenByUsername(String username);
+    void deleteRefreshToken(RefreshTokenDto refreshTokenDto);
     //...
 }

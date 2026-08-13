@@ -1,7 +1,7 @@
 package org.csystem.app.postalcodesearch.repository.helper;
 
 import lombok.AllArgsConstructor;
-import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 import org.csystem.app.postalcodesearch.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +39,6 @@ public class PostalCodeSearchServiceHelper {
     {
         return m_userRepository.updatePassword(userDto);
     }
+
+    //Add methods for refresh token
 }

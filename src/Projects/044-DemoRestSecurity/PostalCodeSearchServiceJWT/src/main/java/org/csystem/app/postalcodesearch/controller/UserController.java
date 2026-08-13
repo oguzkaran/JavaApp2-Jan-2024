@@ -3,7 +3,7 @@ package org.csystem.app.postalcodesearch.controller;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 import org.csystem.app.postalcodesearch.security.helper.JwtHelper;
 import org.csystem.app.postalcodesearch.service.PostalCodeSearchUserService;
 import org.springframework.context.annotation.Scope;
@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j

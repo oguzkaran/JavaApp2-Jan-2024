@@ -2,7 +2,9 @@ create table if not exists members (
     member_name varchar(100) primary key,
     email varchar(200) not null unique,
     birth_date date default(current_date) not null,
-    password varchar(100) not null
+    password varchar(100) not null,
+    token varchar(512),
+    expiry_date_time timestamp
     -- ...
 );
 

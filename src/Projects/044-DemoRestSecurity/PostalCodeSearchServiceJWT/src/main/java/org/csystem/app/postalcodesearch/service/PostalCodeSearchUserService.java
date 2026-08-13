@@ -3,7 +3,7 @@ package org.csystem.app.postalcodesearch.service;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.postalcodesearch.dto.user.UserDto;
+import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 import org.csystem.app.postalcodesearch.repository.helper.PostalCodeSearchServiceHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
