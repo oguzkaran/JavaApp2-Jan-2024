@@ -1,7 +1,7 @@
 package org.csystem.app.postalcodesearch.repository;
 
 import lombok.RequiredArgsConstructor;
-import org.csystem.app.postalcodesearch.dto.security.token.RefreshTokenDto;
+import lombok.experimental.Accessors;
 import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
+@Accessors(prefix = "m_")
 public class UserRepository implements IUserRepository {
     private static final String SAVE_USER_WITH_AUTHORITY_SQL = "call sp_insert_user_with_authority(?, ?, ?, ?, ?)";
     private static final String SAVE_USER_SQL = "call sp_insert_user(?, ?, ?, ?)";
@@ -121,23 +122,5 @@ public class UserRepository implements IUserRepository {
     public boolean updatePassword(UserDto userDto)
     {
         return m_jdbcTemplate.update(UPDATE_PASSWORD_SQL, userDto.getUsername(), m_passwordEncoder.encode(userDto.getPassword())) != 0;
-    }
-
-    @Override
-    public RefreshTokenDto save(RefreshTokenDto refreshTokenDto)
-    {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public Optional<RefreshTokenDto> findRefreshTokenByUsername(String username)
-    {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public void deleteRefreshToken(RefreshTokenDto refreshTokenDto)
-    {
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

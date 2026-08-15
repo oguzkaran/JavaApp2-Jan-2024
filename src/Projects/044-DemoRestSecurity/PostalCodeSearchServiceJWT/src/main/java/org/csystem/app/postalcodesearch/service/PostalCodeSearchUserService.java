@@ -3,6 +3,7 @@ package org.csystem.app.postalcodesearch.service;
 import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.csystem.app.postalcodesearch.dto.security.token.RefreshTokenDto;
 import org.csystem.app.postalcodesearch.dto.security.user.UserDto;
 import org.csystem.app.postalcodesearch.repository.helper.PostalCodeSearchServiceHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,6 +51,21 @@ public class PostalCodeSearchUserService {
         userDto.setUsername(username);
 
         return m_postalCodeSearchServiceHelper.updatePassword(userDto);
+    }
+
+    public RefreshTokenDto saveRefreshToken(RefreshTokenDto refreshTokenDto)
+    {
+        return m_postalCodeSearchServiceHelper.saveRefreshToken(refreshTokenDto);
+    }
+
+    public Optional<RefreshTokenDto> findRefreshTokenByUsername(String username)
+    {
+        return m_postalCodeSearchServiceHelper.findRefreshTokenByUsername(username);
+    }
+
+    public void deleteRefreshToken(RefreshTokenDto refreshTokenDto)
+    {
+        m_postalCodeSearchServiceHelper.deleteRefreshToken(refreshTokenDto);
     }
 
     //...

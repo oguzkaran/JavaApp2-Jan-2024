@@ -2,9 +2,7 @@ create table if not exists members (
     member_name varchar(100) primary key,
     email varchar(200) not null unique,
     birth_date date default(current_date) not null,
-    password varchar(100) not null,
-    token varchar(512),
-    expiry_date_time timestamp
+    password varchar(100) not null
     -- ...
 );
 
@@ -13,6 +11,13 @@ create table if not exists member_roles (
     member_name varchar(100) not null,
     role varchar(100),
     constraint uq_member_role unique (member_name, role),
+    foreign key (member_name) references members
+);
+
+create table if not exists refresh_tokens (
+    token uuid primary key,
+    member_name varchar(100) not null,
+    expiry_date_time timestamp not null,
     foreign key (member_name) references members
 );
 
@@ -97,5 +102,3 @@ as '
         return query select mr.member_name, mr.role from member_roles mr where mr.member_name = $1;
     end;
 ' language plpgsql;
-
--- ...

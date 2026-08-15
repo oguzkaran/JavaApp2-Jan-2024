@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @AllArgsConstructor
 @Accessors(prefix = "m_")
@@ -26,14 +28,20 @@ public class UserController {
     private JwtHelper m_jwtHelper;
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDto userDto)
+    public Map<String, String> login(@RequestBody UserDto userDto)
     {
         log.info("Login user {}", userDto.getUsername());
 
         var auth = m_authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
         var userDetails = (UserDetails) auth.getPrincipal();
 
-        return m_jwtHelper.generateToken(userDetails.getUsername());
+        return Map.of("accessToken", m_jwtHelper.generateToken(userDetails.getUsername()), "refreshToken", "");
+    }
+
+    @PostMapping("/refresh")
+    public  Map<String,String> refresh(@RequestBody UserDto userDto)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @PostMapping("/register")

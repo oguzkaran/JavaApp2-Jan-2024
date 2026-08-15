@@ -1,4 +1,5 @@
 drop table if exists member_roles;
+drop table if exists refresh_tokens;
 drop table if exists members;
 drop procedure if exists sp_insert_user_with_authority;
 drop procedure if exists sp_insert_upsert_authority;
